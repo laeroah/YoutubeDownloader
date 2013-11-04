@@ -32,6 +32,7 @@
 		E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BCF1FE1827ECF300517124 /* YDSearchViewController~ipad.xib */; };
 		E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */; };
 		E3BCF2071827F19200517124 /* YDFontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2061827F19200517124 /* YDFontUtility.m */; };
+		E3BCF20A18281B7C00517124 /* UIWebView+JavascriptAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Private.m"; sourceTree = "<group>"; };
 		E3BCF2051827F19200517124 /* YDFontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDFontUtility.h; sourceTree = "<group>"; };
 		E3BCF2061827F19200517124 /* YDFontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDFontUtility.m; sourceTree = "<group>"; };
+		E3BCF20818281B7C00517124 /* UIWebView+JavascriptAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+JavascriptAlert.h"; sourceTree = "<group>"; };
+		E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+JavascriptAlert.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +304,8 @@
 			children = (
 				E3BCF2021827F13300517124 /* UIBarButtonItem+Private.h */,
 				E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */,
+				E3BCF20818281B7C00517124 /* UIWebView+JavascriptAlert.h */,
+				E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,
 				E3BCF1FD1827EB4100517124 /* Reachability.m in Sources */,
 				E3BCF1F71827EA3100517124 /* YDBaseNavigationViewController.m in Sources */,
+				E3BCF20A18281B7C00517124 /* UIWebView+JavascriptAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

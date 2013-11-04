@@ -17,6 +17,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (nonatomic, assign) BOOL networkAvailable;
+
 @property (strong, nonatomic) Reachability *internetConnectionReachability;
 
 - (void)saveContext;

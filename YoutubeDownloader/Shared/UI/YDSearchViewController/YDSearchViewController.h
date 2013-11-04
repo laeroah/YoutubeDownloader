@@ -8,6 +8,6 @@
 
 #import "YDBaseViewController.h"
 
-@interface YDSearchViewController : YDBaseViewController
+@interface YDSearchViewController : YDBaseViewController<UIWebViewDelegate>
 
 @end

@@ -24,7 +24,9 @@
     
     self.internetConnectionReachability = [Reachability reachabilityForInternetConnection];
     [self.internetConnectionReachability startNotifier];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
     YDSearchViewController *searchViewController = [[YDSearchViewController alloc] initWithNibName:@"YDSearchViewController" bundle:nil];
     YDBaseNavigationViewController *navigationController = [[YDBaseNavigationViewController alloc] initWithRootViewController:searchViewController];
     self.window.rootViewController = navigationController;
@@ -60,6 +62,16 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void)reachabilityChanged:(NSNotification *)note
+{
+    self.networkAvailable = [self.internetConnectionReachability currentReachabilityStatus] != NotReachable;
+    
+    if (self.networkAvailable)
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    else
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)saveContext
