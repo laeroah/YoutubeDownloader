@@ -29,6 +29,8 @@
     
     UIButton *startVideoPlayerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
+    startVideoPlayerButton.frame = CGRectMake(0,0, 100, 40);
+    
     [self.view addSubview:startVideoPlayerButton];
     
     [startVideoPlayerButton setTitle:@"Show Player" forState:UIControlStateNormal];

@@ -10,4 +10,6 @@
 
 @interface YDBaseViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *navigationButtons;
+
 @end
