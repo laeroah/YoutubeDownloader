@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
+		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +84,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF4FB41D18275DA8008F906D /* Player */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		AF4FB41E18275DE6008F906D /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				AF4FB41F18275E06008F906D /* YDViewController.h */,
+				AF4FB42018275E06008F906D /* YDViewController.m */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
 		AFE6AA0D1822E29D0037B389 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +134,8 @@
 		AFE6AA211822E29E0037B389 /* YoutubeDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				AF4FB41E18275DE6008F906D /* Debug */,
+				AF4FB41D18275DA8008F906D /* Player */,
 				AFE6AA2A1822E29E0037B389 /* AppDelegate.h */,
 				AFE6AA2B1822E29E0037B389 /* AppDelegate.m */,
 				AFE6AA301822E29E0037B389 /* Images.xcassets */,
@@ -197,6 +218,7 @@
 		AFE6AA0E1822E29D0037B389 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = YD;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "HAO WANG";
 				TargetAttributes = {
@@ -249,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE6AA2C1822E29E0037B389 /* AppDelegate.m in Sources */,
+				AF4FB42118275E06008F906D /* YDViewController.m in Sources */,
 				AFE6AA2F1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
 			);
@@ -453,6 +476,7 @@
 				AFE6AA4A1822E29E0037B389 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFE6AA4B1822E29E0037B389 /* Build configuration list for PBXNativeTarget "YoutubeDownloaderTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +485,7 @@
 				AFE6AA4D1822E29E0037B389 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
