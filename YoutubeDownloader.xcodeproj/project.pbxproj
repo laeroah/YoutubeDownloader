@@ -23,6 +23,15 @@
 		AFE6AA3B1822E29E0037B389 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1F1822E29E0037B389 /* CoreData.framework */; };
 		AFE6AA431822E29E0037B389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFE6AA411822E29E0037B389 /* InfoPlist.strings */; };
 		AFE6AA451822E29E0037B389 /* YoutubeDownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */; };
+		E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF1EA1827E74000517124 /* YDBaseViewController.m */; };
+		E3BCF1F21827E7B000517124 /* YDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF1F11827E7B000517124 /* YDSearchViewController.m */; };
+		E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BCF1F31827E80300517124 /* YDSearchViewController~iphone.xib */; };
+		E3BCF1F71827EA3100517124 /* YDBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF1F61827EA3100517124 /* YDBaseNavigationViewController.m */; };
+		E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF1F91827EADA00517124 /* YDDeviceUtility.m */; };
+		E3BCF1FD1827EB4100517124 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF1FC1827EB4100517124 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BCF1FE1827ECF300517124 /* YDSearchViewController~ipad.xib */; };
+		E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */; };
+		E3BCF2071827F19200517124 /* YDFontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2061827F19200517124 /* YDFontUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +65,23 @@
 		AFE6AA401822E29E0037B389 /* YoutubeDownloaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YoutubeDownloaderTests-Info.plist"; sourceTree = "<group>"; };
 		AFE6AA421822E29E0037B389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeDownloaderTests.m; sourceTree = "<group>"; };
+		E3BCF1E91827E74000517124 /* YDBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDBaseViewController.h; sourceTree = "<group>"; };
+		E3BCF1EA1827E74000517124 /* YDBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDBaseViewController.m; sourceTree = "<group>"; };
+		E3BCF1F01827E7B000517124 /* YDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDSearchViewController.h; sourceTree = "<group>"; };
+		E3BCF1F11827E7B000517124 /* YDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDSearchViewController.m; sourceTree = "<group>"; };
+		E3BCF1F31827E80300517124 /* YDSearchViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDSearchViewController~iphone.xib"; sourceTree = "<group>"; };
+		E3BCF1F51827EA3100517124 /* YDBaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDBaseNavigationViewController.h; sourceTree = "<group>"; };
+		E3BCF1F61827EA3100517124 /* YDBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDBaseNavigationViewController.m; sourceTree = "<group>"; };
+		E3BCF1F81827EADA00517124 /* YDDeviceUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDDeviceUtility.h; sourceTree = "<group>"; };
+		E3BCF1F91827EADA00517124 /* YDDeviceUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDDeviceUtility.m; sourceTree = "<group>"; };
+		E3BCF1FB1827EB4100517124 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		E3BCF1FC1827EB4100517124 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		E3BCF1FE1827ECF300517124 /* YDSearchViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDSearchViewController~ipad.xib"; sourceTree = "<group>"; };
+		E3BCF2001827F08D00517124 /* YDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDConstants.h; sourceTree = "<group>"; };
+		E3BCF2021827F13300517124 /* UIBarButtonItem+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Private.h"; sourceTree = "<group>"; };
+		E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Private.m"; sourceTree = "<group>"; };
+		E3BCF2051827F19200517124 /* YDFontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDFontUtility.h; sourceTree = "<group>"; };
+		E3BCF2061827F19200517124 /* YDFontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDFontUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +160,7 @@
 		AFE6AA211822E29E0037B389 /* YoutubeDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				E3BCF1E01827E43C00517124 /* Shared */,
 				AF4FB41E18275DE6008F906D /* Debug */,
 				AF4FB41D18275DA8008F906D /* Player */,
 				AFE6AA2A1822E29E0037B389 /* AppDelegate.h */,
@@ -172,6 +199,110 @@
 				AFE6AA411822E29E0037B389 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E3BCF1E01827E43C00517124 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF2011827F11200517124 /* Categories */,
+				E3BCF1E11827E63F00517124 /* Data Models */,
+				E3BCF1E21827E63F00517124 /* Helpers */,
+				E3BCF1E31827E63F00517124 /* Managers */,
+				E3BCF1E41827E63F00517124 /* Resource */,
+				E3BCF1E71827E63F00517124 /* UI */,
+				E3BCF1E81827E63F00517124 /* Utilities */,
+				E3BCF2001827F08D00517124 /* YDConstants.h */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E3BCF1E11827E63F00517124 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		E3BCF1E21827E63F00517124 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E3BCF1E31827E63F00517124 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E3BCF1E41827E63F00517124 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF1E51827E63F00517124 /* fonts */,
+				E3BCF1E61827E63F00517124 /* images */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		E3BCF1E51827E63F00517124 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		E3BCF1E61827E63F00517124 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		E3BCF1E71827E63F00517124 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF1EC1827E78700517124 /* YDSearchViewController */,
+				E3BCF1E91827E74000517124 /* YDBaseViewController.h */,
+				E3BCF1EA1827E74000517124 /* YDBaseViewController.m */,
+				E3BCF1F51827EA3100517124 /* YDBaseNavigationViewController.h */,
+				E3BCF1F61827EA3100517124 /* YDBaseNavigationViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E3BCF1E81827E63F00517124 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF1FB1827EB4100517124 /* Reachability.h */,
+				E3BCF1FC1827EB4100517124 /* Reachability.m */,
+				E3BCF1F81827EADA00517124 /* YDDeviceUtility.h */,
+				E3BCF1F91827EADA00517124 /* YDDeviceUtility.m */,
+				E3BCF2051827F19200517124 /* YDFontUtility.h */,
+				E3BCF2061827F19200517124 /* YDFontUtility.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E3BCF1EC1827E78700517124 /* YDSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF1F01827E7B000517124 /* YDSearchViewController.h */,
+				E3BCF1F11827E7B000517124 /* YDSearchViewController.m */,
+				E3BCF1F31827E80300517124 /* YDSearchViewController~iphone.xib */,
+				E3BCF1FE1827ECF300517124 /* YDSearchViewController~ipad.xib */,
+			);
+			path = YDSearchViewController;
+			sourceTree = "<group>";
+		};
+		E3BCF2011827F11200517124 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E3BCF2021827F13300517124 /* UIBarButtonItem+Private.h */,
+				E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +382,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */,
+				E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */,
+				E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */,
 				AFE6AA311822E29E0037B389 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,10 +403,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3BCF2071827F19200517124 /* YDFontUtility.m in Sources */,
 				AFE6AA2C1822E29E0037B389 /* AppDelegate.m in Sources */,
 				AF4FB42118275E06008F906D /* YDViewController.m in Sources */,
+				E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */,
 				AFE6AA2F1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld in Sources */,
+				E3BCF1F21827E7B000517124 /* YDSearchViewController.m in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
+				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
+				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,
+				E3BCF1FD1827EB4100517124 /* Reachability.m in Sources */,
+				E3BCF1F71827EA3100517124 /* YDBaseNavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

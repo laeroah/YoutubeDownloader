@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "YDViewController.h"
+#import "YDBaseNavigationViewController.h"
+#import "YDSearchViewController.h"
 
 @implementation AppDelegate
 
@@ -20,8 +22,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    YDViewController *debugViewController = [[YDViewController alloc]init];
-    self.window.rootViewController = debugViewController;
+    self.internetConnectionReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetConnectionReachability startNotifier];
+
+    YDSearchViewController *searchViewController = [[YDSearchViewController alloc] initWithNibName:@"YDSearchViewController" bundle:nil];
+    YDBaseNavigationViewController *navigationController = [[YDBaseNavigationViewController alloc] initWithRootViewController:searchViewController];
+    self.window.rootViewController = navigationController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
