@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
+		AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8BA770182861B6008519E8 /* YDPlayer.m */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 /* Begin PBXFileReference section */
 		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
+		AF8BA76F182861B6008519E8 /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
+		AF8BA770182861B6008519E8 /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,6 +119,8 @@
 		AF4FB41D18275DA8008F906D /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				AF8BA76F182861B6008519E8 /* YDPlayer.h */,
+				AF8BA770182861B6008519E8 /* YDPlayer.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				E3BCF1F21827E7B000517124 /* YDSearchViewController.m in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
 				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
+				AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */,
 				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,
 				E3BCF1FD1827EB4100517124 /* Reachability.m in Sources */,
 				E3BCF1F71827EA3100517124 /* YDBaseNavigationViewController.m in Sources */,
