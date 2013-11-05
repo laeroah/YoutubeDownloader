@@ -13,7 +13,7 @@
 
 @interface YDSearchViewController ()
 {
-
+    BOOL _pagedLoaded;
 }
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
@@ -65,11 +65,12 @@
     homeButton.frame = CGRectMake(0, 6, 32, 32);
     [titleView addSubview:homeButton];
     
-    UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [downloadButton setImage:[UIImage imageNamed:@"ic_download"]  forState:UIControlStateNormal];
-    [downloadButton addTarget:self action:@selector(downloadProcess:) forControlEvents:UIControlEventTouchUpInside];
-    downloadButton.frame = CGRectMake(160, 6, 32, 32);
-    [titleView addSubview:downloadButton];
+    _downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_downloadButton setImage:[UIImage imageNamed:@"ic_download"]  forState:UIControlStateNormal];
+    [_downloadButton addTarget:self action:@selector(downloadProcess:) forControlEvents:UIControlEventTouchUpInside];
+    _downloadButton.frame = CGRectMake(160, 6, 32, 32);
+    [titleView addSubview:_downloadButton];
+    
     
     self.navigationItem.titleView = titleView;
     
@@ -81,6 +82,19 @@
     
     [self goHomePage];
 }
+
+- (NSString *)getURL
+{
+    return [self.webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+}
+
+- (NSString *)getTitle
+{
+    NSString *theTitle=[self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    theTitle = [theTitle stringByReplacingOccurrencesOfString:@" - YouTube" withString:@""];
+    return  [theTitle stringByAppendingString:@".mp4"];
+}
+
 
 - (IBAction)goPrevPage:(id)sender
 {
@@ -97,8 +111,23 @@
     
 }
 
-#pragma mark UIWebViewDelegate methods
+- (void)processForNewPage
+{
+    _pagedLoaded = NO;
+    _downloadButton.enabled = NO;
+}
 
+- (void)processForPageLoaded
+{
+    _pagedLoaded = YES;
+}
+
+- (void)analysisVideoLinks
+{
+    
+}
+
+#pragma mark UIWebViewDelegate methods
 - (BOOL)webView:(UIWebView *)wv shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     return YES;
@@ -106,10 +135,12 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)pWebView
 {
+    [self processForNewPage];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)pWebView
 {
+    [self processForPageLoaded];
 }
 
 
@@ -121,5 +152,9 @@
     }
 }
 
+- (void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
+{
+    
+}
 
 @end

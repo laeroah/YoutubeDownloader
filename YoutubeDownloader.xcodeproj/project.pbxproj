@@ -32,7 +32,7 @@
 		E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BCF1FE1827ECF300517124 /* YDSearchViewController~ipad.xib */; };
 		E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */; };
 		E3BCF2071827F19200517124 /* YDFontUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF2061827F19200517124 /* YDFontUtility.m */; };
-		E3BCF20A18281B7C00517124 /* UIWebView+JavascriptAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */; };
+		E3BCF20D18284CA700517124 /* YDVideoLinksExtractorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCF20C18284CA700517124 /* YDVideoLinksExtractorManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +83,8 @@
 		E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Private.m"; sourceTree = "<group>"; };
 		E3BCF2051827F19200517124 /* YDFontUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDFontUtility.h; sourceTree = "<group>"; };
 		E3BCF2061827F19200517124 /* YDFontUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDFontUtility.m; sourceTree = "<group>"; };
-		E3BCF20818281B7C00517124 /* UIWebView+JavascriptAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+JavascriptAlert.h"; sourceTree = "<group>"; };
-		E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+JavascriptAlert.m"; sourceTree = "<group>"; };
+		E3BCF20B18284CA700517124 /* YDVideoLinksExtractorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDVideoLinksExtractorManager.h; sourceTree = "<group>"; };
+		E3BCF20C18284CA700517124 /* YDVideoLinksExtractorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDVideoLinksExtractorManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +236,8 @@
 		E3BCF1E31827E63F00517124 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E3BCF20B18284CA700517124 /* YDVideoLinksExtractorManager.h */,
+				E3BCF20C18284CA700517124 /* YDVideoLinksExtractorManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -304,8 +306,6 @@
 			children = (
 				E3BCF2021827F13300517124 /* UIBarButtonItem+Private.h */,
 				E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */,
-				E3BCF20818281B7C00517124 /* UIWebView+JavascriptAlert.h */,
-				E3BCF20918281B7C00517124 /* UIWebView+JavascriptAlert.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -413,13 +413,13 @@
 				AF4FB42118275E06008F906D /* YDViewController.m in Sources */,
 				E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */,
 				AFE6AA2F1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld in Sources */,
+				E3BCF20D18284CA700517124 /* YDVideoLinksExtractorManager.m in Sources */,
 				E3BCF1F21827E7B000517124 /* YDSearchViewController.m in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
 				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
 				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,
 				E3BCF1FD1827EB4100517124 /* Reachability.m in Sources */,
 				E3BCF1F71827EA3100517124 /* YDBaseNavigationViewController.m in Sources */,
-				E3BCF20A18281B7C00517124 /* UIWebView+JavascriptAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

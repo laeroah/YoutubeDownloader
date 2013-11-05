@@ -10,4 +10,5 @@
 
 @interface YDSearchViewController : YDBaseViewController<UIWebViewDelegate>
 
+@property (nonatomic, strong) UIButton *downloadButton;
 @end
