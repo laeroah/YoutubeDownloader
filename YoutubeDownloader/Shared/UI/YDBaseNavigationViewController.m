@@ -35,4 +35,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    if ([self.topViewController respondsToSelector:@selector(preferredStatusBarStyle)]) {
+        return [self.topViewController preferredStatusBarStyle];
+    }else{
+        return UIStatusBarStyleLightContent;
+    }
+}
+
 @end

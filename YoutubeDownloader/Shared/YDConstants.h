@@ -12,3 +12,10 @@
 
 
 #define APP_DELEGATE (AppDelegate *)[UIApplication sharedApplication].delegate
+
+
+#pragma mark - UI constants
+#define NAVIGATION_BUTTON_WIDTH                    32.0f
+#define NAVIGATION_BUTTON_HEIGHT                   32.0f
+#define NAVIGATION_BUTTON_OFFSET                   0.0f
+#define BAR_TINT_COLOR                             [UIColor colorWithRed:47/255.0f green:47/255.0f blue:47/255.0f alpha:1.0]

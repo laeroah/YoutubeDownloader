@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* const YDYouTubePlayerExtractorErrorDomain;
+extern NSString* const kYDYouTubePlayerExtractorErrorDomain;
 extern NSInteger const YDYouTubePlayerExtractorErrorCodeInvalidHTML;
 extern NSInteger const YDYouTubePlayerExtractorErrorCodeNoStreamURL;
 extern NSInteger const YDYouTubePlayerExtractorErrorCodeNoJSONData;
 
-typedef void (^YDYouTubeExtractorCompletionBlock)(NSURL *videoURL, NSError *error);
+typedef void (^YDYouTubeExtractorCompletionBlock)(NSURL *videoUrl , NSDictionary *videoURLDict, NSError *error);
 
 typedef enum {
     YDYouTubeVideoQualitySmall    = 0,
@@ -27,7 +27,7 @@ typedef enum {
 
 @property (nonatomic, assign) YDYouTubeVideoQuality quality;
 @property (nonatomic, strong) NSURL* youTubeURL;
-@property (nonatomic, strong) NSURL *extractedURL;
+@property (nonatomic, strong) NSMutableDictionary *resultDict;
 @property (nonatomic, weak) IBOutlet id <YDYouTubeExtractorDelegate> delegate;
 @property (nonatomic, strong) YDYouTubeExtractorCompletionBlock completionBlock;
 @property (nonatomic, strong) NSString* extractionExpression;
@@ -39,12 +39,5 @@ typedef enum {
 -(void)stopExtracting;
 
 -(void)extractVideoURLWithCompletionBlock:(YDYouTubeExtractorCompletionBlock)completionBlock;
-
-@end
-
-@protocol YDYouTubeExtractorDelegate <NSObject>
-
--(void)youTubeExtractor:(YDVideoLinksExtractorManager *)extractorManager didSuccessfullyExtractYouTubeURL:(NSURL *)videoURL;
--(void)youTubeExtractor:(YDVideoLinksExtractorManager *)extractorManager failedExtractingYouTubeURLWithError:(NSError *)error;
 
 @end
