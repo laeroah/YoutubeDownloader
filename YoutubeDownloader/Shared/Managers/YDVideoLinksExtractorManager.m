@@ -31,7 +31,6 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     {
         self.youTubeURL = videoURL;
         self.quality = videoQuality;
-        //self.extractionExpression = @"(?!\\\\u0026url=)http[^\"]*?fallback_host=[^\"]*?(?=\\\\u0026)";
         self.extractionExpression = @"(?!\\\\\")url=http[^\"]*?itag=[^\"]*?(?=\\\\\")";
 
     }
@@ -90,6 +89,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 {
     NSError *error;
     
+    
     NSRegularExpression* regex = [[NSRegularExpression alloc] initWithPattern:self.extractionExpression options:NSRegularExpressionCaseInsensitive error:&error];
     
     if (error)
@@ -114,6 +114,8 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     [allStreamURL replaceOccurrencesOfString:@"\\\\u0026" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, allStreamURL.length)];
     [allStreamURL replaceOccurrencesOfString:@"\\\\\\" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, allStreamURL.length)];
     NSString *unescapeAllStreamUrl = [allStreamURL stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"unescapeAllStreamUrl = %@", unescapeAllStreamUrl);
+
     NSArray *videoLists = [unescapeAllStreamUrl componentsSeparatedByString:@"url="];
     
     self.resultDict = [NSMutableDictionary dictionaryWithCapacity:3];

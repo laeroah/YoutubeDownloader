@@ -15,7 +15,6 @@
 
 @interface YDSearchViewController ()
 {
-
     //control buttons
     UIButton *_backButton;
     UIButton *_homeButton;
@@ -32,15 +31,6 @@
 
 @implementation YDSearchViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)configureNavigationBarTitleAndButtons
 {
     if (self.webView.canGoBack)
@@ -48,7 +38,6 @@
     else
         self.navigationItem.leftBarButtonItem.enabled = NO;
 }
-
 
 - (void)loadUrl:(NSURL *)url
 {
@@ -68,7 +57,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     if (_urlExtractor)
     {
         [_urlExtractor stopExtracting];
@@ -77,6 +65,7 @@
     [self dismissAllToastMessages];
 }
 
+// Get current page url
 - (NSString *)getURL
 {
     return [self.webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
@@ -114,12 +103,13 @@
     self.navigationButtons = @[_backButton, _homeButton, _downloadButton, _libraryButton];
 }
 
+#pragma mark - actions
 - (IBAction)goPrevPage:(id)sender
 {
     [self.webView goBack];
 }
 
-- (void)toProgramLibrary:(id)sender
+- (IBAction)toProgramLibrary:(id)sender
 {
     
 }
@@ -133,7 +123,7 @@
 - (void)goHomePage
 {
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = ''"];
-    NSString *homeUrl = @"http://www.youtube.com";
+    NSString *homeUrl = @"http://m.youtube.com";
     [self loadUrl:[NSURL URLWithString:homeUrl]];
 }
 
@@ -195,9 +185,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)pWebView
 {
+    NSString* js = @"window.alert = function(message) {alert(message);}";
+    [self.webView stringByEvaluatingJavaScriptFromString: js];
     
+    // trigger an alert.  for demonstration only:
+    [self.webView stringByEvaluatingJavaScriptFromString: @"alert('hello, world');" ];
 }
-
 
 - (void)webView:(UIWebView *)pWebView didFailLoadWithError:(NSError *)error
 {
@@ -207,9 +200,6 @@
     }
 }
 
-- (void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message
-{
-    
-}
+
 
 @end
