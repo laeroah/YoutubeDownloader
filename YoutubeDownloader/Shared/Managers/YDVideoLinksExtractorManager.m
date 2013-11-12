@@ -88,7 +88,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 -(void)extractYouTubeURLFromFile:(NSString *)html
 {
     NSError *error;
-    
+    NSLog(@"html = %@", html);
     
     NSRegularExpression* regex = [[NSRegularExpression alloc] initWithPattern:self.extractionExpression options:NSRegularExpressionCaseInsensitive error:&error];
     

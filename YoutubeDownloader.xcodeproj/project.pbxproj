@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		E322A69A18325B6C00BA77A2 /* mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E322A69B18325B6C00BA77A2 /* Build configuration list for PBXAggregateTarget "mogenerator" */;
+			buildPhases = (
+				E322A69E18325EAC00BA77A2 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = mogenerator;
+			productName = mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8BA770182861B6008519E8 /* YDPlayer.m */; };
@@ -16,7 +30,6 @@
 		AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFE6AA241822E29E0037B389 /* InfoPlist.strings */; };
 		AFE6AA281822E29E0037B389 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA271822E29E0037B389 /* main.m */; };
 		AFE6AA2C1822E29E0037B389 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA2B1822E29E0037B389 /* AppDelegate.m */; };
-		AFE6AA2F1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA2D1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld */; };
 		AFE6AA311822E29E0037B389 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE6AA301822E29E0037B389 /* Images.xcassets */; };
 		AFE6AA381822E29E0037B389 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA371822E29E0037B389 /* XCTest.framework */; };
 		AFE6AA391822E29E0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
@@ -24,6 +37,7 @@
 		AFE6AA3B1822E29E0037B389 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1F1822E29E0037B389 /* CoreData.framework */; };
 		AFE6AA431822E29E0037B389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFE6AA411822E29E0037B389 /* InfoPlist.strings */; };
 		AFE6AA451822E29E0037B389 /* YoutubeDownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */; };
+		E322A6A8183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E322A6A5183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld */; };
 		E3AFA688182FCFEE008CABB6 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA687182FCFEE008CABB6 /* NSString+Util.m */; };
 		E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA68A182FD629008CABB6 /* WebUtility.m */; };
 		E3AFA6A1182FDC44008CABB6 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA68F182FDC44008CABB6 /* AFHTTPClient.m */; };
@@ -62,6 +76,13 @@
 			remoteGlobalIDString = AFE6AA151822E29D0037B389;
 			remoteInfo = YoutubeDownloader;
 		};
+		E322A6A21832600600BA77A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFE6AA0E1822E29D0037B389 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E322A69A18325B6C00BA77A2;
+			remoteInfo = mogenerator;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -80,13 +101,14 @@
 		AFE6AA291822E29E0037B389 /* YoutubeDownloader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YoutubeDownloader-Prefix.pch"; sourceTree = "<group>"; };
 		AFE6AA2A1822E29E0037B389 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFE6AA2B1822E29E0037B389 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AFE6AA2E1822E29E0037B389 /* YoutubeDownloader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoutubeDownloader.xcdatamodel; sourceTree = "<group>"; };
 		AFE6AA301822E29E0037B389 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFE6AA361822E29E0037B389 /* YoutubeDownloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YoutubeDownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA371822E29E0037B389 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AFE6AA401822E29E0037B389 /* YoutubeDownloaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YoutubeDownloaderTests-Info.plist"; sourceTree = "<group>"; };
 		AFE6AA421822E29E0037B389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeDownloaderTests.m; sourceTree = "<group>"; };
+		E322A6A6183262A400BA77A2 /* YoutubeDownloader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoutubeDownloader.xcdatamodel; sourceTree = "<group>"; };
+		E322A6A7183262A400BA77A2 /* YoutubeDownloader－1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YoutubeDownloader－1.xcdatamodel"; sourceTree = "<group>"; };
 		E3AFA686182FCFED008CABB6 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		E3AFA687182FCFEE008CABB6 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
 		E3AFA689182FD629008CABB6 /* WebUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebUtility.h; sourceTree = "<group>"; };
@@ -225,6 +247,7 @@
 		AFE6AA211822E29E0037B389 /* YoutubeDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				E322A6A5183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld */,
 				E3AFA68C182FDC17008CABB6 /* ThirdParty */,
 				E3BCF1E01827E43C00517124 /* Shared */,
 				AF4FB41E18275DE6008F906D /* Debug */,
@@ -232,7 +255,6 @@
 				AFE6AA2A1822E29E0037B389 /* AppDelegate.h */,
 				AFE6AA2B1822E29E0037B389 /* AppDelegate.m */,
 				AFE6AA301822E29E0037B389 /* Images.xcassets */,
-				AFE6AA2D1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld */,
 				AFE6AA221822E29E0037B389 /* Supporting Files */,
 			);
 			path = YoutubeDownloader;
@@ -265,6 +287,29 @@
 				AFE6AA411822E29E0037B389 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E322A69F18325FF600BA77A2 /* core data */ = {
+			isa = PBXGroup;
+			children = (
+				E322A6A018325FF600BA77A2 /* base */,
+				E322A6A118325FF600BA77A2 /* interface */,
+			);
+			path = "core data";
+			sourceTree = "<group>";
+		};
+		E322A6A018325FF600BA77A2 /* base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		E322A6A118325FF600BA77A2 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interface;
 			sourceTree = "<group>";
 		};
 		E3AFA68C182FDC17008CABB6 /* ThirdParty */ = {
@@ -359,6 +404,7 @@
 		E3BCF1E11827E63F00517124 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				E322A69F18325FF600BA77A2 /* core data */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -461,10 +507,12 @@
 				AFE6AA121822E29D0037B389 /* Sources */,
 				AFE6AA131822E29D0037B389 /* Frameworks */,
 				AFE6AA141822E29D0037B389 /* Resources */,
+				E322A699183259C500BA77A2 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E322A6A31832600600BA77A2 /* PBXTargetDependency */,
 			);
 			name = YoutubeDownloader;
 			productName = YoutubeDownloader;
@@ -518,6 +566,7 @@
 			targets = (
 				AFE6AA151822E29D0037B389 /* YoutubeDownloader */,
 				AFE6AA351822E29E0037B389 /* YoutubeDownloaderTests */,
+				E322A69A18325B6C00BA77A2 /* mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -544,6 +593,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E322A699183259C500BA77A2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+		E322A69E18325EAC00BA77A2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd YoutubeDownloader\n/usr/bin/mogenerator --template-var arc=true -m YoutubeDownloader.xcdatamodeld/YoutubeDownloader.xcdatamodel -M \"Shared/Data Models/coredata/base/\" -H \"Shared/Data Models/coredata/interface/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AFE6AA121822E29D0037B389 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -566,8 +644,8 @@
 				E3AFA6A6182FDC44008CABB6 /* AFPropertyListRequestOperation.m in Sources */,
 				E3AFA6C0182FEEB2008CABB6 /* ActionSheetDatePicker.m in Sources */,
 				E3AFA6A3182FDC44008CABB6 /* AFImageRequestOperation.m in Sources */,
-				AFE6AA2F1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld in Sources */,
 				E3BCF20D18284CA700517124 /* YDVideoLinksExtractorManager.m in Sources */,
+				E322A6A8183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld in Sources */,
 				E3BCF1F21827E7B000517124 /* YDSearchViewController.m in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
 				E3AFA6C3182FEEB2008CABB6 /* DistancePickerView.m in Sources */,
@@ -598,6 +676,11 @@
 			isa = PBXTargetDependency;
 			target = AFE6AA151822E29D0037B389 /* YoutubeDownloader */;
 			targetProxy = AFE6AA3C1822E29E0037B389 /* PBXContainerItemProxy */;
+		};
+		E322A6A31832600600BA77A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E322A69A18325B6C00BA77A2 /* mogenerator */;
+			targetProxy = E322A6A21832600600BA77A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -763,6 +846,20 @@
 			};
 			name = Release;
 		};
+		E322A69C18325B6C00BA77A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E322A69D18325B6C00BA77A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -793,15 +890,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E322A69B18325B6C00BA77A2 /* Build configuration list for PBXAggregateTarget "mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E322A69C18325B6C00BA77A2 /* Debug */,
+				E322A69D18325B6C00BA77A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AFE6AA2D1822E29E0037B389 /* YoutubeDownloader.xcdatamodeld */ = {
+		E322A6A5183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AFE6AA2E1822E29E0037B389 /* YoutubeDownloader.xcdatamodel */,
+				E322A6A6183262A400BA77A2 /* YoutubeDownloader.xcdatamodel */,
+				E322A6A7183262A400BA77A2 /* YoutubeDownloader－1.xcdatamodel */,
 			);
-			currentVersion = AFE6AA2E1822E29E0037B389 /* YoutubeDownloader.xcdatamodel */;
+			currentVersion = E322A6A6183262A400BA77A2 /* YoutubeDownloader.xcdatamodel */;
 			path = YoutubeDownloader.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
