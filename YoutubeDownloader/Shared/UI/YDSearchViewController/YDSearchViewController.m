@@ -12,6 +12,7 @@
 #import "YDConstants.h"
 #import "YDVideoLinksExtractorManager.h"
 #import "ActionSheetStringPicker.h"
+#import "YDMediaLibraryViewController.h"
 
 @interface YDSearchViewController ()
 {
@@ -111,7 +112,8 @@
 
 - (IBAction)toProgramLibrary:(id)sender
 {
-    
+    YDMediaLibraryViewController *mediaLibraryViewController = [[YDMediaLibraryViewController alloc]init];
+    [self.navigationController pushViewController:mediaLibraryViewController animated:YES];
 }
 
 - (void)downloadProcess:(id)sender
@@ -185,11 +187,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)pWebView
 {
-    NSString* js = @"window.alert = function(message) {alert(message);}";
-    [self.webView stringByEvaluatingJavaScriptFromString: js];
-    
-    // trigger an alert.  for demonstration only:
-    [self.webView stringByEvaluatingJavaScriptFromString: @"alert('hello, world');" ];
+//    NSString* js = @"window.alert = function(message) {alert(message);}";
+//    [self.webView stringByEvaluatingJavaScriptFromString: js];
+//    
+//    // trigger an alert.  for demonstration only:
+//    [self.webView stringByEvaluatingJavaScriptFromString: @"alert('hello, world');" ];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"window.alert=null;"];
 }
 
 - (void)webView:(UIWebView *)pWebView didFailLoadWithError:(NSError *)error

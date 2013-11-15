@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */; };
+		AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8BA770182861B6008519E8 /* YDPlayer.m */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
@@ -86,6 +88,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF3CBF551836B2DE0025957C /* YDMediaLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryViewController.h; sourceTree = "<group>"; };
+		AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryViewController.m; sourceTree = "<group>"; };
+		AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryViewController~iphone.xib"; sourceTree = "<group>"; };
 		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
 		AF8BA76F182861B6008519E8 /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
@@ -195,6 +200,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF3CBF541836B2B80025957C /* MediaLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				AF3CBF551836B2DE0025957C /* YDMediaLibraryViewController.h */,
+				AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */,
+				AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */,
+			);
+			path = MediaLibrary;
+			sourceTree = "<group>";
+		};
 		AF4FB41D18275DA8008F906D /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +466,7 @@
 		E3BCF1E71827E63F00517124 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AF3CBF541836B2B80025957C /* MediaLibrary */,
 				E3BCF1EC1827E78700517124 /* YDSearchViewController */,
 				E3BCF1E91827E74000517124 /* YDBaseViewController.h */,
 				E3BCF1EA1827E74000517124 /* YDBaseViewController.m */,
@@ -580,6 +596,7 @@
 				E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */,
 				E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */,
 				AFE6AA311822E29E0037B389 /* Images.xcassets in Resources */,
+				AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +654,7 @@
 				E3AFA6A8182FDC44008CABB6 /* AFXMLRequestOperation.m in Sources */,
 				E3AFA6A5182FDC44008CABB6 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */,
+				AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */,
 				E3AFA688182FCFEE008CABB6 /* NSString+Util.m in Sources */,
 				E3AFA6BF182FEEB2008CABB6 /* AbstractActionSheetPicker.m in Sources */,
 				E3AFA6B2182FDC8C008CABB6 /* MBProgressHUD.m in Sources */,
@@ -897,6 +915,7 @@
 				E322A69D18325B6C00BA77A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
