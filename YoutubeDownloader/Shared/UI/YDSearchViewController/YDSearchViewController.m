@@ -14,6 +14,8 @@
 #import "ActionSheetStringPicker.h"
 #import "DownloadTask.h"
 #import "YDDownloadManager.h"
+#import "YDMediaLibraryViewController.h"
+
 @interface YDSearchViewController ()
 {
     //control buttons
@@ -112,7 +114,8 @@
 
 - (IBAction)toProgramLibrary:(id)sender
 {
-    
+    YDMediaLibraryViewController *mediaLibraryViewController = [[YDMediaLibraryViewController alloc]init];
+    [self.navigationController pushViewController:mediaLibraryViewController animated:YES];
 }
 
 - (void)downloadProcess:(id)sender
@@ -212,11 +215,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)pWebView
 {
-    NSString* js = @"window.alert = function(message) {alert(message);}";
-    [self.webView stringByEvaluatingJavaScriptFromString: js];
-    
-    // trigger an alert.  for demonstration only:
-    [self.webView stringByEvaluatingJavaScriptFromString: @"alert('hello, world');" ];
+//    NSString* js = @"window.alert = function(message) {alert(message);}";
+//    [self.webView stringByEvaluatingJavaScriptFromString: js];
+//    
+//    // trigger an alert.  for demonstration only:
+//    [self.webView stringByEvaluatingJavaScriptFromString: @"alert('hello, world');" ];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"window.alert=null;"];
 }
 
 - (void)webView:(UIWebView *)pWebView didFailLoadWithError:(NSError *)error
