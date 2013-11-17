@@ -10,6 +10,7 @@
 #import "YDViewController.h"
 #import "YDBaseNavigationViewController.h"
 #import "YDSearchViewController.h"
+#import "CoreData+MagicalRecord.h"
 
 @implementation AppDelegate
 
@@ -19,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MagicalRecord setupCoreDataStack];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
@@ -62,6 +65,7 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    [MagicalRecord cleanUp];
 }
 
 - (void)reachabilityChanged:(NSNotification *)note

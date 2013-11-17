@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="DownloadTask" syncable="YES">
+    <entity name="DownloadTask" representedClassName="DownloadTask" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="downloadID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="downloadPageUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,10 +8,10 @@
         <attribute name="downloadTaskStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="qualityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoDownloadUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="videoImageUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Video" syncable="YES">
+    <entity name="Video" representedClassName="Video" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="qualityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,7 +20,7 @@
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
         <element name="DownloadTask" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Video" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

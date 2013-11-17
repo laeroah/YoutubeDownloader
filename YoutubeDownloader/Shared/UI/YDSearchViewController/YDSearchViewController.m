@@ -12,7 +12,8 @@
 #import "YDConstants.h"
 #import "YDVideoLinksExtractorManager.h"
 #import "ActionSheetStringPicker.h"
-
+#import "DownloadTask.h"
+#import "YDDownloadManager.h"
 @interface YDSearchViewController ()
 {
     //control buttons
@@ -20,7 +21,9 @@
     UIButton *_homeButton;
     UIButton *_downloadButton;
     UIButton *_libraryButton;
+    NSString *_downloadPageUrl;
     NSURL *_downloadUrl;
+    NSString *_title;
     YDVideoLinksExtractorManager *_urlExtractor;
     NSDictionary *downloadableVideos;
 }
@@ -73,9 +76,7 @@
 
 - (NSString *)getTitle
 {
-    NSString *theTitle=[self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    theTitle = [theTitle stringByReplacingOccurrencesOfString:@" - YouTube" withString:@""];
-    return  [theTitle stringByAppendingString:@".mp4"];
+    return [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 - (void)createControlButtons
@@ -135,8 +136,9 @@
         _urlExtractor = nil;
     }
     
-    NSString *orgUrl = [self  getURL];
-    _urlExtractor = [[YDVideoLinksExtractorManager alloc] initWithURL:[NSURL URLWithString:orgUrl] quality:YDYouTubeVideoQualityMedium];
+    _downloadPageUrl = [self  getURL];
+    _title = [self getTitle];
+    _urlExtractor = [[YDVideoLinksExtractorManager alloc] initWithURL:[NSURL URLWithString:_downloadPageUrl] quality:YDYouTubeVideoQualityMedium];
     [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSDictionary *dictionary, NSError *error) {
         [self dismissAllToastMessages];
         if(!error && dictionary)
@@ -161,10 +163,35 @@
         [self performSelectorOnMainThread:@selector(showMediaPickers) withObject:nil waitUntilDone:NO];
         return;
     }
-
+    
+    [self showToastMessage:@"Please wait..." hideAfterDelay:0];
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
-        NSLog(@"selectdValue = %@",videoFileDownloadUrl);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+            DownloadTask *downloadTask = [DownloadTask findByDownloadPageUrl:_downloadPageUrl qualityType:selectedValue inContext:privateQueueContext];
+            if (downloadTask && [downloadTask.downloadTaskStatus integerValue] == DownloadTaskFailed)
+            {
+                downloadTask.downloadTaskStatus = @(DownloadTaskWaiting);
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self dismissAllToastMessages];
+                });
+                return;
+            }
+            if (downloadTask)
+            {
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self dismissAllToastMessages];
+                    [self showToastMessage:@"You have selected this video" hideAfterDelay:3.0];
+                });
+                return;
+            }
+            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl qualityType:selectedValue videoDescription:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self dismissAllToastMessages];
+                });
+            }];
+        });
 
     };
     
