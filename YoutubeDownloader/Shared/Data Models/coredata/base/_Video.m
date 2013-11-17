@@ -4,7 +4,9 @@
 #import "_Video.h"
 
 const struct VideoAttributes VideoAttributes = {
+	.bookmark = @"bookmark",
 	.createDate = @"createDate",
+	.isNew = @"isNew",
 	.qualityType = @"qualityType",
 	.videoDescription = @"videoDescription",
 	.videoFilePath = @"videoFilePath",
@@ -13,6 +15,7 @@ const struct VideoAttributes VideoAttributes = {
 };
 
 const struct VideoRelationships VideoRelationships = {
+	.relationship = @"relationship",
 };
 
 const struct VideoFetchedProperties VideoFetchedProperties = {
@@ -44,6 +47,16 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"bookmarkValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"bookmark"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"isNewValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isNew"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"videoIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"videoID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -56,8 +69,60 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 
 
+@dynamic bookmark;
+
+
+
+- (float)bookmarkValue {
+	NSNumber *result = [self bookmark];
+	return [result floatValue];
+}
+
+- (void)setBookmarkValue:(float)value_ {
+	[self setBookmark:[NSNumber numberWithFloat:value_]];
+}
+
+- (float)primitiveBookmarkValue {
+	NSNumber *result = [self primitiveBookmark];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveBookmarkValue:(float)value_ {
+	[self setPrimitiveBookmark:[NSNumber numberWithFloat:value_]];
+}
+
+
+
+
+
 @dynamic createDate;
 
+
+
+
+
+
+@dynamic isNew;
+
+
+
+- (BOOL)isNewValue {
+	NSNumber *result = [self isNew];
+	return [result boolValue];
+}
+
+- (void)setIsNewValue:(BOOL)value_ {
+	[self setIsNew:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsNewValue {
+	NSNumber *result = [self primitiveIsNew];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsNewValue:(BOOL)value_ {
+	[self setPrimitiveIsNew:[NSNumber numberWithBool:value_]];
+}
 
 
 
@@ -116,6 +181,10 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 
 
+
+@dynamic relationship;
+
+	
 
 
 

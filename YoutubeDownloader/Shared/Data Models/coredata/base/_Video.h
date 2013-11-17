@@ -5,7 +5,9 @@
 
 
 extern const struct VideoAttributes {
+	__unsafe_unretained NSString *bookmark;
 	__unsafe_unretained NSString *createDate;
+	__unsafe_unretained NSString *isNew;
 	__unsafe_unretained NSString *qualityType;
 	__unsafe_unretained NSString *videoDescription;
 	__unsafe_unretained NSString *videoFilePath;
@@ -14,10 +16,14 @@ extern const struct VideoAttributes {
 } VideoAttributes;
 
 extern const struct VideoRelationships {
+	__unsafe_unretained NSString *relationship;
 } VideoRelationships;
 
 extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
+
+@class DownloadTask;
+
 
 
 
@@ -40,11 +46,39 @@ extern const struct VideoFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* bookmark;
+
+
+
+@property float bookmarkValue;
+- (float)bookmarkValue;
+- (void)setBookmarkValue:(float)value_;
+
+//- (BOOL)validateBookmark:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* createDate;
 
 
 
 //- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* isNew;
+
+
+
+@property BOOL isNewValue;
+- (BOOL)isNewValue;
+- (void)setIsNewValue:(BOOL)value_;
+
+//- (BOOL)validateIsNew:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -104,6 +138,13 @@ extern const struct VideoFetchedProperties {
 
 
 
+@property (nonatomic, strong) DownloadTask *relationship;
+
+//- (BOOL)validateRelationship:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -114,8 +155,26 @@ extern const struct VideoFetchedProperties {
 @interface _Video (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSNumber*)primitiveBookmark;
+- (void)setPrimitiveBookmark:(NSNumber*)value;
+
+- (float)primitiveBookmarkValue;
+- (void)setPrimitiveBookmarkValue:(float)value_;
+
+
+
+
 - (NSString*)primitiveCreateDate;
 - (void)setPrimitiveCreateDate:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveIsNew;
+- (void)setPrimitiveIsNew:(NSNumber*)value;
+
+- (BOOL)primitiveIsNewValue;
+- (void)setPrimitiveIsNewValue:(BOOL)value_;
 
 
 
@@ -151,6 +210,11 @@ extern const struct VideoFetchedProperties {
 - (void)setPrimitiveVideoImagePath:(NSString*)value;
 
 
+
+
+
+- (DownloadTask*)primitiveRelationship;
+- (void)setPrimitiveRelationship:(DownloadTask*)value;
 
 
 @end

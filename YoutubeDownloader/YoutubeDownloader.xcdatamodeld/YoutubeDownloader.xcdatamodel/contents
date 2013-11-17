@@ -10,14 +10,18 @@
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDownloadUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="relationship" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="Video" representedClassName="Video" syncable="YES">
+        <attribute name="bookmark" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isNew" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="qualityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DownloadTask" inverseName="relationship" inverseEntity="DownloadTask" syncable="YES"/>
     </entity>
     <elements>
         <element name="DownloadTask" positionX="0" positionY="0" width="0" height="0"/>
