@@ -19,3 +19,5 @@
 #define NAVIGATION_BUTTON_HEIGHT                   32.0f
 #define NAVIGATION_BUTTON_OFFSET                   0.0f
 #define BAR_TINT_COLOR                             [UIColor colorWithRed:47/255.0f green:47/255.0f blue:47/255.0f alpha:1.0]
+#define MEDIA_LIBRARY_THUMBNAIL_WIDTH              158.0f
+#define MEDIA_LIBRARY_ROW_HEIGHT                   100.0f

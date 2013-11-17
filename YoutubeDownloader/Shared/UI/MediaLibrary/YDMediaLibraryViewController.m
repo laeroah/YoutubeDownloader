@@ -8,7 +8,14 @@
 
 #import "YDMediaLibraryViewController.h"
 #import "YDConstants.h"
+#import "YDDeviceUtility.h"
 #import "YDMediaLibraryRowCell.h"
+
+typedef enum
+{
+    YDMediaLibraryViewControllerLayoutRow,
+    YDMediaLibraryViewControllerLayoutThumbnail
+}YDMediaLibraryViewControllerLayout;
 
 @interface YDMediaLibraryViewController ()
 {
@@ -17,6 +24,8 @@
     UIButton *_thumbnailButton;
     UIButton *_searchButton;
     UIButton *_deleteButton;
+    YDMediaLibraryViewControllerLayout _currentLayout;
+    BOOL _editMode;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *deviceSpaceStatusBar;
@@ -57,7 +66,7 @@
     _thumbnailButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_thumbnailButton setImage:[UIImage imageNamed:@"ic_thumbnail"] forState:UIControlStateNormal];
     _thumbnailButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
-    //[_thumbnailButton addTarget:self action:@selector(goHomePage) forControlEvents:UIControlEventTouchUpInside];
+    [_thumbnailButton addTarget:self action:@selector(toggleLayout) forControlEvents:UIControlEventTouchUpInside];
     
     _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_searchButton setImage:[UIImage imageNamed:@"ic_search"] forState:UIControlStateNormal];
@@ -67,7 +76,7 @@
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_deleteButton setImage:[UIImage imageNamed:@"ic_delete"] forState:UIControlStateNormal];
     _deleteButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
-    //[_deleteButton addTarget:self action:@selector(toProgramLibrary:) forControlEvents:UIControlEventTouchUpInside];
+    [_deleteButton addTarget:self action:@selector(toggleEditMode) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationButtons = @[_backButton, _thumbnailButton, _searchButton, _deleteButton];
 }
@@ -91,28 +100,78 @@
     [collectionView dequeueReusableCellWithReuseIdentifier:@"YDMediaLibraryRowCell"
                                               forIndexPath:indexPath];
     
+    
+    if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
+        mediaCell.downloadControlButton.hidden = NO;
+        mediaCell.downloadProgressBar.hidden = NO;
+        mediaCell.videoTitleLabel.hidden = NO;
+    }else{
+        mediaCell.downloadControlButton.hidden = YES;
+        mediaCell.downloadProgressBar.hidden = YES;
+        mediaCell.videoTitleLabel.hidden = YES;
+    }
+    
     return mediaCell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // Adjust cell size for orientation
-    if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
-        return CGSizeMake(self.view.frame.size.width, 100);
+    if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
+        return CGSizeMake(self.view.frame.size.width, MEDIA_LIBRARY_ROW_HEIGHT);
+    }else{
+        return CGSizeMake(MEDIA_LIBRARY_THUMBNAIL_WIDTH, MEDIA_LIBRARY_ROW_HEIGHT);
     }
-    return CGSizeMake(320, 100);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+
+{
+    return UIEdgeInsetsZero;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 2;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0;
 }
 
 #pragma mark - rotation
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self.mediaCollectionView performBatchUpdates:nil completion:nil];
+    [self.mediaCollectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - navigation control
 - (void)dismiss
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)toggleLayout
+{
+    if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
+        _currentLayout = YDMediaLibraryViewControllerLayoutThumbnail;
+    }else{
+        _currentLayout = YDMediaLibraryViewControllerLayoutRow;
+    }
+    [self.mediaCollectionView.collectionViewLayout invalidateLayout];
+    [self.mediaCollectionView reloadData];
+}
+
+- (void)toggleEditMode
+{
+    NSArray *visibleCells = [self.mediaCollectionView visibleCells];
+    if (_editMode) {
+        
+    }else{
+        
+    }
+    _editMode = !_editMode;
 }
 
 @end

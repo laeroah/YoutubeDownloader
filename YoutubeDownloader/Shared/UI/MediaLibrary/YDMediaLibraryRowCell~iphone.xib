@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -13,24 +13,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="boc-H4-Pr4">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="boc-H4-Pr4">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="Y5t-Nq-ehE"/>
+                            <constraint firstAttribute="height" constant="100" id="vU6-OG-E1G"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NBA free agency causes " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HTj-Tt-zVQ">
-                        <rect key="frame" x="158" y="14" width="153" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NBA free agency causes " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTj-Tt-zVQ">
+                        <rect key="frame" x="168" y="14" width="143" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="87R-R8-nH3"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="X3I-qw-8CS">
-                        <rect key="frame" x="158" y="71" width="108" height="2"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X3I-qw-8CS">
+                        <rect key="frame" x="168" y="71" width="98" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                     </progressView>
-                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vJu-AU-dtE">
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJu-AU-dtE">
                         <rect key="frame" x="274" y="57" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="4pL-GE-ZCu"/>
+                            <constraint firstAttribute="width" constant="30" id="nAg-tJ-8lV"/>
+                        </constraints>
                         <state key="normal" image="btn_downloadpause">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -39,8 +50,30 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.80000000000000004" green="0.21833493680274607" blue="0.31307077499904318" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="boc-H4-Pr4" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="6FQ-6h-Xtl"/>
+                <constraint firstItem="X3I-qw-8CS" firstAttribute="top" secondItem="HTj-Tt-zVQ" secondAttribute="bottom" constant="36" id="97i-9p-V4k"/>
+                <constraint firstAttribute="trailing" secondItem="X3I-qw-8CS" secondAttribute="trailing" constant="54" id="9re-NP-QTo"/>
+                <constraint firstItem="vJu-AU-dtE" firstAttribute="leading" secondItem="X3I-qw-8CS" secondAttribute="trailing" constant="8" symbolic="YES" id="DH3-Xb-vPE"/>
+                <constraint firstItem="X3I-qw-8CS" firstAttribute="leading" secondItem="HTj-Tt-zVQ" secondAttribute="leading" id="HdN-dM-HWK"/>
+                <constraint firstAttribute="trailing" secondItem="vJu-AU-dtE" secondAttribute="trailing" constant="16" id="SSo-SU-z5n"/>
+                <constraint firstItem="HTj-Tt-zVQ" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" constant="14" id="cpq-uN-5RN"/>
+                <constraint firstAttribute="trailing" secondItem="HTj-Tt-zVQ" secondAttribute="trailing" constant="9" id="f79-90-hAs"/>
+                <constraint firstItem="vJu-AU-dtE" firstAttribute="top" secondItem="HTj-Tt-zVQ" secondAttribute="bottom" constant="22" id="lZ1-Xr-pZt"/>
+                <constraint firstItem="X3I-qw-8CS" firstAttribute="centerY" secondItem="vJu-AU-dtE" secondAttribute="centerY" id="m0s-B1-MJK"/>
+                <constraint firstItem="HTj-Tt-zVQ" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="trailing" constant="8" id="muQ-Vw-s8C"/>
+                <constraint firstItem="HTj-Tt-zVQ" firstAttribute="leading" secondItem="X3I-qw-8CS" secondAttribute="leading" id="tHg-D2-EJ9"/>
+                <constraint firstItem="boc-H4-Pr4" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" id="uOi-LF-rXt"/>
+                <constraint firstAttribute="bottom" secondItem="boc-H4-Pr4" secondAttribute="bottom" id="uWK-e1-0OW"/>
+            </constraints>
             <size key="customSize" width="223" height="49"/>
+            <connections>
+                <outlet property="downloadControlButton" destination="vJu-AU-dtE" id="uVW-4l-xaj"/>
+                <outlet property="downloadProgressBar" destination="X3I-qw-8CS" id="MUp-WP-UAi"/>
+                <outlet property="videoThumbnailImageView" destination="boc-H4-Pr4" id="omd-H8-s2A"/>
+                <outlet property="videoTitleLabel" destination="HTj-Tt-zVQ" id="hTB-D3-3zs"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

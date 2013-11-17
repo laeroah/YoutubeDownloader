@@ -10,4 +10,11 @@
 
 @interface YDMediaLibraryRowCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *videoThumbnailImageView;
+@property (weak, nonatomic) IBOutlet UILabel *videoTitleLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressBar;
+@property (weak, nonatomic) IBOutlet UIButton *downloadControlButton;
+
+- (void)enterEditMode:(BOOL)enter animated:(BOOL)animated;
+
 @end
