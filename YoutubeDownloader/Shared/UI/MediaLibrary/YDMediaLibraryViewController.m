@@ -8,6 +8,7 @@
 
 #import "YDMediaLibraryViewController.h"
 #import "YDConstants.h"
+#import "YDMediaLibraryRowCell.h"
 
 @interface YDMediaLibraryViewController ()
 {
@@ -19,6 +20,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIView *deviceSpaceStatusBar;
+@property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
 
 @end
 
@@ -38,6 +40,11 @@
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
     [self createControlButtons];
+    
+    UINib *nib = [UINib nibWithNibName:@"YDMediaLibraryRowCell" bundle:nil];
+    [self.mediaCollectionView registerNib:nib forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    [self.mediaCollectionView setCollectionViewLayout:flowLayout];
 }
 
 - (void)createControlButtons
@@ -69,6 +76,37 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UICollectionViewDelegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    YDMediaLibraryRowCell *mediaCell =
+    [collectionView dequeueReusableCellWithReuseIdentifier:@"YDMediaLibraryRowCell"
+                                              forIndexPath:indexPath];
+    
+    return mediaCell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Adjust cell size for orientation
+    if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+        return CGSizeMake(self.view.frame.size.width, 100);
+    }
+    return CGSizeMake(320, 100);
+}
+
+#pragma mark - rotation
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.mediaCollectionView performBatchUpdates:nil completion:nil];
 }
 
 #pragma mark - navigation control

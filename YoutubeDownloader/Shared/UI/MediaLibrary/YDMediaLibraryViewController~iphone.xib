@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YDMediaLibraryViewController">
             <connections>
                 <outlet property="deviceSpaceStatusBar" destination="JY4-0f-Eiz" id="9ge-BK-8hG"/>
+                <outlet property="mediaCollectionView" destination="HHL-Pz-UGy" id="1ES-yO-YAf"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -38,6 +39,10 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="wTl-q0-DTt"/>
+                        <outlet property="delegate" destination="-1" id="Uub-Jx-JH3"/>
+                    </connections>
                 </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
