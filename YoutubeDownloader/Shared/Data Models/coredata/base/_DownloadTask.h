@@ -9,6 +9,7 @@ extern const struct DownloadTaskAttributes {
 	__unsafe_unretained NSString *downloadID;
 	__unsafe_unretained NSString *downloadPageUrl;
 	__unsafe_unretained NSString *downloadPriority;
+	__unsafe_unretained NSString *downloadProgress;
 	__unsafe_unretained NSString *downloadTaskStatus;
 	__unsafe_unretained NSString *qualityType;
 	__unsafe_unretained NSString *videoDescription;
@@ -24,6 +25,7 @@ extern const struct DownloadTaskFetchedProperties {
 } DownloadTaskFetchedProperties;
 
 @class Video;
+
 
 
 
@@ -91,6 +93,20 @@ extern const struct DownloadTaskFetchedProperties {
 - (void)setDownloadPriorityValue:(int16_t)value_;
 
 //- (BOOL)validateDownloadPriority:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* downloadProgress;
+
+
+
+@property float downloadProgressValue;
+- (float)downloadProgressValue;
+- (void)setDownloadProgressValue:(float)value_;
+
+//- (BOOL)validateDownloadProgress:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -193,6 +209,15 @@ extern const struct DownloadTaskFetchedProperties {
 
 - (int16_t)primitiveDownloadPriorityValue;
 - (void)setPrimitiveDownloadPriorityValue:(int16_t)value_;
+
+
+
+
+- (NSNumber*)primitiveDownloadProgress;
+- (void)setPrimitiveDownloadProgress:(NSNumber*)value;
+
+- (float)primitiveDownloadProgressValue;
+- (void)setPrimitiveDownloadProgressValue:(float)value_;
 
 
 

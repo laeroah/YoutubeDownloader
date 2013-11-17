@@ -8,6 +8,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 	.downloadID = @"downloadID",
 	.downloadPageUrl = @"downloadPageUrl",
 	.downloadPriority = @"downloadPriority",
+	.downloadProgress = @"downloadProgress",
 	.downloadTaskStatus = @"downloadTaskStatus",
 	.qualityType = @"qualityType",
 	.videoDescription = @"videoDescription",
@@ -55,6 +56,11 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 	}
 	if ([key isEqualToString:@"downloadPriorityValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadPriority"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"downloadProgressValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"downloadProgress"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -130,6 +136,32 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 
 - (void)setPrimitiveDownloadPriorityValue:(int16_t)value_ {
 	[self setPrimitiveDownloadPriority:[NSNumber numberWithShort:value_]];
+}
+
+
+
+
+
+@dynamic downloadProgress;
+
+
+
+- (float)downloadProgressValue {
+	NSNumber *result = [self downloadProgress];
+	return [result floatValue];
+}
+
+- (void)setDownloadProgressValue:(float)value_ {
+	[self setDownloadProgress:[NSNumber numberWithFloat:value_]];
+}
+
+- (float)primitiveDownloadProgressValue {
+	NSNumber *result = [self primitiveDownloadProgress];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveDownloadProgressValue:(float)value_ {
+	[self setPrimitiveDownloadProgress:[NSNumber numberWithFloat:value_]];
 }
 
 
