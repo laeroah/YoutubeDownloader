@@ -10,12 +10,15 @@
 #import "YDConstants.h"
 #import "YDDeviceUtility.h"
 #import "YDMediaLibraryRowCell.h"
+#import "YDDeviceSpaceAvailabilityView.h"
 
 typedef enum
 {
     YDMediaLibraryViewControllerLayoutRow,
     YDMediaLibraryViewControllerLayoutThumbnail
 }YDMediaLibraryViewControllerLayout;
+
+#define SEARCH_BAR_HEIGHT 44.0f
 
 @interface YDMediaLibraryViewController ()
 {
@@ -24,12 +27,16 @@ typedef enum
     UIButton *_thumbnailButton;
     UIButton *_searchButton;
     UIButton *_deleteButton;
+    YDDeviceSpaceAvailabilityView *_availableView;
     YDMediaLibraryViewControllerLayout _currentLayout;
     BOOL _editMode;
+    BOOL _searchBarShowing;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *deviceSpaceStatusBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *totalSpaceLabel;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -54,6 +61,26 @@ typedef enum
     [self.mediaCollectionView registerNib:nib forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [self.mediaCollectionView setCollectionViewLayout:flowLayout];
+    
+    [self layoutDeviceSpaceBar];
+    
+    CGRect searchBarFrame = self.searchBar.frame;
+    searchBarFrame.origin.y = -SEARCH_BAR_HEIGHT;
+    self.searchBar.frame = searchBarFrame;
+}
+
+#pragma mark - layout subviews
+- (void)layoutDeviceSpaceBar
+{
+    VSDeviceSpace *deviceSpace = [YDDeviceUtility getDeviceSpace];
+    uint64_t totalSpace = deviceSpace.totalSpace;
+    self.totalSpaceLabel.text = [NSString stringWithFormat:@"%.2fG", 0.001 * totalSpace];
+    
+    YDDeviceSpaceAvailabilityView *availableView = [[YDDeviceSpaceAvailabilityView alloc]initWithFrame:CGRectMake(66, 10, self.deviceSpaceStatusBar.frame.size.width - 80, 10)];
+    [self.deviceSpaceStatusBar addSubview:availableView];
+    availableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    _availableView = availableView;
 }
 
 - (void)createControlButtons
@@ -71,10 +98,11 @@ typedef enum
     _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_searchButton setImage:[UIImage imageNamed:@"ic_search"] forState:UIControlStateNormal];
     _searchButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
-    //[_searchButton addTarget:self action:@selector(downloadProcess:) forControlEvents:UIControlEventTouchUpInside];
+    [_searchButton addTarget:self action:@selector(toggleSearchBar) forControlEvents:UIControlEventTouchUpInside];
     
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_deleteButton setImage:[UIImage imageNamed:@"ic_delete"] forState:UIControlStateNormal];
+    [_deleteButton setImage:[UIImage imageNamed:@"ic_finish"] forState:UIControlStateSelected];
     _deleteButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_deleteButton addTarget:self action:@selector(toggleEditMode) forControlEvents:UIControlEventTouchUpInside];
     
@@ -110,6 +138,8 @@ typedef enum
         mediaCell.downloadProgressBar.hidden = YES;
         mediaCell.videoTitleLabel.hidden = YES;
     }
+    mediaCell.delegate = self;
+    [mediaCell enterEditMode:_editMode animated:NO];
     
     return mediaCell;
 }
@@ -144,6 +174,7 @@ typedef enum
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
+    [_availableView layoutColoredSpaceBarAnimated:YES];
 }
 
 #pragma mark - navigation control
@@ -166,12 +197,39 @@ typedef enum
 - (void)toggleEditMode
 {
     NSArray *visibleCells = [self.mediaCollectionView visibleCells];
-    if (_editMode) {
-        
-    }else{
-        
-    }
     _editMode = !_editMode;
+    for (YDMediaLibraryRowCell *cell in visibleCells) {
+        [cell enterEditMode:_editMode animated:YES];
+    }
+    
+    _deleteButton.selected = _editMode;
+}
+
+- (void)toggleSearchBar
+{
+    CGRect searchBarFrame = self.searchBar.frame;
+    CGRect mediaLibraryTableFrame = self.mediaCollectionView.frame;
+    _searchBarShowing = !_searchBarShowing;
+    
+    if (_searchBarShowing) {
+        searchBarFrame.origin.y = 0.0f;
+        mediaLibraryTableFrame.origin.y = SEARCH_BAR_HEIGHT;
+        mediaLibraryTableFrame.size.height -= SEARCH_BAR_HEIGHT;
+    }else{
+        searchBarFrame.origin.y -= SEARCH_BAR_HEIGHT;
+        mediaLibraryTableFrame.origin.y = 0.0f;
+        mediaLibraryTableFrame.size.height += SEARCH_BAR_HEIGHT;
+    }
+    [UIView animateWithDuration:0.2f animations:^{
+        self.searchBar.frame = searchBarFrame;
+        self.mediaCollectionView.frame = mediaLibraryTableFrame;
+    }];
+}
+
+#pragma mark - YDMediaLibraryRowCellDelegate
+- (void)didChooseToRemoveCell:(YDMediaLibraryRowCell *)cell
+{
+    
 }
 
 @end

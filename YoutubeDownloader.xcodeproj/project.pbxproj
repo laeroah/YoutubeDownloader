@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */; };
 		AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */; };
+		AF45422A183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */; };
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
@@ -124,6 +125,8 @@
 		AF3CBF551836B2DE0025957C /* YDMediaLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryViewController.h; sourceTree = "<group>"; };
 		AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryViewController.m; sourceTree = "<group>"; };
 		AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryViewController~iphone.xib"; sourceTree = "<group>"; };
+		AF454228183973A200A06A07 /* YDDeviceSpaceAvailabilityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDDeviceSpaceAvailabilityView.h; sourceTree = "<group>"; };
+		AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDDeviceSpaceAvailabilityView.m; sourceTree = "<group>"; };
 		AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryRowCell~iphone.xib"; sourceTree = "<group>"; };
 		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
@@ -309,6 +312,8 @@
 				AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */,
 				AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */,
 				AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */,
+				AF454228183973A200A06A07 /* YDDeviceSpaceAvailabilityView.h */,
+				AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */,
 			);
 			path = MediaLibrary;
 			sourceTree = "<group>";
@@ -871,6 +876,7 @@
 				E322A700183266E600BA77A2 /* NSString+MagicalDataImport.m in Sources */,
 				E322A711183266E600BA77A2 /* MagicalRecord+Setup.m in Sources */,
 				AFE6AA2C1822E29E0037B389 /* AppDelegate.m in Sources */,
+				AF45422A183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m in Sources */,
 				AF4FB42118275E06008F906D /* YDViewController.m in Sources */,
 				E3AFA6A4182FDC44008CABB6 /* AFJSONRequestOperation.m in Sources */,
 				E322A6B71832662300BA77A2 /* _Video.m in Sources */,

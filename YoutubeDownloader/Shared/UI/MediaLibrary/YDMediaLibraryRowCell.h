@@ -14,7 +14,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *videoTitleLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressBar;
 @property (weak, nonatomic) IBOutlet UIButton *downloadControlButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (nonatomic, weak) id delegate;
 
 - (void)enterEditMode:(BOOL)enter animated:(BOOL)animated;
+
+@end
+
+@protocol YDMediaLibraryRowCellDelegate <NSObject>
+
+- (void)didChooseToRemoveCell:(YDMediaLibraryRowCell *)cell;
 
 @end

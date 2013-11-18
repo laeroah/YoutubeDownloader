@@ -23,6 +23,13 @@ typedef enum
 
 @end
 
+@interface VSDeviceSpace : NSObject
+
+@property (nonatomic,assign) uint64_t totalSpace; // everything in MB
+@property (nonatomic,assign) uint64_t availableSpace;
+
+@end
+
 @interface YDDeviceUtility : NSObject
 
 /**
@@ -62,6 +69,9 @@ typedef enum
 + (BOOL) isLandscape;
 
 + (VSDeviceStatus*)getDeviceStatus;
+
++ (VSDeviceSpace *)getDeviceSpace;
+
 + (VSNetworkType)getCurrentNetworkType;
 
 @end

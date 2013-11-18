@@ -17,7 +17,12 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 
+
 @implementation VSDeviceStatus
+
+@end
+
+@implementation VSDeviceSpace
 
 @end
 
@@ -110,6 +115,29 @@
 + (BOOL) isLandscape
 {
     return UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
+}
+
++ (VSDeviceSpace *)getDeviceSpace
+{
+    VSDeviceSpace *deviceSpace = [[VSDeviceSpace alloc]init];
+    uint64_t totalSpace = 0;
+    uint64_t totalFreeSpace = 0;
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary) {
+        NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
+        NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
+        totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
+        totalFreeSpace = [freeFileSystemSizeInBytes unsignedLongLongValue];
+        NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace/1024ll)/1024ll), ((totalFreeSpace/1024ll)/1024ll));
+        deviceSpace.totalSpace = (totalSpace/1024ll)/1024ll;
+        deviceSpace.availableSpace = (totalFreeSpace/1024ll)/1024ll;
+        return deviceSpace;
+    } else {
+        return nil;
+    }
 }
 
 + (VSDeviceStatus*)getDeviceStatus

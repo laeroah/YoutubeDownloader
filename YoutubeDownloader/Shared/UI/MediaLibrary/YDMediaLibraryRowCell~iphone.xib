@@ -47,6 +47,19 @@
                         </state>
                         <state key="selected" image="btn_downloadResume"/>
                     </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-bN-TOk">
+                        <rect key="frame" x="0.0" y="0.0" width="77" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Delete">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="RUt-mI-dK9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -69,6 +82,7 @@
             </constraints>
             <size key="customSize" width="223" height="49"/>
             <connections>
+                <outlet property="deleteButton" destination="Gdb-bN-TOk" id="amT-cu-TPs"/>
                 <outlet property="downloadControlButton" destination="vJu-AU-dtE" id="uVW-4l-xaj"/>
                 <outlet property="downloadProgressBar" destination="X3I-qw-8CS" id="MUp-WP-UAi"/>
                 <outlet property="videoThumbnailImageView" destination="boc-H4-Pr4" id="omd-H8-s2A"/>
