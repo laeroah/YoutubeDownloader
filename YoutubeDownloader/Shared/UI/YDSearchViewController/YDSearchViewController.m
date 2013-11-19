@@ -15,6 +15,7 @@
 #import "DownloadTask.h"
 #import "YDDownloadManager.h"
 #import "YDMediaLibraryViewController.h"
+#import "BadgedButton.h"
 
 @interface YDSearchViewController ()
 {
@@ -22,7 +23,7 @@
     UIButton *_backButton;
     UIButton *_homeButton;
     UIButton *_downloadButton;
-    UIButton *_libraryButton;
+    BadgedButton *_libraryButton;
     NSString *_downloadPageUrl;
     NSURL *_downloadUrl;
     NSString *_title;
@@ -98,12 +99,15 @@
     _downloadButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_downloadButton addTarget:self action:@selector(downloadProcess:) forControlEvents:UIControlEventTouchUpInside];
     
-    _libraryButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _libraryButton = [BadgedButton buttonWithType:UIButtonTypeCustom];
     [_libraryButton setImage:[UIImage imageNamed:@"ic_library"] forState:UIControlStateNormal];
     _libraryButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_libraryButton addTarget:self action:@selector(toProgramLibrary:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationButtons = @[_backButton, _homeButton, _downloadButton, _libraryButton];
+    
+    /*debug, need to move this to whenever download finish notification is finish and when checking current new downloaded videos*/
+    [_libraryButton setBadgeNumber:2];
 }
 
 #pragma mark - actions

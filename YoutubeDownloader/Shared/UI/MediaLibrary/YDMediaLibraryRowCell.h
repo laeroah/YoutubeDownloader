@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressBar;
 @property (weak, nonatomic) IBOutlet UIButton *downloadControlButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIImageView *ribbonImageView;
 
 @property (nonatomic, weak) id delegate;
 

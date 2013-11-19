@@ -24,6 +24,8 @@
 		AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */; };
 		AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */; };
 		AF45422A183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */; };
+		AF45422F183AE31E00A06A07 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = AF45422E183AE31E00A06A07 /* CustomBadge.m */; };
+		AF454232183AE33A00A06A07 /* BadgedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF454231183AE33A00A06A07 /* BadgedButton.m */; };
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
@@ -127,6 +129,10 @@
 		AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryViewController~iphone.xib"; sourceTree = "<group>"; };
 		AF454228183973A200A06A07 /* YDDeviceSpaceAvailabilityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDDeviceSpaceAvailabilityView.h; sourceTree = "<group>"; };
 		AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDDeviceSpaceAvailabilityView.m; sourceTree = "<group>"; };
+		AF45422D183AE31E00A06A07 /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		AF45422E183AE31E00A06A07 /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
+		AF454230183AE33A00A06A07 /* BadgedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgedButton.h; sourceTree = "<group>"; };
+		AF454231183AE33A00A06A07 /* BadgedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgedButton.m; sourceTree = "<group>"; };
 		AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryRowCell~iphone.xib"; sourceTree = "<group>"; };
 		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
@@ -316,6 +322,24 @@
 				AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */,
 			);
 			path = MediaLibrary;
+			sourceTree = "<group>";
+		};
+		AF45422B183AE2ED00A06A07 /* BadgedButton */ = {
+			isa = PBXGroup;
+			children = (
+				AF454230183AE33A00A06A07 /* BadgedButton.h */,
+				AF454231183AE33A00A06A07 /* BadgedButton.m */,
+			);
+			path = BadgedButton;
+			sourceTree = "<group>";
+		};
+		AF45422C183AE31E00A06A07 /* CustomBadge */ = {
+			isa = PBXGroup;
+			children = (
+				AF45422D183AE31E00A06A07 /* CustomBadge.h */,
+				AF45422E183AE31E00A06A07 /* CustomBadge.m */,
+			);
+			path = CustomBadge;
 			sourceTree = "<group>";
 		};
 		AF4FB41D18275DA8008F906D /* Player */ = {
@@ -547,6 +571,7 @@
 		E3AFA68C182FDC17008CABB6 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				AF45422C183AE31E00A06A07 /* CustomBadge */,
 				E322A6BE183266E600BA77A2 /* MagicalRecord */,
 				E3AFA6B3182FEEB2008CABB6 /* Pickers */,
 				E3AFA6AF182FDC8C008CABB6 /* MBProgressHUD */,
@@ -686,6 +711,7 @@
 		E3BCF1E71827E63F00517124 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AF45422B183AE2ED00A06A07 /* BadgedButton */,
 				AF3CBF541836B2B80025957C /* MediaLibrary */,
 				E3BCF1EC1827E78700517124 /* YDSearchViewController */,
 				E3BCF1E91827E74000517124 /* YDBaseViewController.h */,
@@ -873,6 +899,7 @@
 				E322A70C183266E600BA77A2 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				E322A705183266E600BA77A2 /* NSManagedObject+MagicalRequests.m in Sources */,
 				E3BCF2071827F19200517124 /* YDFontUtility.m in Sources */,
+				AF45422F183AE31E00A06A07 /* CustomBadge.m in Sources */,
 				E322A700183266E600BA77A2 /* NSString+MagicalDataImport.m in Sources */,
 				E322A711183266E600BA77A2 /* MagicalRecord+Setup.m in Sources */,
 				AFE6AA2C1822E29E0037B389 /* AppDelegate.m in Sources */,
@@ -905,6 +932,7 @@
 				E322A6B61832662300BA77A2 /* _DownloadTask.m in Sources */,
 				AFE6AA281822E29E0037B389 /* main.m in Sources */,
 				E322A6FF183266E600BA77A2 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				AF454232183AE33A00A06A07 /* BadgedButton.m in Sources */,
 				E3AFA6C3182FEEB2008CABB6 /* DistancePickerView.m in Sources */,
 				E322A707183266E600BA77A2 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				E322A6FE183266E600BA77A2 /* NSObject+MagicalDataImport.m in Sources */,

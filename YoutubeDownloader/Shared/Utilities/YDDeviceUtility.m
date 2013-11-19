@@ -131,7 +131,7 @@
         NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
         totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
         totalFreeSpace = [freeFileSystemSizeInBytes unsignedLongLongValue];
-        NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace/1024ll)/1024ll), ((totalFreeSpace/1024ll)/1024ll));
+//        NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace/1024ll)/1024ll), ((totalFreeSpace/1024ll)/1024ll));
         deviceSpace.totalSpace = (totalSpace/1024ll)/1024ll;
         deviceSpace.availableSpace = (totalFreeSpace/1024ll)/1024ll;
         return deviceSpace;
