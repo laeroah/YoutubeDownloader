@@ -11,6 +11,10 @@
 #import "YDDeviceUtility.h"
 #import "YDMediaLibraryRowCell.h"
 #import "YDDeviceSpaceAvailabilityView.h"
+#import "AFNetworking.h"
+#import "Video.h"
+
+#import "CoreData+MagicalRecord.h"
 
 typedef enum
 {
@@ -32,6 +36,8 @@ typedef enum
     BOOL _editMode;
     BOOL _searchBarShowing;
 }
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchResultController;
 
 @property (weak, nonatomic) IBOutlet UIView *deviceSpaceStatusBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
@@ -57,8 +63,9 @@ typedef enum
     self.navigationItem.hidesBackButton = YES;
     [self createControlButtons];
     
-    UINib *nib = [UINib nibWithNibName:@"YDMediaLibraryRowCell" bundle:nil];
-    [self.mediaCollectionView registerNib:nib forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
+    //UINib *nib = [UINib nibWithNibName:@"YDMediaLibraryRowCell" bundle:nil];
+    //[self.mediaCollectionView registerNib:nib forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
+    [self.mediaCollectionView registerClass:[YDMediaLibraryRowCell class] forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [self.mediaCollectionView setCollectionViewLayout:flowLayout];
     
@@ -67,6 +74,14 @@ typedef enum
     CGRect searchBarFrame = self.searchBar.frame;
     searchBarFrame.origin.y = -SEARCH_BAR_HEIGHT;
     self.searchBar.frame = searchBarFrame;
+    
+    NSArray *videos = [Video findAll];
+    
+    Video *video = videos[0];
+    
+    NSLog(@"%@", video.videoTitle);
+    
+    [self loadVideos];
 }
 
 #pragma mark - layout subviews
@@ -115,29 +130,114 @@ typedef enum
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - load downloaded videos
+- (void)loadVideos
+{
+	NSError *error = nil;
+	if (![[self fetchResultController] performFetch:&error]) {
+        NSLog(@"Core Data Error %@, %@", error, [error userInfo]);
+        exit(0);
+    }
+    [self.mediaCollectionView reloadData];
+}
+
+#pragma mark - fetch result controller and delegate
+- (NSFetchedResultsController *)fetchResultController
+{
+ 	NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"createDate"
+                                                         ascending:NO
+                                                          selector:@selector(compare:)];
+    
+    NSMutableArray *predicates = [NSMutableArray array];
+    
+    //only show the call if it's terminated
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSPredicate *createTimePredicate = [NSPredicate predicateWithFormat:@"%K != %@", @"createDate", nil];
+    NSPredicate *deletedPredicate = [NSPredicate predicateWithFormat:@"%K != %@", @"isRemoved", @(YES)];
+    [predicates addObject:createTimePredicate];
+    [predicates addObject:deletedPredicate];
+    
+    NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    NSFetchRequest *request = [Video MR_requestAllWithPredicate:fetchPredicate inContext:context];
+    
+    [request setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    
+    if (_fetchResultController != nil) {
+        [_fetchResultController.fetchRequest setPredicate:fetchPredicate];
+        [NSFetchedResultsController deleteCacheWithName:@"Videos"];
+        return _fetchResultController;
+    }
+    
+    [NSFetchedResultsController deleteCacheWithName:@"Videos"];
+    _fetchResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:@"Videos"];
+    _fetchResultController.delegate = self;
+    [_fetchResultController.fetchRequest setFetchLimit:30];
+    
+    return _fetchResultController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+	//Video *videoObject = (Video *)anObject;
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+            [self.mediaCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+			break;
+			
+		case NSFetchedResultsChangeUpdate:
+            [self.mediaCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+			break;
+			
+		case NSFetchedResultsChangeMove:
+            break;
+	}
+}
+
+// deal with secion
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+}
+
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.fetchResultController.fetchedObjects count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    YDMediaLibraryRowCell *mediaCell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:@"YDMediaLibraryRowCell"
-                                              forIndexPath:indexPath];
     
-    
+    YDMediaLibraryRowCell *mediaCell = nil;
+    static NSString *cellReusedID = @"YDMediaLibraryThumbnailCell";
     if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
-        mediaCell.downloadControlButton.hidden = NO;
-        mediaCell.downloadProgressBar.hidden = NO;
-        mediaCell.videoTitleLabel.hidden = NO;
+        cellReusedID = @"YDMediaLibraryRowCell";
     }else{
-        mediaCell.downloadControlButton.hidden = YES;
-        mediaCell.downloadProgressBar.hidden = YES;
-        mediaCell.videoTitleLabel.hidden = YES;
+        cellReusedID = @"YDMediaLibraryThumbnailCell";
     }
+    
+    UINib *nib = [UINib nibWithNibName:cellReusedID bundle:nil];
+    [collectionView registerNib:nib forCellWithReuseIdentifier:cellReusedID];
+    mediaCell = [collectionView dequeueReusableCellWithReuseIdentifier:cellReusedID
+                                                          forIndexPath:indexPath];
+    
+    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
+    mediaCell.videoTitleLabel.text = video.videoTitle;
+    mediaCell.ribbonImageView.hidden = !video.isNewValue;
+    [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL URLWithString:video.videoImagePath]];
+    mediaCell.videoID = video.videoID;
+    
     mediaCell.delegate = self;
     [mediaCell enterEditMode:_editMode animated:NO];
     
@@ -157,7 +257,11 @@ typedef enum
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 
 {
-    return UIEdgeInsetsZero;
+    if ([YDDeviceUtility isLandscape]) {
+        return UIEdgeInsetsMake(0, 25, 0, 25);
+    }else{
+        return UIEdgeInsetsZero;
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
@@ -229,7 +333,15 @@ typedef enum
 #pragma mark - YDMediaLibraryRowCellDelegate
 - (void)didChooseToRemoveCell:(YDMediaLibraryRowCell *)cell
 {
-    
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    Video *video = [Video findByVideoID:cell.videoID inContext:context];
+    [video setIsRemovedValue:YES];
+    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Failed to remove video, please try again.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+    }];
 }
 
 @end

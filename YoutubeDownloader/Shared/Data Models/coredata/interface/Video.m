@@ -43,7 +43,7 @@
 + (Video*)findByVideoID:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context
 {
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoID == %@"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoID == %@", videoID];
     return  [Video MR_findFirstWithPredicate:predicate inContext:context];
 }
 

@@ -8,6 +8,7 @@ const struct VideoAttributes VideoAttributes = {
 	.createDate = @"createDate",
 	.duration = @"duration",
 	.isNew = @"isNew",
+	.isRemoved = @"isRemoved",
 	.qualityType = @"qualityType",
 	.videoDescription = @"videoDescription",
 	.videoFilePath = @"videoFilePath",
@@ -61,6 +62,11 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 	}
 	if ([key isEqualToString:@"isNewValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isNew"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"isRemovedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isRemoved"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -155,6 +161,32 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 - (void)setPrimitiveIsNewValue:(BOOL)value_ {
 	[self setPrimitiveIsNew:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic isRemoved;
+
+
+
+- (BOOL)isRemovedValue {
+	NSNumber *result = [self isRemoved];
+	return [result boolValue];
+}
+
+- (void)setIsRemovedValue:(BOOL)value_ {
+	[self setIsRemoved:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsRemovedValue {
+	NSNumber *result = [self primitiveIsRemoved];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsRemovedValue:(BOOL)value_ {
+	[self setPrimitiveIsRemoved:[NSNumber numberWithBool:value_]];
 }
 
 

@@ -9,6 +9,7 @@ extern const struct VideoAttributes {
 	__unsafe_unretained NSString *createDate;
 	__unsafe_unretained NSString *duration;
 	__unsafe_unretained NSString *isNew;
+	__unsafe_unretained NSString *isRemoved;
 	__unsafe_unretained NSString *qualityType;
 	__unsafe_unretained NSString *videoDescription;
 	__unsafe_unretained NSString *videoFilePath;
@@ -25,6 +26,7 @@ extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
 
 @class DownloadTask;
+
 
 
 
@@ -64,7 +66,7 @@ extern const struct VideoFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* createDate;
+@property (nonatomic, strong) NSDate* createDate;
 
 
 
@@ -97,6 +99,20 @@ extern const struct VideoFetchedProperties {
 - (void)setIsNewValue:(BOOL)value_;
 
 //- (BOOL)validateIsNew:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* isRemoved;
+
+
+
+@property BOOL isRemovedValue;
+- (BOOL)isRemovedValue;
+- (void)setIsRemovedValue:(BOOL)value_;
+
+//- (BOOL)validateIsRemoved:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -192,8 +208,8 @@ extern const struct VideoFetchedProperties {
 
 
 
-- (NSString*)primitiveCreateDate;
-- (void)setPrimitiveCreateDate:(NSString*)value;
+- (NSDate*)primitiveCreateDate;
+- (void)setPrimitiveCreateDate:(NSDate*)value;
 
 
 
@@ -212,6 +228,15 @@ extern const struct VideoFetchedProperties {
 
 - (BOOL)primitiveIsNewValue;
 - (void)setPrimitiveIsNewValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveIsRemoved;
+- (void)setPrimitiveIsRemoved:(NSNumber*)value;
+
+- (BOOL)primitiveIsRemovedValue;
+- (void)setPrimitiveIsRemovedValue:(BOOL)value_;
 
 
 

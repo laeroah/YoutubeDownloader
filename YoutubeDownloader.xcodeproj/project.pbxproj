@@ -30,6 +30,7 @@
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
 		AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8BA770182861B6008519E8 /* YDPlayer.m */; };
+		AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -140,6 +141,7 @@
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
 		AF8BA76F182861B6008519E8 /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
 		AF8BA770182861B6008519E8 /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
+		AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryThumbnailCell~iphone.xib"; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -318,6 +320,7 @@
 				AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */,
 				AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */,
 				AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */,
+				AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */,
 				AF454228183973A200A06A07 /* YDDeviceSpaceAvailabilityView.h */,
 				AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */,
 			);
@@ -838,6 +841,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */,
 				AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */,
 				E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */,
 				E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */,

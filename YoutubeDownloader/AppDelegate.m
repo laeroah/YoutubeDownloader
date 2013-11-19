@@ -37,6 +37,10 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+    /*debug*/
+    [self generateDebugData];
     return YES;
 }
 
@@ -47,22 +51,37 @@
     video1.videoTitle = @"video title 1";
     video1.videoImagePath = @"http://i1.ytimg.com/vi/d105E2sijd4/mqdefault.jpg";
     video1.duration = @(812);
+    [video1 setIsRemovedValue:NO];
+    video1.createDate = [NSDate date];
     
     Video *video2 = [Video createVideoWithVideoID:[NSNumber numberWithInt:1] inContext:context completion:nil];
     video2.videoTitle = @"video title 2";
     video2.videoImagePath = @"http://i1.ytimg.com/vi/HnemfnZc3sI/mqdefault.jpg";
     video2.duration = @(1231);
     [video2 setIsNewValue:YES];
+    [video2 setIsRemovedValue:NO];
+    video2.createDate = [NSDate date];
     
     Video *video3 = [Video createVideoWithVideoID:[NSNumber numberWithInt:2] inContext:context completion:nil];
     video3.videoTitle = @"video title 3";
     video3.videoImagePath = @"http://i1.ytimg.com/vi/O_4IxOMfOds/mqdefault.jpg";
     video3.duration = @(522);
+    [video3 setIsRemovedValue:NO];
+    video3.createDate = [NSDate date];
     
-    Video *video4 = [Video createVideoWithVideoID:[NSNumber numberWithInt:2] inContext:context completion:nil];
+    Video *video4 = [Video createVideoWithVideoID:[NSNumber numberWithInt:3] inContext:context completion:nil];
     video4.videoTitle = @"video title 4";
     video4.videoImagePath = @"http://i1.ytimg.com/vi/sfdoLedAWWg/mqdefault.jpg";
     video4.duration = @(998);
+    [video4 setIsRemovedValue:NO];
+    video4.createDate = [NSDate date];
+    
+    Video *video5 = [Video createVideoWithVideoID:[NSNumber numberWithInt:4] inContext:context completion:nil];
+    video5.videoTitle = @"video title 5";
+    video5.videoImagePath = @"http://i1.ytimg.com/vi/A5y_jx3Gzoo/mqdefault.jpg";
+    video5.duration = @(998);
+    [video5 setIsRemovedValue:NO];
+    video5.createDate = [NSDate date];
     
     [context MR_saveToPersistentStoreWithCompletion:nil];
 }

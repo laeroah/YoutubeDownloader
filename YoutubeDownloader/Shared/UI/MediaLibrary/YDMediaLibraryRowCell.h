@@ -16,8 +16,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *downloadControlButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIImageView *ribbonImageView;
+@property (weak, nonatomic) IBOutlet UILabel *currentProgressLabel;
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, strong) NSNumber *videoID;
 
 - (void)enterEditMode:(BOOL)enter animated:(BOOL)animated;
 

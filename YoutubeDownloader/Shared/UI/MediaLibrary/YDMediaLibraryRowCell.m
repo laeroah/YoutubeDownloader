@@ -25,6 +25,8 @@
         [UIView animateWithDuration:0.2f animations:^{
             [self enterEditMode:enter];
         }];
+    }else{
+        [self enterEditMode:enter];
     }
 }
 

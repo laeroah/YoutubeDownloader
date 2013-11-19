@@ -8,6 +8,8 @@
 
 #import "YDBaseViewController.h"
 
-@interface YDMediaLibraryViewController : YDBaseViewController
-
+@interface YDMediaLibraryViewController : YDBaseViewController <NSFetchedResultsControllerDelegate>
+{
+    
+}
 @end
