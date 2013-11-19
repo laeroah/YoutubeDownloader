@@ -12,6 +12,7 @@ const struct VideoAttributes VideoAttributes = {
 	.videoFilePath = @"videoFilePath",
 	.videoID = @"videoID",
 	.videoImagePath = @"videoImagePath",
+	.videoTitle = @"videoTitle",
 };
 
 const struct VideoRelationships VideoRelationships = {
@@ -176,6 +177,13 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 
 @dynamic videoImagePath;
+
+
+
+
+
+
+@dynamic videoTitle;
 
 
 

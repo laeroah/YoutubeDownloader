@@ -15,8 +15,13 @@
 
 + (Video *)createVideoWithVideoID:(NSNumber *)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
 {
+    Video *video = [Video findByVideoID:videoID inContext:context];
+    if (video) {
+        return video;
+    }
+    
     // Get the local context
-    Video *video = [Video MR_createInContext:context];
+    video = [Video MR_createInContext:context];
     video.videoID = videoID;
     // Save the modification in the local context
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {

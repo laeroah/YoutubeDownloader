@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DownloadTask" representedClassName="DownloadTask" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="downloadID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -23,6 +23,7 @@
         <attribute name="videoFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DownloadTask" inverseName="relationship" inverseEntity="DownloadTask" syncable="YES"/>
     </entity>
     <elements>

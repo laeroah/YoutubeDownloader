@@ -13,6 +13,7 @@ extern const struct VideoAttributes {
 	__unsafe_unretained NSString *videoFilePath;
 	__unsafe_unretained NSString *videoID;
 	__unsafe_unretained NSString *videoImagePath;
+	__unsafe_unretained NSString *videoTitle;
 } VideoAttributes;
 
 extern const struct VideoRelationships {
@@ -23,6 +24,7 @@ extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
 
 @class DownloadTask;
+
 
 
 
@@ -138,6 +140,16 @@ extern const struct VideoFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* videoTitle;
+
+
+
+//- (BOOL)validateVideoTitle:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) DownloadTask *relationship;
 
 //- (BOOL)validateRelationship:(id*)value_ error:(NSError**)error_;
@@ -208,6 +220,12 @@ extern const struct VideoFetchedProperties {
 
 - (NSString*)primitiveVideoImagePath;
 - (void)setPrimitiveVideoImagePath:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveVideoTitle;
+- (void)setPrimitiveVideoTitle:(NSString*)value;
 
 
 
