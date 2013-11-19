@@ -6,6 +6,7 @@
 const struct VideoAttributes VideoAttributes = {
 	.bookmark = @"bookmark",
 	.createDate = @"createDate",
+	.duration = @"duration",
 	.isNew = @"isNew",
 	.qualityType = @"qualityType",
 	.videoDescription = @"videoDescription",
@@ -50,6 +51,11 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 	
 	if ([key isEqualToString:@"bookmarkValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"bookmark"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"durationValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"duration"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -98,6 +104,32 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 @dynamic createDate;
 
+
+
+
+
+
+@dynamic duration;
+
+
+
+- (int32_t)durationValue {
+	NSNumber *result = [self duration];
+	return [result intValue];
+}
+
+- (void)setDurationValue:(int32_t)value_ {
+	[self setDuration:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveDurationValue {
+	NSNumber *result = [self primitiveDuration];
+	return [result intValue];
+}
+
+- (void)setPrimitiveDurationValue:(int32_t)value_ {
+	[self setPrimitiveDuration:[NSNumber numberWithInt:value_]];
+}
 
 
 

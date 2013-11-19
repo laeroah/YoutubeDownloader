@@ -7,6 +7,7 @@
 extern const struct VideoAttributes {
 	__unsafe_unretained NSString *bookmark;
 	__unsafe_unretained NSString *createDate;
+	__unsafe_unretained NSString *duration;
 	__unsafe_unretained NSString *isNew;
 	__unsafe_unretained NSString *qualityType;
 	__unsafe_unretained NSString *videoDescription;
@@ -24,6 +25,7 @@ extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
 
 @class DownloadTask;
+
 
 
 
@@ -67,6 +69,20 @@ extern const struct VideoFetchedProperties {
 
 
 //- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* duration;
+
+
+
+@property int32_t durationValue;
+- (int32_t)durationValue;
+- (void)setDurationValue:(int32_t)value_;
+
+//- (BOOL)validateDuration:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -178,6 +194,15 @@ extern const struct VideoFetchedProperties {
 
 - (NSString*)primitiveCreateDate;
 - (void)setPrimitiveCreateDate:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveDuration;
+- (void)setPrimitiveDuration:(NSNumber*)value;
+
+- (int32_t)primitiveDurationValue;
+- (void)setPrimitiveDurationValue:(int32_t)value_;
 
 
 
