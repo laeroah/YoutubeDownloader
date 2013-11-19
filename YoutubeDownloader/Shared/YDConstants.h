@@ -21,3 +21,6 @@
 #define BAR_TINT_COLOR                             [UIColor colorWithRed:47/255.0f green:47/255.0f blue:47/255.0f alpha:1.0]
 #define MEDIA_LIBRARY_THUMBNAIL_WIDTH              158.0f
 #define MEDIA_LIBRARY_ROW_HEIGHT                   100.0f
+#define DEVICE_SPACE_OTHER_APP_BAR_COLOR           [UIColor colorWithRed:32/255.0f green:32/255.0f blue:32/255.0f alpha:1.0]
+#define DEVICE_SPACE_THIS_APP_BAR_COLOR            [UIColor colorWithRed:4/255.0f green:174/255.0f blue:218/255.0f alpha:1.0]
+#define DEVICE_SPACE_AVAILABLE_BAR_COLOR           [UIColor colorWithRed:241/255.0f green:242/255.0f blue:242/255.0f alpha:1.0]

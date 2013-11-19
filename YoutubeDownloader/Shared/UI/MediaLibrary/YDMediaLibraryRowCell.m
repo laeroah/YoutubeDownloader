@@ -31,9 +31,15 @@
 - (void)enterEditMode:(BOOL)enter
 {
     if (enter) {
-        
+        self.deleteButton.hidden = NO;
     }else{
-        
+        self.deleteButton.hidden = YES;
+    }
+}
+
+- (IBAction)deleteButtonTapped:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didChooseToRemoveCell:)]) {
+        [self.delegate didChooseToRemoveCell:self];
     }
 }
 
