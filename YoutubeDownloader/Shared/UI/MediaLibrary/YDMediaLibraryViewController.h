@@ -8,7 +8,7 @@
 
 #import "YDBaseViewController.h"
 
-@interface YDMediaLibraryViewController : YDBaseViewController <NSFetchedResultsControllerDelegate>
+@interface YDMediaLibraryViewController : YDBaseViewController <NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 {
     
 }

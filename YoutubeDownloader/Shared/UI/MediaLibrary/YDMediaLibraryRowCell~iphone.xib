@@ -46,18 +46,8 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" image="btn_downloadResume"/>
-                    </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-bN-TOk">
-                        <rect key="frame" x="0.0" y="0.0" width="77" height="100"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal" title="Delete">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
                         <connections>
-                            <action selector="deleteButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="RUt-mI-dK9"/>
+                            <action selector="pauseButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="Z7T-03-cvt"/>
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_newVideoRibbon" translatesAutoresizingMaskIntoConstraints="NO" id="Cic-3C-JmE">
@@ -87,6 +77,23 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-bN-TOk">
+                        <rect key="frame" x="243" y="0.0" width="77" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="77" id="Ke8-SP-CPR"/>
+                            <constraint firstAttribute="height" constant="100" id="lNQ-28-4Xm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Delete">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="RUt-mI-dK9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -96,14 +103,14 @@
                 <constraint firstAttribute="trailing" secondItem="Cic-3C-JmE" secondAttribute="trailing" constant="11" id="2fc-1m-f94"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="3H0-JB-KBA"/>
                 <constraint firstItem="WBr-qI-Jg9" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" constant="109" id="3To-SC-cSw"/>
-                <constraint firstItem="WBr-qI-Jg9" firstAttribute="leading" secondItem="Gdb-bN-TOk" secondAttribute="trailing" constant="32" id="5DD-ke-6Z9"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="6FQ-6h-Xtl"/>
                 <constraint firstItem="vUH-Bc-b2y" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="trailing" constant="8" id="6dG-8E-eN3"/>
                 <constraint firstAttribute="trailing" secondItem="vUH-Bc-b2y" secondAttribute="trailing" constant="11" id="6gy-Ch-5Tj"/>
+                <constraint firstItem="Gdb-bN-TOk" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="8yZ-gL-3QN"/>
                 <constraint firstItem="X3I-qw-8CS" firstAttribute="top" secondItem="HTj-Tt-zVQ" secondAttribute="bottom" constant="36" id="97i-9p-V4k"/>
                 <constraint firstAttribute="trailing" secondItem="X3I-qw-8CS" secondAttribute="trailing" constant="54" id="9re-NP-QTo"/>
-                <constraint firstItem="Gdb-bN-TOk" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="leading" id="9zJ-oJ-j3l"/>
                 <constraint firstItem="vJu-AU-dtE" firstAttribute="leading" secondItem="X3I-qw-8CS" secondAttribute="trailing" constant="8" symbolic="YES" id="DH3-Xb-vPE"/>
+                <constraint firstAttribute="trailing" secondItem="Gdb-bN-TOk" secondAttribute="trailing" id="FTB-il-Sv1"/>
                 <constraint firstItem="WBr-qI-Jg9" firstAttribute="top" secondItem="X3I-qw-8CS" secondAttribute="top" id="GEX-y7-44m"/>
                 <constraint firstItem="X3I-qw-8CS" firstAttribute="leading" secondItem="HTj-Tt-zVQ" secondAttribute="leading" id="HdN-dM-HWK"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" id="IdG-rx-nii"/>

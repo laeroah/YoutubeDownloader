@@ -28,5 +28,6 @@
 @protocol YDMediaLibraryRowCellDelegate <NSObject>
 
 - (void)didChooseToRemoveCell:(YDMediaLibraryRowCell *)cell;
+- (void)didTappOnPauseButtonFromCell:(YDMediaLibraryRowCell *)cell;
 
 @end

@@ -96,10 +96,13 @@
                         <outlet property="delegate" destination="-1" id="Uub-Jx-JH3"/>
                     </connections>
                 </collectionView>
-                <searchBar contentMode="redraw" id="Z8P-gD-toj">
+                <searchBar contentMode="redraw" showsCancelButton="YES" id="Z8P-gD-toj">
                     <rect key="frame" x="0.0" y="63" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="HSn-9b-ub9"/>
+                    </connections>
                 </searchBar>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -35,18 +35,8 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" image="btn_downloadResume"/>
-                    </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-bN-TOk">
-                        <rect key="frame" x="0.0" y="0.0" width="77" height="100"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal" title="Delete">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
                         <connections>
-                            <action selector="deleteButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="RUt-mI-dK9"/>
+                            <action selector="pauseButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="cEL-IY-E70"/>
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_newVideoRibbon" translatesAutoresizingMaskIntoConstraints="NO" id="Cic-3C-JmE">
@@ -69,6 +59,23 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-bN-TOk">
+                        <rect key="frame" x="85" y="0.0" width="77" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="56I-5S-2a8"/>
+                            <constraint firstAttribute="width" constant="77" id="HU4-SE-cCQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Delete">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteButtonTapped:" destination="D7J-yv-OIa" eventType="touchUpInside" id="RUt-mI-dK9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -78,10 +85,10 @@
                 <constraint firstAttribute="trailing" secondItem="Cic-3C-JmE" secondAttribute="trailing" constant="17" id="2fc-1m-f94"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="3H0-JB-KBA"/>
                 <constraint firstItem="WBr-qI-Jg9" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" constant="109" id="3To-SC-cSw"/>
-                <constraint firstItem="WBr-qI-Jg9" firstAttribute="leading" secondItem="Gdb-bN-TOk" secondAttribute="trailing" constant="32" id="5DD-ke-6Z9"/>
+                <constraint firstItem="WBr-qI-Jg9" firstAttribute="leading" secondItem="Gdb-bN-TOk" secondAttribute="trailing" constant="-53" id="5DD-ke-6Z9"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="6FQ-6h-Xtl"/>
                 <constraint firstAttribute="trailing" secondItem="X3I-qw-8CS" secondAttribute="trailing" id="9re-NP-QTo"/>
-                <constraint firstItem="Gdb-bN-TOk" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="leading" id="9zJ-oJ-j3l"/>
+                <constraint firstItem="Gdb-bN-TOk" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="leading" constant="85" id="9zJ-oJ-j3l"/>
                 <constraint firstItem="vJu-AU-dtE" firstAttribute="leading" secondItem="X3I-qw-8CS" secondAttribute="trailing" constant="-95" id="DH3-Xb-vPE"/>
                 <constraint firstItem="WBr-qI-Jg9" firstAttribute="top" secondItem="X3I-qw-8CS" secondAttribute="top" constant="-27" id="GEX-y7-44m"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" id="IdG-rx-nii"/>
@@ -89,10 +96,12 @@
                 <constraint firstItem="Cic-3C-JmE" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="gL9-U5-ZTZ"/>
                 <constraint firstItem="Gdb-bN-TOk" firstAttribute="bottom" secondItem="boc-H4-Pr4" secondAttribute="bottom" id="kY9-fY-YJX"/>
                 <constraint firstItem="X3I-qw-8CS" firstAttribute="centerY" secondItem="vJu-AU-dtE" secondAttribute="centerY" constant="49" id="m0s-B1-MJK"/>
+                <constraint firstAttribute="trailing" secondItem="Gdb-bN-TOk" secondAttribute="trailing" constant="-2" id="mHn-bZ-uur"/>
                 <constraint firstItem="X3I-qw-8CS" firstAttribute="leading" secondItem="boc-H4-Pr4" secondAttribute="leading" id="se2-J6-PO3"/>
                 <constraint firstItem="X3I-qw-8CS" firstAttribute="bottom" secondItem="boc-H4-Pr4" secondAttribute="bottom" id="tbe-YZ-WrA"/>
                 <constraint firstItem="boc-H4-Pr4" firstAttribute="leading" secondItem="D7J-yv-OIa" secondAttribute="leading" id="uOi-LF-rXt"/>
                 <constraint firstAttribute="bottom" secondItem="boc-H4-Pr4" secondAttribute="bottom" id="uWK-e1-0OW"/>
+                <constraint firstItem="Gdb-bN-TOk" firstAttribute="top" secondItem="D7J-yv-OIa" secondAttribute="top" id="yYa-ZT-pwy"/>
             </constraints>
             <size key="customSize" width="63" height="49"/>
             <connections>

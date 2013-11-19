@@ -38,6 +38,7 @@ typedef enum
 }
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchResultController;
+@property (nonatomic, strong) NSString *searchString;
 
 @property (weak, nonatomic) IBOutlet UIView *deviceSpaceStatusBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
@@ -156,6 +157,11 @@ typedef enum
     NSPredicate *deletedPredicate = [NSPredicate predicateWithFormat:@"%K != %@", @"isRemoved", @(YES)];
     [predicates addObject:createTimePredicate];
     [predicates addObject:deletedPredicate];
+    
+    if (self.searchString && [self.searchString length] > 0) {
+        NSPredicate *searchVideoTitlePredicate = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@", @"videoTitle", self.searchString];
+        [predicates addObject:searchVideoTitlePredicate];
+    }
     
     NSPredicate *fetchPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
     NSFetchRequest *request = [Video MR_requestAllWithPredicate:fetchPredicate inContext:context];
@@ -316,13 +322,17 @@ typedef enum
     _searchBarShowing = !_searchBarShowing;
     
     if (_searchBarShowing) {
+        //show search bar
         searchBarFrame.origin.y = 0.0f;
         mediaLibraryTableFrame.origin.y = SEARCH_BAR_HEIGHT;
         mediaLibraryTableFrame.size.height -= SEARCH_BAR_HEIGHT;
+        [self.searchBar becomeFirstResponder];
     }else{
+        //hide search bar
         searchBarFrame.origin.y -= SEARCH_BAR_HEIGHT;
         mediaLibraryTableFrame.origin.y = 0.0f;
         mediaLibraryTableFrame.size.height += SEARCH_BAR_HEIGHT;
+        [self.searchBar resignFirstResponder];
     }
     [UIView animateWithDuration:0.2f animations:^{
         self.searchBar.frame = searchBarFrame;
@@ -342,6 +352,31 @@ typedef enum
             [alertView show];
         }
     }];
+}
+
+- (void)didTappOnPauseButtonFromCell:(YDMediaLibraryRowCell *)cell
+{
+    
+}
+
+#pragma mark - UISearchBarDelegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    self.searchString = searchText;
+    [self loadVideos];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    //hide the search bar when cancel is tapped
+    [self toggleSearchBar];
+    self.searchString = @"";
+    [self loadVideos];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 
 @end

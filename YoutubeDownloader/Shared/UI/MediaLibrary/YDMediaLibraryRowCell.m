@@ -45,4 +45,11 @@
     }
 }
 
+- (IBAction)pauseButtonTapped:(id)sender {
+    self.downloadControlButton.selected = !self.downloadControlButton.selected;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTappOnPauseButtonFromCell:)]) {
+        [self.delegate didTappOnPauseButtonFromCell:self];
+    }
+}
+
 @end
