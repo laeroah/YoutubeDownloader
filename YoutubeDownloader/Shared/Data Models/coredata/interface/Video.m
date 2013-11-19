@@ -13,7 +13,7 @@
 
 // Custom logic goes here.
 
-- (void)createVideoWithVideoID:(NSNumber *)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
++ (Video *)createVideoWithVideoID:(NSNumber *)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
 {
     // Get the local context
     Video *video = [Video MR_createInContext:context];
@@ -26,6 +26,8 @@
         }
     }
     ];
+    
+    return video;
 }
 
 + (NSArray*)findAll
@@ -33,7 +35,7 @@
     return [Video MR_findAll];
 }
 
-- (Video*)findByVideoID:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context
++ (Video*)findByVideoID:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context
 {
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoID == %@"];

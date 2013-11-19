@@ -11,6 +11,7 @@
 #import "YDBaseNavigationViewController.h"
 #import "YDSearchViewController.h"
 #import "CoreData+MagicalRecord.h"
+#import "Video.h"
 
 @implementation AppDelegate
 
@@ -37,6 +38,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)generateDebugData
+{
+    NSManagedObjectContext *context  = [NSManagedObjectContext MR_contextForCurrentThread];
+    Video *video1 = [Video createVideoWithVideoID:[NSNumber numberWithInt:0] inContext:context completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
