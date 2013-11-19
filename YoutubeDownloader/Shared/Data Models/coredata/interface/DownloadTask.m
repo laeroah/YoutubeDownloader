@@ -48,6 +48,12 @@
     return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
 }
 
++ (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d",DownloadTaskWaiting];
+    return  [DownloadTask MR_findFirstWithPredicate:predicate sortedBy:@"createDate" ascending:YES inContext:context];
+}
+
 + (DownloadTask*)findByDownloadPageUrl:(NSString*)downloadPageUrl qualityType:(NSString*)qualityType  inContext:(NSManagedObjectContext *)context
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadPageUrl = %@ and qualityType = %@",downloadPageUrl,qualityType];

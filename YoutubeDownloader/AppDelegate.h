@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 
+typedef void (^DownloadTaskBlock)();
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -21,7 +23,7 @@
 @property (nonatomic, assign) BOOL networkAvailable;
 
 @property (strong, nonatomic) Reachability *internetConnectionReachability;
-
+@property (strong, nonatomic) DownloadTaskBlock backgroundURLSessionCompletionHandler;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

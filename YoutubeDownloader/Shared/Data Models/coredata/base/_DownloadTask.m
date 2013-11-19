@@ -13,6 +13,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 	.qualityType = @"qualityType",
 	.videoDescription = @"videoDescription",
 	.videoDownloadUrl = @"videoDownloadUrl",
+	.videoFileSize = @"videoFileSize",
 	.videoImagePath = @"videoImagePath",
 };
 
@@ -66,6 +67,11 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 	}
 	if ([key isEqualToString:@"downloadTaskStatusValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadTaskStatus"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"videoFileSizeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"videoFileSize"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -210,6 +216,32 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 
 @dynamic videoDownloadUrl;
 
+
+
+
+
+
+@dynamic videoFileSize;
+
+
+
+- (int64_t)videoFileSizeValue {
+	NSNumber *result = [self videoFileSize];
+	return [result longLongValue];
+}
+
+- (void)setVideoFileSizeValue:(int64_t)value_ {
+	[self setVideoFileSize:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveVideoFileSizeValue {
+	NSNumber *result = [self primitiveVideoFileSize];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveVideoFileSizeValue:(int64_t)value_ {
+	[self setPrimitiveVideoFileSize:[NSNumber numberWithLongLong:value_]];
+}
 
 
 
