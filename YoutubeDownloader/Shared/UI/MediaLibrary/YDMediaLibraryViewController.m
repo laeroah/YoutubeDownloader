@@ -115,7 +115,7 @@ typedef enum
     
     _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_searchButton setImage:[UIImage imageNamed:@"ic_search"] forState:UIControlStateNormal];
-    [_searchButton setImage:[UIImage imageNamed:@"ic_search_highlighted"] forState:UIControlStateHighlighted];
+    //[_searchButton setImage:[UIImage imageNamed:@"ic_search_highlighted"] forState:UIControlStateHighlighted];
     _searchButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_searchButton addTarget:self action:@selector(toggleSearchBar) forControlEvents:UIControlEventTouchUpInside];
     

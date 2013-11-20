@@ -127,7 +127,11 @@
         }
         else
         {
-            buttonSpacing = 142.0f;
+            if ([YDDeviceUtility isIPhone5]) {
+                buttonSpacing = 142.0f;
+            }else{
+                buttonSpacing = 113.0f;
+            }
         }
     }
     

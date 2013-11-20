@@ -45,6 +45,8 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
 
 - (void)placeEmbeddedAudioAdjustableVideoOnView:(UIView *)view WithSize:(CGSize)size andVideoPath:(NSString *)videoPath
 {
+    _audioDelay = kCMTimeZero;
+    
     AVURLAsset *asset;
     
     NSURL *fileURL = [NSURL fileURLWithPath:videoPath];
@@ -65,11 +67,14 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
     AVPlayerItem* audioItem = [AVPlayerItem playerItemWithAsset:mutableAudioComposition];
     self.audioPlayer = [[AVPlayer alloc]initWithPlayerItem:audioItem];
     
+    
 }
 
 
 - (void)placeEmbeddedVideoOnView:(UIView *)view WithSize:(CGSize)size andVideoPath:(NSString *)videoPath
 {
+    
+    _audioDelay = kCMTimeZero;
     
     AVURLAsset *asset;
     
@@ -123,6 +128,8 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
 
 - (void)placeEmbeddedVideoOnView:(UIView *)view WithSize:(CGSize)size avComposition:( AVMutableComposition *)composition
 {
+    _audioDelay = kCMTimeZero;
+    
     self.playerItem = [AVPlayerItem playerItemWithAsset:composition];
     //self.playerItem.videoComposition = videoComposition;
     self.player = [[AVPlayer alloc]initWithPlayerItem:self.playerItem];
