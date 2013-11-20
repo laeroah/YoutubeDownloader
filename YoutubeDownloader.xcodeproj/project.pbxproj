@@ -29,8 +29,11 @@
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
-		AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8BA770182861B6008519E8 /* YDPlayer.m */; };
 		AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */; };
+		AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD38183C2E0C00711B5F /* YDPlayer.m */; };
+		AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */; };
+		AFD2AD3F183C2E2E00711B5F /* YDPlayerViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */; };
+		AFD2AD41183C2E8D00711B5F /* VID_0001.m4v in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -139,9 +142,13 @@
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
 		AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryRowCell.h; sourceTree = "<group>"; };
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
-		AF8BA76F182861B6008519E8 /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
-		AF8BA770182861B6008519E8 /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
 		AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryThumbnailCell~iphone.xib"; sourceTree = "<group>"; };
+		AFD2AD37183C2E0C00711B5F /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
+		AFD2AD38183C2E0C00711B5F /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
+		AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayerViewController.h; sourceTree = "<group>"; };
+		AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayerViewController.m; sourceTree = "<group>"; };
+		AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
+		AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = VID_0001.m4v; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -345,15 +352,6 @@
 			path = CustomBadge;
 			sourceTree = "<group>";
 		};
-		AF4FB41D18275DA8008F906D /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				AF8BA76F182861B6008519E8 /* YDPlayer.h */,
-				AF8BA770182861B6008519E8 /* YDPlayer.m */,
-			);
-			path = Player;
-			sourceTree = "<group>";
-		};
 		AF4FB41E18275DE6008F906D /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +359,26 @@
 				AF4FB42018275E06008F906D /* YDViewController.m */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		AFD2AD36183C2E0C00711B5F /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				AFD2AD37183C2E0C00711B5F /* YDPlayer.h */,
+				AFD2AD38183C2E0C00711B5F /* YDPlayer.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		AFD2AD3A183C2E2800711B5F /* YDMediaPlayerController */ = {
+			isa = PBXGroup;
+			children = (
+				AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */,
+				AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */,
+				AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */,
+				AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */,
+			);
+			path = YDMediaPlayerController;
 			sourceTree = "<group>";
 		};
 		AFE6AA0D1822E29D0037B389 = {
@@ -401,7 +419,6 @@
 				E3AFA68C182FDC17008CABB6 /* ThirdParty */,
 				E3BCF1E01827E43C00517124 /* Shared */,
 				AF4FB41E18275DE6008F906D /* Debug */,
-				AF4FB41D18275DA8008F906D /* Player */,
 				AFE6AA2A1822E29E0037B389 /* AppDelegate.h */,
 				AFE6AA2B1822E29E0037B389 /* AppDelegate.m */,
 				AFE6AA301822E29E0037B389 /* Images.xcassets */,
@@ -650,6 +667,7 @@
 		E3BCF1E01827E43C00517124 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				AFD2AD36183C2E0C00711B5F /* Player */,
 				E3BCF2011827F11200517124 /* Categories */,
 				E3BCF1E11827E63F00517124 /* Data Models */,
 				E3BCF1E21827E63F00517124 /* Helpers */,
@@ -714,6 +732,7 @@
 		E3BCF1E71827E63F00517124 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AFD2AD3A183C2E2800711B5F /* YDMediaPlayerController */,
 				AF45422B183AE2ED00A06A07 /* BadgedButton */,
 				AF3CBF541836B2B80025957C /* MediaLibrary */,
 				E3BCF1EC1827E78700517124 /* YDSearchViewController */,
@@ -842,9 +861,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */,
+				AFD2AD41183C2E8D00711B5F /* VID_0001.m4v in Resources */,
 				AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */,
 				E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */,
 				E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */,
+				AFD2AD3F183C2E2E00711B5F /* YDPlayerViewController~iphone.xib in Resources */,
 				AFE6AA311822E29E0037B389 /* Images.xcassets in Resources */,
 				AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */,
 				AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */,
@@ -897,6 +918,7 @@
 			files = (
 				E322A6FC183266E600BA77A2 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E322A70F183266E600BA77A2 /* MagicalRecord+iCloud.m in Sources */,
+				AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */,
 				E3AFA6C1182FEEB2008CABB6 /* ActionSheetDistancePicker.m in Sources */,
 				E322A6FD183266E600BA77A2 /* NSNumber+MagicalDataImport.m in Sources */,
 				E3AFA6A7182FDC44008CABB6 /* AFURLConnectionOperation.m in Sources */,
@@ -942,8 +964,8 @@
 				E322A6FE183266E600BA77A2 /* NSObject+MagicalDataImport.m in Sources */,
 				E322A704183266E600BA77A2 /* NSManagedObject+MagicalRecord.m in Sources */,
 				E322A70A183266E600BA77A2 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */,
 				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
-				AF8BA771182861B6008519E8 /* YDPlayer.m in Sources */,
 				E322A701183266E600BA77A2 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E322A706183266E600BA77A2 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,

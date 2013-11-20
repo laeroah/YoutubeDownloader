@@ -12,6 +12,7 @@
 #import "YDMediaLibraryRowCell.h"
 #import "YDDeviceSpaceAvailabilityView.h"
 #import "AFNetworking.h"
+#import "YDPlayerViewController.h"
 #import "Video.h"
 
 #import "CoreData+MagicalRecord.h"
@@ -83,6 +84,12 @@ typedef enum
     NSLog(@"%@", video.videoTitle);
     
     [self loadVideos];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.mediaCollectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - layout subviews
@@ -278,6 +285,15 @@ typedef enum
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*debug*/
+    YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
+    [playerViewController presentPlayerViewControllerFromViewController:self];
+    NSString*thePath=[[NSBundle mainBundle] pathForResource:@"VID_0001" ofType:@"m4v"];
+    [playerViewController playLocalVideoWithPath:thePath];
 }
 
 #pragma mark - rotation
