@@ -90,6 +90,7 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
                             if (status == AVKeyValueStatusLoaded) {
                                 self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
                                 self.player = [[AVPlayer alloc]initWithPlayerItem:self.playerItem];
+                                self.player.allowsExternalPlayback = YES;
                                 //update progress every 1/2 second
                                 [self.player addPeriodicTimeObserverForInterval:CMTimeMake(5, 10) queue:dispatch_get_main_queue() usingBlock:^(CMTime time)
                                 {
@@ -125,6 +126,7 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
     self.playerItem = [AVPlayerItem playerItemWithAsset:composition];
     //self.playerItem.videoComposition = videoComposition;
     self.player = [[AVPlayer alloc]initWithPlayerItem:self.playerItem];
+    self.player.allowsExternalPlayback = YES;
     
     //update progress every 1/2 second
     __weak YDPlayer *weakSelf = self;

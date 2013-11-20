@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YDPlayerViewController">
             <connections>
+                <outlet property="airplayButtonView" destination="gjl-3o-cN3" id="zms-Wf-ufV"/>
                 <outlet property="audioDelaySlider" destination="ZvQ-dH-WuD" id="v6v-Xe-9Fc"/>
                 <outlet property="audioOffsetLabel" destination="5c4-tj-HVe" id="SHk-rJ-a4i"/>
                 <outlet property="brightnessSlider" destination="s7l-3d-YBg" id="0e0-Qb-oGF"/>
@@ -69,13 +70,11 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PIg-5U-TX0">
-                                    <rect key="frame" x="278" y="9" width="32" height="32"/>
+                                <view contentMode="scaleToFill" id="gjl-3o-cN3" userLabel="airplayButtonView">
+                                    <rect key="frame" x="278" y="14" width="31" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <state key="normal" image="btn_playerAirplay">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" red="0.18431372549019609" green="0.18431372549019609" blue="0.18431372549019609" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                         </view>
@@ -144,7 +143,6 @@
     </objects>
     <resources>
         <image name="btn_close" width="16" height="16"/>
-        <image name="btn_playerAirplay" width="32" height="32"/>
         <image name="btn_playerPause" width="32" height="32"/>
         <image name="btn_playerPlay" width="32" height="32"/>
         <image name="ic_decreaseBrightness" width="40" height="40"/>

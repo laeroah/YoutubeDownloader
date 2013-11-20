@@ -10,6 +10,7 @@
 #import "YDBaseNavigationViewController.h"
 #import "YDConstants.h"
 #import "YDDeviceUtility.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface YDPlayerViewController ()
 {
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *brightnessSlider;
 @property (weak, nonatomic) IBOutlet UISlider *audioDelaySlider;
 @property (weak, nonatomic) IBOutlet UILabel *audioOffsetLabel;
+@property (weak, nonatomic) IBOutlet UIView *airplayButtonView;
 
 @end
 
@@ -68,6 +70,8 @@
     self.brightnessSlider.value = [UIScreen mainScreen].brightness;
     
     [self colorNavigationBar];
+    
+    [self layoutAirplayButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -77,6 +81,14 @@
     if (_chromeTimer) {
         [_chromeTimer invalidate];
     }
+}
+
+- (void)layoutAirplayButton
+{
+    MPVolumeView *volumeView = [ [MPVolumeView alloc] init] ;
+    [volumeView setShowsVolumeSlider:NO];
+    [volumeView sizeToFit];
+    [self.airplayButtonView addSubview:volumeView];
 }
 
 - (void)colorNavigationBar
@@ -165,6 +177,13 @@
     [self.player addAudioOffset:offset];
     
 }
+
+//- (IBAction)airplayButtonTapped:(id)sender {
+//    MPVolumeView *volumeView = [ [MPVolumeView alloc] init] ;
+//    [volumeView setShowsVolumeSlider:NO];
+//    [volumeView sizeToFit];
+//    [self.view addSubview:volumeView];
+//}
 
 #pragma mark - player initialization
 - (YDPlayer *)player

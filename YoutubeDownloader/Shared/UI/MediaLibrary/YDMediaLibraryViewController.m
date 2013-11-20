@@ -77,12 +77,6 @@ typedef enum
     searchBarFrame.origin.y = -SEARCH_BAR_HEIGHT;
     self.searchBar.frame = searchBarFrame;
     
-    NSArray *videos = [Video findAll];
-    
-    Video *video = videos[0];
-    
-    NSLog(@"%@", video.videoTitle);
-    
     [self loadVideos];
 }
 
