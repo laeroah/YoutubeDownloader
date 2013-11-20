@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ic_delete.png"
+      "filename" : "ic_list.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ic_delete@2x.png"
+      "filename" : "ic_list@2x.png"
     }
   ],
   "info" : {

@@ -109,11 +109,13 @@ typedef enum
     
     _thumbnailButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_thumbnailButton setImage:[UIImage imageNamed:@"ic_thumbnail"] forState:UIControlStateNormal];
+    [_thumbnailButton setImage:[UIImage imageNamed:@"ic_list"] forState:UIControlStateSelected];
     _thumbnailButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_thumbnailButton addTarget:self action:@selector(toggleLayout) forControlEvents:UIControlEventTouchUpInside];
     
     _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_searchButton setImage:[UIImage imageNamed:@"ic_search"] forState:UIControlStateNormal];
+    [_searchButton setImage:[UIImage imageNamed:@"ic_search_highlighted"] forState:UIControlStateHighlighted];
     _searchButton.frame = CGRectMake(0, 0, NAVIGATION_BUTTON_WIDTH, NAVIGATION_BUTTON_HEIGHT);
     [_searchButton addTarget:self action:@selector(toggleSearchBar) forControlEvents:UIControlEventTouchUpInside];
     
@@ -306,8 +308,10 @@ typedef enum
 - (void)toggleLayout
 {
     if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
+        _thumbnailButton.selected = YES;
         _currentLayout = YDMediaLibraryViewControllerLayoutThumbnail;
     }else{
+        _thumbnailButton.selected = NO;
         _currentLayout = YDMediaLibraryViewControllerLayoutRow;
     }
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
@@ -321,7 +325,6 @@ typedef enum
     for (YDMediaLibraryRowCell *cell in visibleCells) {
         [cell enterEditMode:_editMode animated:YES];
     }
-    
     _deleteButton.selected = _editMode;
 }
 
@@ -330,6 +333,7 @@ typedef enum
     CGRect searchBarFrame = self.searchBar.frame;
     CGRect mediaLibraryTableFrame = self.mediaCollectionView.frame;
     _searchBarShowing = !_searchBarShowing;
+    _searchButton.highlighted = _searchBarShowing;
     
     if (_searchBarShowing) {
         //show search bar
