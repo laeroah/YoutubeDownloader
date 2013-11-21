@@ -16,6 +16,7 @@
 #import "YDDownloadManager.h"
 #import "YDMediaLibraryViewController.h"
 #import "BadgedButton.h"
+#import "YDAnalyticManager.h"
 
 @interface YDSearchViewController ()
 {
@@ -58,6 +59,9 @@
     [self createControlButtons];
     self.webView.mediaPlaybackRequiresUserAction = YES;
     [self goHomePage];
+    
+    // setup the screen name for GA tracking
+    self.screenName = @"Home Screen";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -120,6 +124,8 @@
 {
     YDMediaLibraryViewController *mediaLibraryViewController = [[YDMediaLibraryViewController alloc]init];
     [self.navigationController pushViewController:mediaLibraryViewController animated:YES];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_NAVIGATION action:EVENT_ACTION_NAVIGATION label:@"library" value:nil];
 }
 
 - (void)downloadProcess:(id)sender

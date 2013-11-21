@@ -10,6 +10,8 @@
 #import "YDConstants.h"
 #import "YDDeviceUtility.h"
 #import "MBProgressHUD.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface YDBaseViewController ()
 {
@@ -32,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tracker = [[GAI sharedInstance] defaultTracker];
     [self colorNavigationBar];
     
 	// Do any additional setup after loading the view.
@@ -48,6 +51,17 @@
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // use GA to track the screen name, in child view controllers, set the screenname property in viewDidLoad method
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [self.tracker set:kGAIScreenName
+           value:self.screenName];
+    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (void)didReceiveMemoryWarning

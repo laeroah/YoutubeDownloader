@@ -25,3 +25,8 @@
 #define DEVICE_SPACE_OTHER_APP_BAR_COLOR           [UIColor colorWithRed:32/255.0f green:32/255.0f blue:32/255.0f alpha:1.0]
 #define DEVICE_SPACE_THIS_APP_BAR_COLOR            [UIColor colorWithRed:4/255.0f green:174/255.0f blue:218/255.0f alpha:1.0]
 #define DEVICE_SPACE_AVAILABLE_BAR_COLOR           [UIColor colorWithRed:241/255.0f green:242/255.0f blue:242/255.0f alpha:1.0]
+
+#pragma mark - Persistent User Defaults
+#define IS_RETURNING_USER_KEY                       @"IS_RETURNING_USER_KEY"
+
+#pragma mark - Google Analytics

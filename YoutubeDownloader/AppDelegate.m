@@ -12,6 +12,8 @@
 #import "YDSearchViewController.h"
 #import "CoreData+MagicalRecord.h"
 #import "Video.h"
+#import "YDConstants.h"
+#import "YDAnalyticManager.h"
 
 @implementation AppDelegate
 
@@ -40,9 +42,25 @@
     
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    /*google analytics*/
+    [self recordNewOrReturningUser];
+    [[YDAnalyticManager sharedInstance]setUserType];
+    
     /*debug*/
     [self generateDebugData];
+    
     return YES;
+}
+
+- (void)recordNewOrReturningUser
+{
+    BOOL isReturningUser = [[NSUserDefaults standardUserDefaults]boolForKey:IS_RETURNING_USER_KEY];
+    if (isReturningUser) {
+        
+    }else{
+        // new user
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:IS_RETURNING_USER_KEY];
+    }
 }
 
 - (void)generateDebugData

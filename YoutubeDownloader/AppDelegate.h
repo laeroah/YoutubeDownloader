@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
+#import "GAI.h"
 
 typedef void (^DownloadTaskBlock)();
 
@@ -24,6 +25,8 @@ typedef void (^DownloadTaskBlock)();
 
 @property (strong, nonatomic) Reachability *internetConnectionReachability;
 @property (strong, nonatomic) DownloadTaskBlock backgroundURLSessionCompletionHandler;
+
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

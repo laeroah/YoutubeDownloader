@@ -29,6 +29,7 @@
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
+		AFA064DD183EB92000AA0C4D /* YDAnalyticManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA064DC183EB92000AA0C4D /* YDAnalyticManager.m */; };
 		AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */; };
 		AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD38183C2E0C00711B5F /* YDPlayer.m */; };
 		AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */; };
@@ -48,6 +49,10 @@
 		AFE6AA3B1822E29E0037B389 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1F1822E29E0037B389 /* CoreData.framework */; };
 		AFE6AA431822E29E0037B389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFE6AA411822E29E0037B389 /* InfoPlist.strings */; };
 		AFE6AA451822E29E0037B389 /* YoutubeDownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */; };
+		AFF212FB183E70AD00CC1E4C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF212FA183E70AD00CC1E4C /* SystemConfiguration.framework */; };
+		AFF212FD183E70BA00CC1E4C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF212FC183E70BA00CC1E4C /* libz.dylib */; };
+		AFF2130A183E741100CC1E4C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF21309183E741100CC1E4C /* libGoogleAnalyticsServices.a */; };
+		AFF2130D183EB12C00CC1E4C /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF2130C183EB12C00CC1E4C /* UIDevice-Hardware.m */; };
 		E322A6A8183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E322A6A5183262A400BA77A2 /* YoutubeDownloader.xcdatamodeld */; };
 		E322A6B61832662300BA77A2 /* _DownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E322A6B31832662300BA77A2 /* _DownloadTask.m */; };
 		E322A6B71832662300BA77A2 /* _Video.m in Sources */ = {isa = PBXBuildFile; fileRef = E322A6B51832662300BA77A2 /* _Video.m */; };
@@ -142,6 +147,8 @@
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
 		AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryRowCell.h; sourceTree = "<group>"; };
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
+		AFA064DB183EB92000AA0C4D /* YDAnalyticManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDAnalyticManager.h; sourceTree = "<group>"; };
+		AFA064DC183EB92000AA0C4D /* YDAnalyticManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDAnalyticManager.m; sourceTree = "<group>"; };
 		AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryThumbnailCell~iphone.xib"; sourceTree = "<group>"; };
 		AFD2AD37183C2E0C00711B5F /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
 		AFD2AD38183C2E0C00711B5F /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
@@ -166,6 +173,17 @@
 		AFE6AA401822E29E0037B389 /* YoutubeDownloaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YoutubeDownloaderTests-Info.plist"; sourceTree = "<group>"; };
 		AFE6AA421822E29E0037B389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeDownloaderTests.m; sourceTree = "<group>"; };
+		AFF212FA183E70AD00CC1E4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AFF212FC183E70BA00CC1E4C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AFF21301183E726F00CC1E4C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		AFF21302183E726F00CC1E4C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		AFF21303183E726F00CC1E4C /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		AFF21304183E726F00CC1E4C /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		AFF21305183E726F00CC1E4C /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		AFF21306183E726F00CC1E4C /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		AFF21309183E741100CC1E4C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		AFF2130B183EB12C00CC1E4C /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		AFF2130C183EB12C00CC1E4C /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		E322A6A6183262A400BA77A2 /* YoutubeDownloader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YoutubeDownloader.xcdatamodel; sourceTree = "<group>"; };
 		E322A6A7183262A400BA77A2 /* YoutubeDownloader－1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "YoutubeDownloader－1.xcdatamodel"; sourceTree = "<group>"; };
 		E322A6B21832662300BA77A2 /* _DownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DownloadTask.h; sourceTree = "<group>"; };
@@ -297,7 +315,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF212FD183E70BA00CC1E4C /* libz.dylib in Frameworks */,
+				AFF212FB183E70AD00CC1E4C /* SystemConfiguration.framework in Frameworks */,
 				AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */,
+				AFF2130A183E741100CC1E4C /* libGoogleAnalyticsServices.a in Frameworks */,
 				AFE6AA201822E29E0037B389 /* CoreData.framework in Frameworks */,
 				AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */,
 				AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */,
@@ -403,6 +424,8 @@
 		AFE6AA181822E29D0037B389 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFF212FC183E70BA00CC1E4C /* libz.dylib */,
+				AFF212FA183E70AD00CC1E4C /* SystemConfiguration.framework */,
 				AFE6AA191822E29D0037B389 /* Foundation.framework */,
 				AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */,
 				AFE6AA1D1822E29E0037B389 /* UIKit.framework */,
@@ -454,6 +477,20 @@
 				AFE6AA411822E29E0037B389 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AFF21300183E726F00CC1E4C /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				AFF21301183E726F00CC1E4C /* GAI.h */,
+				AFF21302183E726F00CC1E4C /* GAIDictionaryBuilder.h */,
+				AFF21303183E726F00CC1E4C /* GAIFields.h */,
+				AFF21304183E726F00CC1E4C /* GAILogger.h */,
+				AFF21305183E726F00CC1E4C /* GAITrackedViewController.h */,
+				AFF21306183E726F00CC1E4C /* GAITracker.h */,
+				AFF21309183E741100CC1E4C /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		E322A6AF1832652B00BA77A2 /* coredata */ = {
@@ -591,6 +628,7 @@
 		E3AFA68C182FDC17008CABB6 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				AFF21300183E726F00CC1E4C /* GoogleAnalytics */,
 				AF45422C183AE31E00A06A07 /* CustomBadge */,
 				E322A6BE183266E600BA77A2 /* MagicalRecord */,
 				E3AFA6B3182FEEB2008CABB6 /* Pickers */,
@@ -702,6 +740,8 @@
 				E3BCF20C18284CA700517124 /* YDVideoLinksExtractorManager.m */,
 				E3B40A7E1839193700EFBEE5 /* YDDownloadManager.h */,
 				E3B40A7F1839193700EFBEE5 /* YDDownloadManager.m */,
+				AFA064DB183EB92000AA0C4D /* YDAnalyticManager.h */,
+				AFA064DC183EB92000AA0C4D /* YDAnalyticManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -773,6 +813,8 @@
 		E3BCF2011827F11200517124 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				AFF2130B183EB12C00CC1E4C /* UIDevice-Hardware.h */,
+				AFF2130C183EB12C00CC1E4C /* UIDevice-Hardware.m */,
 				E3BCF2021827F13300517124 /* UIBarButtonItem+Private.h */,
 				E3BCF2031827F13300517124 /* UIBarButtonItem+Private.m */,
 				E3AFA686182FCFED008CABB6 /* NSString+Util.h */,
@@ -945,6 +987,7 @@
 				E3AFA6BF182FEEB2008CABB6 /* AbstractActionSheetPicker.m in Sources */,
 				E322A6BD1832662B00BA77A2 /* Video.m in Sources */,
 				E3AFA6B2182FDC8C008CABB6 /* MBProgressHUD.m in Sources */,
+				AFA064DD183EB92000AA0C4D /* YDAnalyticManager.m in Sources */,
 				E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */,
 				E3AFA6A6182FDC44008CABB6 /* AFPropertyListRequestOperation.m in Sources */,
 				E322A6FA183266E600BA77A2 /* MagicalImportFunctions.m in Sources */,
@@ -968,6 +1011,7 @@
 				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
 				E322A701183266E600BA77A2 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E322A706183266E600BA77A2 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				AFF2130D183EB12C00CC1E4C /* UIDevice-Hardware.m in Sources */,
 				E3BCF1EB1827E74000517124 /* YDBaseViewController.m in Sources */,
 				E3AFA6A9182FDC44008CABB6 /* UIImageView+AFNetworking.m in Sources */,
 				E322A6FB183266E600BA77A2 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
@@ -1112,6 +1156,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
 				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices/GoogleAnalytics/Library,
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices,
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1125,6 +1175,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
 				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices/GoogleAnalytics/Library,
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices,
+					/Users/haowang/Documents/Projects/YoutubeDownloader/YoutubeDownloader/ThirdParty/GoogleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

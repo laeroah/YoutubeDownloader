@@ -7,10 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAI.h"
 
 @interface YDBaseViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *navigationButtons;
+
+/*!
+ The tracker on which view tracking calls are be made, or `nil`, in which case
+ [GAI defaultTracker] will be used.
+ */
+@property(nonatomic, assign) id<GAITracker> tracker;
+/*!
+ The screen name, for purposes of Google Analytics tracking. If this is `nil`,
+ no tracking calls will be made.
+ */
+@property(nonatomic, copy)   NSString *screenName;
 
 - (void)showToastMessage:(NSString *)msg hideAfterDelay:(NSTimeInterval)seconds;
 - (void)showToastMessage:(NSString *)msg hideAfterDelay:(NSTimeInterval)seconds withProgress:(BOOL)useProgress;
