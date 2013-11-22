@@ -259,14 +259,22 @@ typedef enum
     if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
         return CGSizeMake(self.view.frame.size.width, MEDIA_LIBRARY_ROW_HEIGHT);
     }else{
-        return CGSizeMake(MEDIA_LIBRARY_THUMBNAIL_WIDTH, MEDIA_LIBRARY_ROW_HEIGHT);
+        if ([YDDeviceUtility isIPad]) {
+            if ([YDDeviceUtility isLandscape]) {
+                return CGSizeMake(MEDIA_LIBRARY_THUMBNAIL_WIDTH_IPAD_LANDSCAPE, MEDIA_LIBRARY_ROW_HEIGHT);
+            }else{
+                return CGSizeMake(MEDIA_LIBRARY_THUMBNAIL_WIDTH_IPAD_PORTRAIT, MEDIA_LIBRARY_ROW_HEIGHT);
+            }
+        }else{
+            return CGSizeMake(MEDIA_LIBRARY_THUMBNAIL_WIDTH_IPHONE, MEDIA_LIBRARY_ROW_HEIGHT);
+        }
     }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 
 {
-    if ([YDDeviceUtility isLandscape]) {
+    if ([YDDeviceUtility isLandscape] && ![YDDeviceUtility isIPad]) {
         return UIEdgeInsetsMake(0, 25, 0, 25);
     }else{
         return UIEdgeInsetsZero;

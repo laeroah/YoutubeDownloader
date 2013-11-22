@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AF295AE6183EEC55001FBAE5 /* YDMediaLibraryRowCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF295AE5183EEC55001FBAE5 /* YDMediaLibraryRowCell~ipad.xib */; };
+		AF295AE8183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF295AE7183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib */; };
+		AF295AEA183F02BF001FBAE5 /* YDPlayerViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF295AE9183F02BF001FBAE5 /* YDPlayerViewController~ipad.xib */; };
 		AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */; };
 		AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */; };
 		AF45422A183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */; };
@@ -30,6 +33,7 @@
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
 		AFA064DD183EB92000AA0C4D /* YDAnalyticManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA064DC183EB92000AA0C4D /* YDAnalyticManager.m */; };
+		AFA064E1183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA064E0183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib */; };
 		AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */; };
 		AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD38183C2E0C00711B5F /* YDPlayer.m */; };
 		AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */; };
@@ -133,6 +137,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF295AE5183EEC55001FBAE5 /* YDMediaLibraryRowCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryRowCell~ipad.xib"; sourceTree = "<group>"; };
+		AF295AE7183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryThumbnailCell~ipad.xib"; sourceTree = "<group>"; };
+		AF295AE9183F02BF001FBAE5 /* YDPlayerViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDPlayerViewController~ipad.xib"; sourceTree = "<group>"; };
 		AF3CBF551836B2DE0025957C /* YDMediaLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryViewController.h; sourceTree = "<group>"; };
 		AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryViewController.m; sourceTree = "<group>"; };
 		AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -149,6 +156,7 @@
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
 		AFA064DB183EB92000AA0C4D /* YDAnalyticManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDAnalyticManager.h; sourceTree = "<group>"; };
 		AFA064DC183EB92000AA0C4D /* YDAnalyticManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDAnalyticManager.m; sourceTree = "<group>"; };
+		AFA064E0183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryViewController~ipad.xib"; sourceTree = "<group>"; };
 		AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryThumbnailCell~iphone.xib"; sourceTree = "<group>"; };
 		AFD2AD37183C2E0C00711B5F /* YDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayer.h; sourceTree = "<group>"; };
 		AFD2AD38183C2E0C00711B5F /* YDPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayer.m; sourceTree = "<group>"; };
@@ -345,10 +353,13 @@
 				AF3CBF551836B2DE0025957C /* YDMediaLibraryViewController.h */,
 				AF3CBF561836B2DE0025957C /* YDMediaLibraryViewController.m */,
 				AF3CBF571836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib */,
+				AFA064E0183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib */,
 				AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */,
 				AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */,
 				AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */,
+				AF295AE5183EEC55001FBAE5 /* YDMediaLibraryRowCell~ipad.xib */,
 				AFD2AD34183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib */,
+				AF295AE7183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib */,
 				AF454228183973A200A06A07 /* YDDeviceSpaceAvailabilityView.h */,
 				AF454229183973A200A06A07 /* YDDeviceSpaceAvailabilityView.m */,
 			);
@@ -398,6 +409,7 @@
 				AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */,
 				AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */,
 				AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */,
+				AF295AE9183F02BF001FBAE5 /* YDPlayerViewController~ipad.xib */,
 			);
 			path = YDMediaPlayerController;
 			sourceTree = "<group>";
@@ -905,12 +917,16 @@
 				AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */,
 				AFD2AD41183C2E8D00711B5F /* VID_0001.m4v in Resources */,
 				AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */,
+				AF295AE8183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib in Resources */,
+				AFA064E1183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib in Resources */,
 				E3BCF1F41827E80300517124 /* YDSearchViewController~iphone.xib in Resources */,
 				E3BCF1FF1827ECF300517124 /* YDSearchViewController~ipad.xib in Resources */,
 				AFD2AD3F183C2E2E00711B5F /* YDPlayerViewController~iphone.xib in Resources */,
 				AFE6AA311822E29E0037B389 /* Images.xcassets in Resources */,
 				AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */,
 				AF3CBF591836B2DE0025957C /* YDMediaLibraryViewController~iphone.xib in Resources */,
+				AF295AE6183EEC55001FBAE5 /* YDMediaLibraryRowCell~ipad.xib in Resources */,
+				AF295AEA183F02BF001FBAE5 /* YDPlayerViewController~ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

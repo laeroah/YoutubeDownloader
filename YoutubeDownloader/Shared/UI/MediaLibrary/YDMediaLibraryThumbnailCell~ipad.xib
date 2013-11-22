@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="YDMediaLibraryThumbnailCell" id="q74-h1-C0g" customClass="YDMediaLibraryRowCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="60s-wJ-gY9">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="BDG-NR-lhb"/>
+                            <constraint firstAttribute="height" constant="100" id="EhG-lF-09Q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NBA free agency causes " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-T5-MyM">
+                        <rect key="frame" x="168" y="14" width="143" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="27W-o4-Dfi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bmv-DZ-Yzi">
+                        <rect key="frame" x="168" y="71" width="98" height="2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                    </progressView>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as5-TF-D1c">
+                        <rect key="frame" x="274" y="57" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="HHZ-Mn-p2L"/>
+                            <constraint firstAttribute="height" constant="30" id="MBl-BH-bVe"/>
+                        </constraints>
+                        <state key="normal" image="btn_downloadpause">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="btn_downloadResume"/>
+                        <connections>
+                            <action selector="pauseButtonTapped:" destination="q74-h1-C0g" eventType="touchUpInside" id="KHh-dZ-P0d"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_newVideoRibbon" translatesAutoresizingMaskIntoConstraints="NO" id="otd-9S-ZzU">
+                        <rect key="frame" x="284" y="0.0" width="25" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="qvp-oU-tAG"/>
+                            <constraint firstAttribute="width" constant="25" id="t7y-p3-LvX"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:54" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0Q-UY-gpA">
+                        <rect key="frame" x="109" y="71" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="RXP-sU-57d"/>
+                            <constraint firstAttribute="width" constant="42" id="z2l-7r-mb3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="73 of 300MB, 00:49:29 remaining" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-st-2pO">
+                        <rect key="frame" x="168" y="42" width="141" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFg-yF-RcG">
+                        <rect key="frame" x="243" y="0.0" width="77" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.66666666669999997" green="0.1444098962" blue="0.1366728962" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="1zo-uR-NEu"/>
+                            <constraint firstAttribute="width" constant="77" id="6cK-yQ-1tm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Delete">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteButtonTapped:" destination="q74-h1-C0g" eventType="touchUpInside" id="r4y-sC-sZp"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="60s-wJ-gY9" firstAttribute="leading" secondItem="q74-h1-C0g" secondAttribute="leading" id="D3T-cM-0EJ"/>
+                <constraint firstItem="otd-9S-ZzU" firstAttribute="top" secondItem="q74-h1-C0g" secondAttribute="top" id="H2n-Z5-B9g"/>
+                <constraint firstItem="60s-wJ-gY9" firstAttribute="leading" secondItem="q74-h1-C0g" secondAttribute="leading" id="Hwj-wH-0jn"/>
+                <constraint firstAttribute="trailing" secondItem="SFg-yF-RcG" secondAttribute="trailing" id="J8B-FH-NCC"/>
+                <constraint firstItem="iG8-st-2pO" firstAttribute="leading" secondItem="60s-wJ-gY9" secondAttribute="trailing" constant="8" id="JHw-Lp-TKd"/>
+                <constraint firstAttribute="trailing" secondItem="otd-9S-ZzU" secondAttribute="trailing" constant="11" id="KAN-04-dOB"/>
+                <constraint firstItem="hY1-T5-MyM" firstAttribute="leading" secondItem="60s-wJ-gY9" secondAttribute="trailing" constant="8" id="OSw-bE-8kT"/>
+                <constraint firstItem="hY1-T5-MyM" firstAttribute="leading" secondItem="Bmv-DZ-Yzi" secondAttribute="leading" id="OWR-Ec-kpd"/>
+                <constraint firstItem="60s-wJ-gY9" firstAttribute="top" secondItem="q74-h1-C0g" secondAttribute="top" id="PH7-N8-dNr"/>
+                <constraint firstItem="SFg-yF-RcG" firstAttribute="top" secondItem="60s-wJ-gY9" secondAttribute="top" id="RvZ-NR-wpY"/>
+                <constraint firstAttribute="trailing" secondItem="hY1-T5-MyM" secondAttribute="trailing" constant="9" id="UjA-Wo-J3H"/>
+                <constraint firstItem="hY1-T5-MyM" firstAttribute="top" secondItem="q74-h1-C0g" secondAttribute="top" constant="14" id="Xov-3b-H8t"/>
+                <constraint firstItem="o0Q-UY-gpA" firstAttribute="leading" secondItem="q74-h1-C0g" secondAttribute="leading" constant="109" id="YJb-cb-nIT"/>
+                <constraint firstItem="Bmv-DZ-Yzi" firstAttribute="centerY" secondItem="as5-TF-D1c" secondAttribute="centerY" id="aoN-wh-MHb"/>
+                <constraint firstAttribute="trailing" secondItem="iG8-st-2pO" secondAttribute="trailing" constant="11" id="c99-qV-QMi"/>
+                <constraint firstItem="iG8-st-2pO" firstAttribute="centerY" secondItem="60s-wJ-gY9" secondAttribute="centerY" id="cqX-4M-bnh"/>
+                <constraint firstItem="Bmv-DZ-Yzi" firstAttribute="top" secondItem="iG8-st-2pO" secondAttribute="bottom" constant="12" id="eVe-Ch-1WI"/>
+                <constraint firstAttribute="trailing" secondItem="as5-TF-D1c" secondAttribute="trailing" constant="16" id="gy0-YT-8BK"/>
+                <constraint firstItem="as5-TF-D1c" firstAttribute="top" secondItem="hY1-T5-MyM" secondAttribute="bottom" constant="22" id="iTR-80-mYY"/>
+                <constraint firstItem="as5-TF-D1c" firstAttribute="leading" secondItem="Bmv-DZ-Yzi" secondAttribute="trailing" constant="8" symbolic="YES" id="iY8-bE-wFO"/>
+                <constraint firstItem="SFg-yF-RcG" firstAttribute="top" secondItem="q74-h1-C0g" secondAttribute="top" id="il0-6S-CIk"/>
+                <constraint firstItem="60s-wJ-gY9" firstAttribute="top" secondItem="q74-h1-C0g" secondAttribute="top" id="iqS-Ew-Avv"/>
+                <constraint firstItem="SFg-yF-RcG" firstAttribute="bottom" secondItem="60s-wJ-gY9" secondAttribute="bottom" id="m2g-zC-nvZ"/>
+                <constraint firstAttribute="trailing" secondItem="Bmv-DZ-Yzi" secondAttribute="trailing" constant="54" id="pup-M9-MdF"/>
+                <constraint firstAttribute="bottom" secondItem="60s-wJ-gY9" secondAttribute="bottom" id="s3L-eB-gDb"/>
+                <constraint firstItem="Bmv-DZ-Yzi" firstAttribute="leading" secondItem="hY1-T5-MyM" secondAttribute="leading" id="swK-Jf-3N6"/>
+                <constraint firstItem="o0Q-UY-gpA" firstAttribute="top" secondItem="Bmv-DZ-Yzi" secondAttribute="top" id="yH8-RY-UxS"/>
+                <constraint firstItem="Bmv-DZ-Yzi" firstAttribute="top" secondItem="hY1-T5-MyM" secondAttribute="bottom" constant="36" id="z0x-Sx-bqL"/>
+            </constraints>
+            <size key="customSize" width="223" height="49"/>
+            <connections>
+                <outlet property="currentProgressLabel" destination="iG8-st-2pO" id="5lV-V4-QvI"/>
+                <outlet property="deleteButton" destination="SFg-yF-RcG" id="eG5-Tr-MEK"/>
+                <outlet property="downloadControlButton" destination="as5-TF-D1c" id="hw9-vt-MGa"/>
+                <outlet property="downloadProgressBar" destination="Bmv-DZ-Yzi" id="cuk-9K-zpl"/>
+                <outlet property="ribbonImageView" destination="otd-9S-ZzU" id="ZOH-gm-hkq"/>
+                <outlet property="videoThumbnailImageView" destination="60s-wJ-gY9" id="cgU-rJ-33d"/>
+                <outlet property="videoTitleLabel" destination="hY1-T5-MyM" id="5ll-2V-aF2"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="btn_downloadResume" width="23" height="23"/>
+        <image name="btn_downloadpause" width="23" height="23"/>
+        <image name="img_newVideoRibbon" width="25" height="42"/>
+    </resources>
+</document>
