@@ -44,6 +44,8 @@ static NSString *const kTrackingId = @"UA-31727751-2";
     NSString *userTypeValue = nil;
     if (DEBUG) {
         userTypeValue = @"Developer";
+    }else{
+        userTypeValue = @"Customer";
     }
     [self.tracker set:[GAIFields customDimensionForIndex:1] value:userTypeValue];
 }
@@ -57,7 +59,6 @@ static NSString *const kTrackingId = @"UA-31727751-2";
                                                           action:action
                                                            label:label
                                                            value:value] build]];
-    [[GAI sharedInstance] dispatch];
 }
 
 

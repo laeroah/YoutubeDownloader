@@ -10,10 +10,22 @@
 #import "GAI.h"
 
 // event categories
-static NSString *EVENT_CATEGORY_NAVIGATION = @"ui_navigation";
+static NSString *EVENT_CATEGORY_USER_ACTION = @"user action events";
 
 // event actions
-static NSString *EVENT_ACTION_NAVIGATION = @"navigation button tapped";
+static NSString *EVENT_ACTION_NAVIGATION_BACK = @"back";
+static NSString *EVENT_ACTION_NAVIGATION_LIBRARY = @"library";
+static NSString *EVENT_ACTION_NAVIGATION_HOME = @"home";
+static NSString *EVENT_ACTION_NAVIGATION_DOWNLOAD = @"download";
+
+// event labels
+static NSString *EVENT_LABEL_SEARCH_VIEW = @"search view";
+static NSString *EVENT_LABEL_LIBRARY_VIEW = @"library view";
+static NSString *EVENT_LABEL_DOWNLOAD = @"video download";
+
+// screen names
+static NSString *SCREEN_NAME_SEARCH_VIEW = @"search view";
+static NSString *SCREEN_NAME_LIBRARY_VIEW = @"library view";
 
 @interface YDAnalyticManager : NSObject
 

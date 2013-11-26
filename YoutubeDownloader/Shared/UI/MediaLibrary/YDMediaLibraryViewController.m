@@ -78,12 +78,16 @@ typedef enum
     self.searchBar.frame = searchBarFrame;
     
     [self loadVideos];
+    
+    // setup the screen name for GA tracking
+    self.screenName = SCREEN_NAME_LIBRARY_VIEW;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
+    
 }
 
 #pragma mark - layout subviews
