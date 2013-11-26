@@ -18,7 +18,9 @@ typedef enum
 + (DownloadTask *)createDownloadTaskInContext:(NSManagedObjectContext *)context;
 + (DownloadTask*)findByDownloadID:(NSNumber*)downloadID inContext:(NSManagedObjectContext *)context;
 + (DownloadTask*)findByDownloadPageUrl:(NSString*)downloadPageUrl qualityType:(NSString*)qualityType  inContext:(NSManagedObjectContext *)context;
++ (DownloadTask*)getDownloadingTaskInContext:(NSManagedObjectContext *)context;
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 - (void)deleteWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
++ (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context;
 
 @end

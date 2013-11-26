@@ -12,25 +12,32 @@
 @implementation Video
 
 // Custom logic goes here.
-
-+ (Video *)createVideoWithVideoID:(NSNumber *)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
++ (NSInteger)maxVideoID:(NSManagedObjectContext*)context
 {
-    Video *video = [Video findByVideoID:videoID inContext:context];
-    if (video) {
-        return video;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Video"];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"videoID" ascending:NO]];
+    NSError *error = nil;
+    Video *video = [context executeFetchRequest:fetchRequest error:&error].lastObject;
+    if (video != nil)
+    {
+        return [video.videoID integerValue];
     }
-    
-    // Get the local context
-    video = [Video MR_createInContext:context];
-    video.videoID = videoID;
-    // Save the modification in the local context
-    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (completion)
-        {
-            completion(success, error);
-        }
+    return 0;
+}
+
+
++ (Video *)createVideoWithContext:(NSManagedObjectContext *)context
+{
+    Video *video;
+    @synchronized(self)
+    {
+        NSInteger videoID = [Video maxVideoID:context];
+        videoID++;
+        video = [Video MR_createInContext:context];
+        video.videoID = @(videoID);
+        [context MR_saveToPersistentStoreAndWait];
     }
-    ];
     
     return video;
 }

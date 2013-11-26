@@ -15,6 +15,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 	.videoDownloadUrl = @"videoDownloadUrl",
 	.videoFileSize = @"videoFileSize",
 	.videoImagePath = @"videoImagePath",
+	.videoTitle = @"videoTitle",
 };
 
 const struct DownloadTaskRelationships DownloadTaskRelationships = {
@@ -248,6 +249,13 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 
 
 @dynamic videoImagePath;
+
+
+
+
+
+
+@dynamic videoTitle;
 
 
 

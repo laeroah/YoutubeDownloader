@@ -199,7 +199,7 @@
                 });
                 return;
             }
-            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl qualityType:selectedValue videoDescription:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
+            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];
                 });

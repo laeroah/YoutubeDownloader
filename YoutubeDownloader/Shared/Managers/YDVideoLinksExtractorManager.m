@@ -129,6 +129,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
             continue;
         }
         self.resultDict[quality] = videoUrl;
+        //[videoUrl stringByReplacingOccurrencesOfString:@"%2C" withString:@","];
     }
     
     if ([self.resultDict count] <= 0)

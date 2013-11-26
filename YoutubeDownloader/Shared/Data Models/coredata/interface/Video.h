@@ -5,7 +5,7 @@
 @interface Video : _Video {}
 
 // Custom logic goes here.
-+ (Video *)createVideoWithVideoID:(NSNumber *)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
++ (Video *)createVideoWithContext:(NSManagedObjectContext *)context;
 + (NSArray*)findAll;
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 + (Video*)findByVideoID:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context;
