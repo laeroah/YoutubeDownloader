@@ -13,6 +13,7 @@
 #import "YDFileUtil.h"
 #import "AFNetworking.h"
 #import "WebUtility.h"
+#import "YDImageUtil.h"
 
 @interface YDDownloadManager ()
 {
@@ -161,14 +162,15 @@
     [YDFileUtil createAbsoluteDirectory:imagePath];
     NSString *imageFileName = [NSString stringWithFormat:@"%@.jpeg", self.downloadTaskID];
     NSString *imageFilePath = [imagePath stringByAppendingPathComponent:imageFileName];
-    [media getThumbnailImageWithCompletion:^(UIImage *thumbnail) {
-        if (thumbnail)
-        {
-            NSData* imageData = UIImageJPEGRepresentation(thumbnail, 1.0);
-            [imageData writeToFile:imageFilePath atomically:YES];
-            
-        }
-        NSManagedObjectContext * privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    UIImage *thumbnail = [media getThumbNailFromDocumentMedia:media.mediaUrl];
+    if (thumbnail)
+    {
+        thumbnail = [YDImageUtil scaleImage:thumbnail maxSize:CGSizeMake(80,80)];
+        NSData* imageData = UIImageJPEGRepresentation(thumbnail, 1.0);
+        [imageData writeToFile:imageFilePath atomically:YES];
+    }
+    
+    NSManagedObjectContext * privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
         DownloadTask *downloadingTask = [DownloadTask findByDownloadID:self.downloadTaskID inContext:privateQueueContext];
         Video *video = [Video createVideoWithContext:privateQueueContext];
         video.createDate = [NSDate date];
@@ -185,7 +187,6 @@
             self.downloadOperation = nil;
         }];
 
-    } WithWidth:80 height:80];
     
 }
 

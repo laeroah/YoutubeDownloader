@@ -12,6 +12,7 @@
 #import "YDAlbumManager.h"
 #import "YDErrorUtil.h"
 #import "YDFileUtil.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface YDMedia()
 {
@@ -54,6 +55,17 @@
     UIImage *scaledImage = [YDImageUtil scaleImage:image maxSize:CGSizeMake(width , height)];
     [[SDImageCache sharedImageCache] storeImage:scaledImage forKey:key];
     return scaledImage;
+}
+
+
+-(UIImage *)getThumbNailFromDocumentMedia:(NSString*)stringPath
+{
+    NSURL *videoURL = [NSURL fileURLWithPath:stringPath];
+    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:videoURL];
+    UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+    //Player autoplays audio on init
+    [player stop];
+    return thumbnail;
 }
 
 

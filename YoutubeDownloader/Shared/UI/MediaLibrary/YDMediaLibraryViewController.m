@@ -248,7 +248,7 @@ typedef enum
     Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
     mediaCell.videoTitleLabel.text = video.videoTitle;
     mediaCell.ribbonImageView.hidden = !video.isNewValue;
-    [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL URLWithString:video.videoImagePath]];
+    [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
     mediaCell.videoID = video.videoID;
     
     mediaCell.delegate = self;
@@ -298,10 +298,10 @@ typedef enum
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /*debug*/
+    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
     YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
     [playerViewController presentPlayerViewControllerFromViewController:self];
-    NSString*thePath=[[NSBundle mainBundle] pathForResource:@"VID_0001" ofType:@"m4v"];
-    [playerViewController playLocalVideoWithPath:thePath];
+    [playerViewController playLocalVideoWithPath:video.videoFilePath];
 }
 
 #pragma mark - rotation

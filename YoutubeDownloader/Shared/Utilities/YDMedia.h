@@ -72,6 +72,7 @@ typedef void (^YDMediaGetALAssetCallback)(ALAsset *aasset);
 - (YDVideoAudioEncoding)getFirstTrackAudioEncoding;
 - (YDVideoEncoding)getFirstTrackVideoEncoding;
 - (BOOL)hasAudio;
+-(UIImage *)getThumbNailFromDocumentMedia:(NSString *)stringPath;
 - (BOOL)hasVideo;
 - (CGSize)getFirstVideoTrackSize;
 - (CGSize)getPhotoTrackSize;
