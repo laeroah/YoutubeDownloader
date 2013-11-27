@@ -128,7 +128,20 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
         {
             continue;
         }
-        self.resultDict[quality] = videoUrl;
+        NSString *playUrl;
+        if ([videoUrl rangeOfString:@",type="].location != NSNotFound)
+        {
+            playUrl = [videoUrl substringToIndex:[videoUrl rangeOfString:@",type="].location];
+        }
+        else if ([videoUrl rangeOfString:@"&type="].location != NSNotFound)
+        {
+            playUrl = [videoUrl substringToIndex:[videoUrl rangeOfString:@"&type="].location];
+        }
+        else
+            playUrl = videoUrl;
+        
+        playUrl = [playUrl stringByReplacingOccurrencesOfString:@"," withString:@"&"];
+        self.resultDict[quality] = playUrl;
         //[videoUrl stringByReplacingOccurrencesOfString:@"%2C" withString:@","];
     }
     
@@ -164,7 +177,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 
 -(void)connectionDidFinishLoading:(NSURLConnection *) connection
 {
-    NSString* html = [[NSString alloc] initWithData:self.buffer encoding:NSUTF8StringEncoding];
+    NSString* html = [[NSString alloc] initWithData:self.buffer encoding:NSASCIIStringEncoding];
     [self closeConnection];
     
     if (html.length <= 0)
@@ -175,6 +188,8 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
         }
         return;
     }
+    
+    NSLog(@"html = %@",html);
     
     [self extractYouTubeURLFromFile:html];
 }

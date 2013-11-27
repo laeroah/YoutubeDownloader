@@ -68,7 +68,8 @@
         return;
     }
     ALAssetsLibrary *library = [YDAlbumManager sharedInstance].assetLibrary;
-    [library assetForURL:[NSURL URLWithString:self.mediaUrl]
+    NSURL *fileURL = [NSURL fileURLWithPath:self.mediaUrl];
+    [library assetForURL:fileURL
              resultBlock:^(ALAsset *asset){
                  if (!asset)
                  {
@@ -83,6 +84,7 @@
                      completion(scaledImage);
              }
             failureBlock:^(NSError *error) {
+                NSLog(@"error = %@", [error description]);
                 if (completion) {
                     completion(nil);
                 }

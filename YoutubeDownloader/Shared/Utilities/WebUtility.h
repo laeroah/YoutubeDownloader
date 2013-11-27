@@ -11,5 +11,7 @@
 @interface WebUtility : NSObject
 
 + (NSDictionary *)parseQueryStringToDictionary:(NSString *)query;
++ (NSString*)URLencode:(NSString *)originalString
+        stringEncoding:(NSStringEncoding)stringEncoding;
 
 @end

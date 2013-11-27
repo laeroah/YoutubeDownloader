@@ -10,6 +10,7 @@
         <attribute name="qualityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDownloadUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoFileSize" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="videoImagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoTitle" optional="YES" attributeType="String" syncable="YES"/>

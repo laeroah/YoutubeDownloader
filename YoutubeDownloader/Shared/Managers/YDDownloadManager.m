@@ -12,6 +12,7 @@
 #import "YDMedia.h"
 #import "YDFileUtil.h"
 #import "AFNetworking.h"
+#import "WebUtility.h"
 
 @interface YDDownloadManager ()
 {
@@ -32,6 +33,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[YDDownloadManager alloc] init];
+        NSString *videoDirectory = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"videos"];
+        [YDFileUtil createAbsoluteDirectory:videoDirectory];
     });
     return instance;
 }
@@ -126,7 +129,7 @@
     NSURLRequest *requestVid = [NSURLRequest requestWithURL:downloadUrl];
     __weak YDDownloadManager *weakSelf = self;
     self.downloadOperation = [[AFHTTPRequestOperation alloc] initWithRequest:requestVid];
-    self.downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:[self getCurrentDownloadFileDestPath] append:NO];
+    self.downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:[self getCurrentDownloadFileDestPath:self.downloadTaskID] append:NO];
     [self.downloadOperation setCompletionBlock:^{
         [weakSelf setDownloadTaskStatus:YES];
     }];
@@ -137,6 +140,7 @@
         DownloadTask *downloadingTask = [DownloadTask findByDownloadID:weakSelf.downloadTaskID inContext:privateQueueContext];
         if (downloadingTask) {
             downloadingTask.downloadProgress = @(currentProgress);
+            downloadingTask.videoFileSize = @(totalBytesExpectedToRead);
             [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
             }];
         }
@@ -151,7 +155,7 @@
 {
     YDMedia *media = [[YDMedia alloc] init];
     media.mediaType = ALAssetTypeVideo;
-    media.mediaUrl = [self getCurrentDownloadFileDestPath];
+    media.mediaUrl = [self getCurrentDownloadFileDestPath:downloadTask.downloadID];
     [media duration];
     NSString *imagePath = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"images"];
     [YDFileUtil createAbsoluteDirectory:imagePath];
@@ -210,13 +214,11 @@
     
 }
 
-- (NSString*)getCurrentDownloadFileDestPath
+- (NSString*)getCurrentDownloadFileDestPath:(NSNumber*)downloadTaskID
 {
     NSString *videoDirectory = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"videos"];
     [YDFileUtil createAbsoluteDirectory:videoDirectory];
-    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    DownloadTask   *downloadingTask = [DownloadTask getDownloadingTaskInContext:privateQueueContext];
-    NSString *fileName = [NSString stringWithFormat:@"%d.mp4",downloadingTask.downloadIDValue];
+    NSString *fileName = [NSString stringWithFormat:@"%@.mp4",downloadTaskID];
     return [videoDirectory stringByAppendingPathComponent:fileName];
 }
 
