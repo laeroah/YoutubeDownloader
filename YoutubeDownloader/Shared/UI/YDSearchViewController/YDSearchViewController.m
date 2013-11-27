@@ -61,7 +61,7 @@
     [self goHomePage];
     
     // setup the screen name for GA tracking
-    self.screenName = @"Home Screen";
+    self.screenName = SCREEN_NAME_SEARCH_VIEW;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -118,6 +118,8 @@
 - (IBAction)goPrevPage:(id)sender
 {
     [self.webView goBack];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_BACK label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (IBAction)toProgramLibrary:(id)sender
@@ -125,13 +127,15 @@
     YDMediaLibraryViewController *mediaLibraryViewController = [[YDMediaLibraryViewController alloc]init];
     [self.navigationController pushViewController:mediaLibraryViewController animated:YES];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_NAVIGATION action:EVENT_ACTION_NAVIGATION label:@"library" value:nil];
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_LIBRARY label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)downloadProcess:(id)sender
 {
     [self showToastMessage:NSLocalizedString(@"Getting video information...", @"Parse the html page and get video information") hideAfterDelay:0.0 withProgress:YES];
     [self processForPageLoaded];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_HOME label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)goHomePage
@@ -139,6 +143,8 @@
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = ''"];
     NSString *homeUrl = @"http://m.youtube.com";
     [self loadUrl:[NSURL URLWithString:homeUrl]];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_DOWNLOAD label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)processForPageLoaded

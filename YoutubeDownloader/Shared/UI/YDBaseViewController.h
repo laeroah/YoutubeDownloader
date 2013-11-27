@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GAI.h"
+#import "YDAnalyticManager.h"
 
 @interface YDBaseViewController : UIViewController
 

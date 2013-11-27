@@ -7,6 +7,7 @@
 //
 
 #import "YDBaseViewController.h"
+#import "YDAnalyticManager.h"
 
 @interface YDSearchViewController : YDBaseViewController<UIWebViewDelegate>
 
