@@ -21,7 +21,7 @@ extern const struct DownloadTaskAttributes {
 } DownloadTaskAttributes;
 
 extern const struct DownloadTaskRelationships {
-	__unsafe_unretained NSString *relationship;
+	__unsafe_unretained NSString *video;
 } DownloadTaskRelationships;
 
 extern const struct DownloadTaskFetchedProperties {
@@ -206,9 +206,9 @@ extern const struct DownloadTaskFetchedProperties {
 
 
 
-@property (nonatomic, strong) Video *relationship;
+@property (nonatomic, strong) Video *video;
 
-//- (BOOL)validateRelationship:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateVideo:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -317,8 +317,8 @@ extern const struct DownloadTaskFetchedProperties {
 
 
 
-- (Video*)primitiveRelationship;
-- (void)setPrimitiveRelationship:(Video*)value;
+- (Video*)primitiveVideo;
+- (void)setPrimitiveVideo:(Video*)value;
 
 
 @end

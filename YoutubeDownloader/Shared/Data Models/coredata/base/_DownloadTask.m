@@ -20,7 +20,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 };
 
 const struct DownloadTaskRelationships DownloadTaskRelationships = {
-	.relationship = @"relationship",
+	.video = @"video",
 };
 
 const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
@@ -270,7 +270,7 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 
 
 
-@dynamic relationship;
+@dynamic video;
 
 	
 

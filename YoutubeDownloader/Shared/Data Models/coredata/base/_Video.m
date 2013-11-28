@@ -18,7 +18,7 @@ const struct VideoAttributes VideoAttributes = {
 };
 
 const struct VideoRelationships VideoRelationships = {
-	.relationship = @"relationship",
+	.downloadTask = @"downloadTask",
 };
 
 const struct VideoFetchedProperties VideoFetchedProperties = {
@@ -254,7 +254,7 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 
 
-@dynamic relationship;
+@dynamic downloadTask;
 
 	
 

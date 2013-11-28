@@ -65,8 +65,6 @@ typedef enum
     self.navigationItem.hidesBackButton = YES;
     [self createControlButtons];
     
-    //UINib *nib = [UINib nibWithNibName:@"YDMediaLibraryRowCell" bundle:nil];
-    //[self.mediaCollectionView registerNib:nib forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
     [self.mediaCollectionView registerClass:[YDMediaLibraryRowCell class] forCellWithReuseIdentifier:@"YDMediaLibraryRowCell"];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [self.mediaCollectionView setCollectionViewLayout:flowLayout];
