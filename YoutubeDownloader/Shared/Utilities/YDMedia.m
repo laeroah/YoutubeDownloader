@@ -62,7 +62,7 @@
 {
     NSURL *videoURL = [NSURL fileURLWithPath:stringPath];
     MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:videoURL];
-    UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+    UIImage *thumbnail = [player thumbnailImageAtTime:5.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
     //Player autoplays audio on init
     [player stop];
     return thumbnail;

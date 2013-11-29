@@ -246,7 +246,10 @@ typedef enum
     Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
     mediaCell.videoTitleLabel.text = video.videoTitle;
     mediaCell.ribbonImageView.hidden = !video.isNewValue;
-    [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
+    if (video.videoImagePath)
+    {
+        [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
+    }
     mediaCell.videoID = video.videoID;
     
     mediaCell.delegate = self;

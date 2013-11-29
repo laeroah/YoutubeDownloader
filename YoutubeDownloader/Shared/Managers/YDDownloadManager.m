@@ -23,6 +23,7 @@
 
 @property (atomic, strong)      NSNumber *downloadTaskID;
 @property (atomic, strong)      AFURLConnectionOperation *downloadOperation;
+@property (atomic, strong)      NSDate *lastWriteProgressTime;
 
 @end
 
@@ -79,6 +80,7 @@
         if (downloadingTask)
         {
             self.downloadTaskID = downloadingTask.downloadID;
+            self.lastWriteProgressTime = [NSDate date];
             downloadingTask.downloadTaskStatus = @(DownloadTaskDownloading);
             NSString *downloadUrl = downloadingTask.videoDownloadUrl;
             [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
@@ -111,6 +113,21 @@
 	task.videoDescription = videoDescription;
 	task.videoImagePath = nil;
 	task.videoDownloadUrl = videoDownloadUrl;
+    
+    Video *video = [Video createVideoWithContext:context];
+    video.createDate = [NSDate date];
+    video.duration = @(0);
+    video.isNew = @(NO);
+    video.isRemoved = @(NO);
+    video.qualityType = qualityType;
+    video.videoDescription = videoDescription;
+    video.videoFilePath = nil;
+    video.videoImagePath = nil;
+    video.videoTitle = videoTitle;
+    
+    task.video = video;
+    video.downloadTask = task;
+    
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (completion)
         {
@@ -136,7 +153,13 @@
     }];
     
     [self.downloadOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        NSDate *currentTime = [NSDate date];
+        if ([currentTime compare:[weakSelf.lastWriteProgressTime dateByAddingTimeInterval:3]] == NSOrderedAscending)
+        {
+            return;
+        }
         float currentProgress = totalBytesExpectedToRead > 0 ? (float)totalBytesRead / totalBytesExpectedToRead : 0.0;
+        weakSelf.lastWriteProgressTime = currentTime;
         NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
         DownloadTask *downloadingTask = [DownloadTask findByDownloadID:weakSelf.downloadTaskID inContext:privateQueueContext];
         if (downloadingTask) {
@@ -172,7 +195,7 @@
     
     NSManagedObjectContext * privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
         DownloadTask *downloadingTask = [DownloadTask findByDownloadID:self.downloadTaskID inContext:privateQueueContext];
-        Video *video = [Video createVideoWithContext:privateQueueContext];
+        Video *video = downloadingTask.video;
         video.createDate = [NSDate date];
         video.duration = @([media duration]);
         video.isNew = @(YES);
@@ -195,6 +218,7 @@
     NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
     DownloadTask *downloadingTask = [DownloadTask findByDownloadID:self.downloadTaskID inContext:privateQueueContext];
     if (success) {
+        downloadingTask.downloadProgress = @(1.0);
         downloadingTask.downloadTaskStatus = @(DownloadTaskFinished);
     }
     else {
