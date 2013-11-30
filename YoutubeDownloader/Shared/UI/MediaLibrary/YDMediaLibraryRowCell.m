@@ -39,6 +39,13 @@
     }
 }
 
+- (void)enterDownloadMode:(BOOL)enter
+{
+    self.currentProgressLabel.hidden = !enter;
+    self.downloadProgressBar.hidden = !enter;
+    self.downloadControlButton.hidden = !enter;
+}
+
 - (IBAction)deleteButtonTapped:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didChooseToRemoveCell:)]) {
         [self.delegate didChooseToRemoveCell:self];

@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "YDPlayerViewController.h"
 #import "Video.h"
+#import "DownloadTask.h"
 
 #import "CoreData+MagicalRecord.h"
 
@@ -255,6 +256,12 @@ typedef enum
     mediaCell.delegate = self;
     [mediaCell enterEditMode:_editMode animated:NO];
     
+    DownloadTask *downloadTask = video.downloadTask;
+    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+    [mediaCell enterDownloadMode:isDownloading];
+    
+    mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
+    
     return mediaCell;
 }
 
@@ -303,6 +310,10 @@ typedef enum
     YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
     [playerViewController presentPlayerViewControllerFromViewController:self];
     [playerViewController playLocalVideoWithPath:video.videoFilePath];
+    
+    [video setIsNewValue:NO];
+    [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];
+    
 }
 
 #pragma mark - rotation

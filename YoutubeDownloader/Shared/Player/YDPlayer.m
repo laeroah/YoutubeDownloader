@@ -67,7 +67,7 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
     AVPlayerItem* audioItem = [AVPlayerItem playerItemWithAsset:mutableAudioComposition];
     self.audioPlayer = [[AVPlayer alloc]initWithPlayerItem:audioItem];
     
-    
+    [self start];
 }
 
 

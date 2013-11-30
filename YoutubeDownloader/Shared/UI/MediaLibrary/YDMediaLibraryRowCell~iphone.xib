@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X3I-qw-8CS">
-                        <rect key="frame" x="168" y="71" width="98.000000000000028" height="2"/>
+                        <rect key="frame" x="168" y="71" width="98" height="2"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                     </progressView>
                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJu-AU-dtE">
@@ -135,6 +135,7 @@
                 <outlet property="downloadControlButton" destination="vJu-AU-dtE" id="uVW-4l-xaj"/>
                 <outlet property="downloadProgressBar" destination="X3I-qw-8CS" id="MUp-WP-UAi"/>
                 <outlet property="ribbonImageView" destination="Cic-3C-JmE" id="0ID-nM-RO2"/>
+                <outlet property="videoDurationLabel" destination="WBr-qI-Jg9" id="u9P-GM-jrl"/>
                 <outlet property="videoThumbnailImageView" destination="boc-H4-Pr4" id="omd-H8-s2A"/>
                 <outlet property="videoTitleLabel" destination="HTj-Tt-zVQ" id="hTB-D3-3zs"/>
             </connections>
