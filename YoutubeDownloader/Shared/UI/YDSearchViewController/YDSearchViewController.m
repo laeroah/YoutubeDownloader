@@ -183,7 +183,6 @@
         return;
     }
     
-    [self showToastMessage:@"Please wait..." hideAfterDelay:0];
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

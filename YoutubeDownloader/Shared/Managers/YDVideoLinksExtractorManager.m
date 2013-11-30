@@ -87,61 +87,133 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 
 -(void)extractYouTubeURLFromFile:(NSString *)html
 {
-    NSError *error;
-    
-    NSRegularExpression* regex = [[NSRegularExpression alloc] initWithPattern:self.extractionExpression options:NSRegularExpressionCaseInsensitive error:&error];
-    
-    if (error)
-    {
-        if (self.completionBlock)
-        {
-            self.completionBlock(self.youTubeURL, nil,error);
-        }
-        return;
-    }
-    
-    NSArray* videos = [regex matchesInString:html options:0 range:NSMakeRange(0, [html length])];
-    if ([videos count] <= 0)
+    // get url_encoded_fmt_stream_map
+    NSString *streamMappingString = @"\\\"url_encoded_fmt_stream_map\\\"";
+    NSRange streamMappingRange = [html rangeOfString:streamMappingString];
+    if (streamMappingRange.location == NSNotFound)
     {
         if (self.completionBlock)
             self.completionBlock(self.youTubeURL, nil,nil);
         return;
     }
     
-    NSTextCheckingResult *video = videos[0];
-    NSMutableString* allStreamURL = [NSMutableString stringWithString: [html substringWithRange:video.range]];
+    // get begin \"
+    NSString *newString = [html substringFromIndex:streamMappingRange.location + streamMappingRange.length];
+    NSRange beginRange = [ newString rangeOfString:@"\\\""];
+    if (beginRange.location == NSNotFound)
+    {
+        if (self.completionBlock)
+            self.completionBlock(self.youTubeURL, nil,nil);
+        return;
+    }
+    
+    // get end \"
+    NSString *newString1 = [newString substringFromIndex:beginRange.location + beginRange.length];
+    NSRange endRange = [ newString1 rangeOfString:@"\\\""];
+    if (endRange.location == NSNotFound)
+    {
+        if (self.completionBlock)
+            self.completionBlock(self.youTubeURL, nil,nil);
+        return;
+    }
+    
+    NSMutableString* allStreamURL = [NSMutableString stringWithString: [newString1 substringToIndex:endRange.location]];
     [allStreamURL replaceOccurrencesOfString:@"\\\\u0026" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, allStreamURL.length)];
     [allStreamURL replaceOccurrencesOfString:@"\\\\\\" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, allStreamURL.length)];
     NSString *unescapeAllStreamUrl = [allStreamURL stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"unescapeAllStreamUrl = %@", unescapeAllStreamUrl);
-
-    NSArray *videoLists = [unescapeAllStreamUrl componentsSeparatedByString:@"url="];
     
+    //NSString *unescapeAllStreamUrl = allStreamURL;
+    
+    NSRange range;
+    NSInteger lastIndex = 0;
+    Boolean startQuotation = NO;
+    NSMutableArray *urlsArray = [NSMutableArray array];
+    for(NSInteger index = 0; index < [unescapeAllStreamUrl length]; index++)
+    {
+        range.length = 1;
+        range.location = index;
+        NSString *currentChar = [unescapeAllStreamUrl substringWithRange:range];
+        
+        if ([currentChar isEqualToString:@"\""])
+        {
+            startQuotation = startQuotation ? NO : YES
+            ;
+        }
+        
+        if ([currentChar isEqualToString:@","] && !startQuotation)
+        {
+            range.length = index - lastIndex;
+            range.location = lastIndex;
+            [urlsArray addObject:[unescapeAllStreamUrl substringWithRange:range]];
+            lastIndex = index + 1;
+        }
+    }
+    
+    if (lastIndex < [unescapeAllStreamUrl length])
+    {
+        range.length = [unescapeAllStreamUrl length] - lastIndex;
+        range.location = lastIndex;
+        [urlsArray addObject:[unescapeAllStreamUrl substringWithRange:range]];
+    }
     self.resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
-    for (NSString *videoUrl in videoLists)
+    NSInteger index;
+    NSString *resultUrl;
+    for (NSString *videoUrl in urlsArray)
     {
         if ([NSString isEmpty:videoUrl])
             continue;
-        NSDictionary *queryItems = [WebUtility parseQueryStringToDictionary:videoUrl];
+        
+        NSMutableArray *components = [NSMutableArray arrayWithArray:[videoUrl componentsSeparatedByString:@"&"]];
+        NSString *beginString;
+        NSMutableArray *removeObjects = [NSMutableArray array];
+        BOOL removeItag= NO;
+        NSInteger iTagCount = 0;
+        NSString *iTagComponent;
+        for (index = 0; index < [components count]; index++)
+        {
+            NSString *componetString = [components objectAtIndex:index];
+            if ([componetString hasPrefix:@"url=http"])
+            {
+                beginString = componetString;
+                [removeObjects addObject:componetString];
+            }
+            else if ([componetString hasPrefix:@"fallback_host="])
+            {
+                [removeObjects addObject:componetString];
+            }
+            else if ([componetString hasPrefix:@"pcm2fr="])
+            {
+                [removeObjects addObject:componetString];
+            }
+            else if ([componetString hasPrefix:@"type="])
+            {
+                [removeObjects addObject:componetString];
+            }
+            else if  ([componetString hasPrefix:@"itag="])
+            {
+                if (!removeItag) {
+                    iTagComponent = componetString;
+                    removeItag = YES;
+                }
+                [removeObjects addObject:componetString];
+            }
+        }
+        
+        [components removeObjectsInArray:removeObjects];
+        [components addObject:iTagComponent];
+        
+                resultUrl = [NSString stringWithFormat:@"%@&%@",beginString,[components componentsJoinedByString:@"&"]];
+        
+        NSDictionary *queryItems = [WebUtility parseQueryStringToDictionary:resultUrl];
         NSString *quality = queryItems[@"quality"];
         if (!quality)
         {
             continue;
         }
-        NSString *playUrl;
-        if ([videoUrl rangeOfString:@",type="].location != NSNotFound)
-        {
-            playUrl = [videoUrl substringToIndex:[videoUrl rangeOfString:@",type="].location];
-        }
-        else if ([videoUrl rangeOfString:@"&type="].location != NSNotFound)
-        {
-            playUrl = [videoUrl substringToIndex:[videoUrl rangeOfString:@"&type="].location];
-        }
-        else
-            playUrl = videoUrl;
-        
-        playUrl = [playUrl stringByReplacingOccurrencesOfString:@"," withString:@"&"];
-        self.resultDict[quality] = playUrl;
+        NSError *error;
+//        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\+codecs=\".*\"" options:NSRegularExpressionCaseInsensitive error:&error];
+//        NSString *modifiedString = [regex stringByReplacingMatchesInString:resultUrl options:0 range:NSMakeRange(0, [videoUrl length]) withTemplate:@""];
+        self.resultDict[quality] = [resultUrl substringFromIndex:4];
         //[videoUrl stringByReplacingOccurrencesOfString:@"%2C" withString:@","];
     }
     
