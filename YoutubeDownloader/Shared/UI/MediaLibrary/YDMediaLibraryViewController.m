@@ -15,7 +15,7 @@
 #import "YDPlayerViewController.h"
 #import "Video.h"
 #import "DownloadTask.h"
-
+#import "UIImageView+WebCache.h"
 #import "CoreData+MagicalRecord.h"
 
 typedef enum

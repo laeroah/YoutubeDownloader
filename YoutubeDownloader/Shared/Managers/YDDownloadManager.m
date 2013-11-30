@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "WebUtility.h"
 #import "YDImageUtil.h"
+#import "YDConstants.h"
 
 @interface YDDownloadManager ()
 {
@@ -22,7 +23,7 @@
 }
 
 @property (atomic, strong)      NSNumber *downloadTaskID;
-@property (atomic, strong)      AFURLConnectionOperation *downloadOperation;
+@property (atomic, strong)      AFHTTPRequestOperation *downloadOperation;
 @property (atomic, strong)      NSDate *lastWriteProgressTime;
 
 @end
@@ -83,7 +84,11 @@
             self.lastWriteProgressTime = [NSDate date];
             downloadingTask.downloadTaskStatus = @(DownloadTaskDownloading);
             NSString *downloadUrl = downloadingTask.videoDownloadUrl;
+            NSNumber *videoID = downloadingTask.video.videoID;
             [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+                
+                [self sendDownloadStatusChangeNotificationWithVideoID:videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskDownloading)];
+                
                 if (![self createBackgroundTaskWithUrl:downloadUrl])
                 {
                     [self setDownloadTaskStatus:NO];
@@ -148,13 +153,15 @@
     __weak YDDownloadManager *weakSelf = self;
     self.downloadOperation = [[AFHTTPRequestOperation alloc] initWithRequest:requestVid];
     self.downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:[self getCurrentDownloadFileDestPath:self.downloadTaskID] append:NO];
-    [self.downloadOperation setCompletionBlock:^{
+    [self.downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [weakSelf setDownloadTaskStatus:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [weakSelf setDownloadTaskStatus:NO];
     }];
     
     [self.downloadOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         NSDate *currentTime = [NSDate date];
-        if ([currentTime compare:[weakSelf.lastWriteProgressTime dateByAddingTimeInterval:3]] == NSOrderedAscending)
+        if ([currentTime compare:[weakSelf.lastWriteProgressTime dateByAddingTimeInterval:1]] == NSOrderedAscending)
         {
             return;
         }
@@ -167,6 +174,7 @@
             downloadingTask.videoFileSize = @(totalBytesExpectedToRead);
             [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
             }];
+            [weakSelf sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadProgress" statusValue:@(currentProgress)];
         }
     }];
    
@@ -209,8 +217,6 @@
             self.downloadTaskID = nil;
             self.downloadOperation = nil;
         }];
-
-    
 }
 
 - (void)setDownloadTaskStatus:(BOOL)success
@@ -225,9 +231,11 @@
         downloadingTask.downloadTaskStatus = @(DownloadTaskFailed);
     }
     
+    
     if (!success)
     {
         [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+            [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
             self.downloadTaskID = nil;
             self.downloadOperation = nil;
         }];
@@ -235,8 +243,8 @@
     }
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self createCurrentDownloadVideoThumbWithDownloadTask:downloadingTask];
+        [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
     }];
-    
 }
 
 - (NSString*)getCurrentDownloadFileDestPath:(NSNumber*)downloadTaskID
@@ -247,7 +255,7 @@
     return [videoDirectory stringByAppendingPathComponent:fileName];
 }
 
--(void)cancelDownloadTaskWithID:(NSNumber *)downloadID
+- (void)cancelDownloadTaskWithID:(NSNumber *)downloadID
 {
     if (!self.downloadTaskID)
         return;
@@ -261,5 +269,15 @@
         self.downloadOperation = nil;
     }
 }
+
+- (void)sendDownloadStatusChangeNotificationWithVideoID:(NSNumber*)videoID statusKey:(NSString *)statusKeyName statusValue:(NSNumber *)statusKeyValue
+{
+    NSDictionary *userInfo = @{
+                               @"videoID" : videoID,
+                               statusKeyName : statusKeyValue
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName: kReachabilityChangedNotification object: userInfo];
+}
+
 
 @end

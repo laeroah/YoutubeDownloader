@@ -9,7 +9,7 @@
 + (NSArray*)findAll;
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 + (Video*)findByVideoID:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context;
-
++ (NSInteger)getNewVideosCountWithContext:(NSManagedObjectContext *)context;
 - (NSString *)formattedVideoDuration;
 
 @end

@@ -42,6 +42,12 @@
     return video;
 }
 
++ (NSInteger)getNewVideosCountWithContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isNew == 1"];
+    return  [[Video MR_findAllWithPredicate:predicate] count];
+}
+
 + (NSArray*)findAll
 {
     return [Video MR_findAll];

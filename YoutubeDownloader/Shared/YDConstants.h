@@ -32,3 +32,5 @@
 #define IS_RETURNING_USER_KEY                       @"IS_RETURNING_USER_KEY"
 
 #pragma mark - Google Analytics
+
+#define kDownloadTaskStatusChangeNotification       @"kDownloadTaskStatusChangeNotification"
