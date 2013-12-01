@@ -276,7 +276,7 @@
                                @"videoID" : videoID,
                                statusKeyName : statusKeyValue
                                };
-    [[NSNotificationCenter defaultCenter] postNotificationName: kReachabilityChangedNotification object: userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName: kDownloadTaskStatusChangeNotification object: userInfo];
 }
 
 
