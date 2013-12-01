@@ -76,6 +76,12 @@
     [self dismissAllToastMessages];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateNewVideoBadge];
+}
+
 // Get current page url
 - (NSString *)getURL
 {

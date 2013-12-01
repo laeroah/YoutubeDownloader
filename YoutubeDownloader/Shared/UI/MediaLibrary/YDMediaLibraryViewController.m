@@ -257,12 +257,19 @@ typedef enum
     [mediaCell enterEditMode:_editMode animated:NO];
     
     DownloadTask *downloadTask = video.downloadTask;
-    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskDownloading)] ||
+                         [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskWaiting)];
     [mediaCell enterDownloadMode:isDownloading];
     
     mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
     
     mediaCell.downloadProgressBar.progress = downloadTask.downloadProgress.floatValue;
+    
+    //register the cell to receive the download status update notification
+    [[NSNotificationCenter defaultCenter] addObserver:mediaCell
+                                             selector:@selector(updateVideoDownloadProgress:)
+                                                 name:kDownloadTaskStatusChangeNotification
+                                               object:nil];
     
     return mediaCell;
 }
@@ -307,14 +314,20 @@ typedef enum
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*debug*/
-    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
-    YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
-    [playerViewController presentPlayerViewControllerFromViewController:self];
-    [playerViewController playLocalVideoWithPath:video.videoFilePath];
     
-    [video setIsNewValue:NO];
-    [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];
+    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
+    DownloadTask *downloadTask = video.downloadTask;
+    BOOL downloadFinished = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+    
+    if (downloadFinished) {
+        YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
+        [playerViewController presentPlayerViewControllerFromViewController:self];
+        [playerViewController playLocalVideoWithPath:video.videoFilePath];
+        
+        [video setIsNewValue:NO];
+        [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];
+    }
+    
     
 }
 
