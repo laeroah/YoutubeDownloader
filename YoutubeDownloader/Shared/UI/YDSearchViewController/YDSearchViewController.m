@@ -131,7 +131,7 @@
 {
     [self.webView goBack];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_BACK label:SCREEN_NAME_SEARCH_VIEW value:nil];
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_BACK label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (IBAction)toProgramLibrary:(id)sender
@@ -139,7 +139,7 @@
     YDMediaLibraryViewController *mediaLibraryViewController = [[YDMediaLibraryViewController alloc]init];
     [self.navigationController pushViewController:mediaLibraryViewController animated:YES];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_LIBRARY label:SCREEN_NAME_SEARCH_VIEW value:nil];
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_LIBRARY label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)downloadProcess:(id)sender
@@ -147,7 +147,7 @@
     [self showToastMessage:NSLocalizedString(@"Getting video information...", @"Parse the html page and get video information") hideAfterDelay:0.0 withProgress:YES];
     [self processForPageLoaded];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_HOME label:SCREEN_NAME_SEARCH_VIEW value:nil];
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_HOME label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)goHomePage
@@ -156,7 +156,7 @@
     NSString *homeUrl = @"http://m.youtube.com";
     [self loadUrl:[NSURL URLWithString:homeUrl]];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_USER_ACTION action:EVENT_ACTION_NAVIGATION_DOWNLOAD label:SCREEN_NAME_SEARCH_VIEW value:nil];
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_DOWNLOAD label:SCREEN_NAME_SEARCH_VIEW value:nil];
 }
 
 - (void)processForPageLoaded
@@ -198,6 +198,9 @@
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_CHOOSE_VIDEO_QUALITY label:SCREEN_NAME_SEARCH_VIEW value:@(selectedIndex)];
+            
             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
             DownloadTask *downloadTask = [DownloadTask findByDownloadPageUrl:_downloadPageUrl qualityType:selectedValue inContext:privateQueueContext];
             if (downloadTask && [downloadTask.downloadTaskStatus integerValue] == DownloadTaskFailed)

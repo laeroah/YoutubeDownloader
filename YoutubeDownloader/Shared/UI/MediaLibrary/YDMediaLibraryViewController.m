@@ -363,6 +363,8 @@ typedef enum
     }
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
     [self.mediaCollectionView reloadData];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_USE_THUMBNAILVIEW label:SCREEN_NAME_LIBRARY_VIEW value:nil];
 }
 
 - (void)toggleEditMode
@@ -373,6 +375,12 @@ typedef enum
         [cell enterEditMode:_editMode animated:YES];
     }
     _deleteButton.selected = _editMode;
+    
+    if (_editMode) {
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_ENTER_EDIT_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+    }else{
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_FINISH_EDIT_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+    }
 }
 
 - (void)toggleSearchBar
@@ -388,6 +396,9 @@ typedef enum
         mediaLibraryTableFrame.origin.y = SEARCH_BAR_HEIGHT;
         mediaLibraryTableFrame.size.height -= SEARCH_BAR_HEIGHT;
         [self.searchBar becomeFirstResponder];
+        
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_SEARCH_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+        
     }else{
         //hide search bar
         searchBarFrame.origin.y -= SEARCH_BAR_HEIGHT;
