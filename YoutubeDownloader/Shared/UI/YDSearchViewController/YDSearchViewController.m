@@ -13,6 +13,7 @@
 #import "YDVideoLinksExtractorManager.h"
 #import "ActionSheetStringPicker.h"
 #import "DownloadTask.h"
+#import "Video.h"
 #import "YDDownloadManager.h"
 #import "YDMediaLibraryViewController.h"
 #import "BadgedButton.h"
@@ -110,8 +111,13 @@
     
     self.navigationButtons = @[_backButton, _homeButton, _downloadButton, _libraryButton];
     
-    /*debug, need to move this to whenever download finish notification is finish and when checking current new downloaded videos*/
-    [_libraryButton setBadgeNumber:2];
+    [self updateNewVideoBadge];
+}
+
+- (void)updateNewVideoBadge
+{
+    NSInteger numberOfNewVideos = [Video getNewVideosCountWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    [_libraryButton setBadgeNumber:numberOfNewVideos];
 }
 
 #pragma mark - actions

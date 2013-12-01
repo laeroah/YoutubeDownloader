@@ -262,6 +262,8 @@ typedef enum
     
     mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
     
+    mediaCell.downloadProgressBar.progress = downloadTask.downloadProgress.floatValue;
+    
     return mediaCell;
 }
 
