@@ -93,7 +93,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (streamMappingRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil,nil);
         return;
     }
     
@@ -103,7 +103,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (beginRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil,nil);
         return;
     }
     
@@ -113,7 +113,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (endRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil,nil);
         return;
     }
     
@@ -158,6 +158,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     self.resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
     NSInteger index;
     NSString *resultUrl;
+    NSString *youtubeVideoID;
     for (NSString *videoUrl in urlsArray)
     {
         if ([NSString isEmpty:videoUrl])
@@ -167,7 +168,6 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
         NSString *beginString;
         NSMutableArray *removeObjects = [NSMutableArray array];
         BOOL removeItag= NO;
-        NSInteger iTagCount = 0;
         NSString *iTagComponent;
         for (index = 0; index < [components count]; index++)
         {
@@ -202,7 +202,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
         [components removeObjectsInArray:removeObjects];
         [components addObject:iTagComponent];
         
-                resultUrl = [NSString stringWithFormat:@"%@&%@",beginString,[components componentsJoinedByString:@"&"]];
+        resultUrl = [NSString stringWithFormat:@"%@&%@",beginString,[components componentsJoinedByString:@"&"]];
         
         NSDictionary *queryItems = [WebUtility parseQueryStringToDictionary:resultUrl];
         NSString *quality = queryItems[@"quality"];
@@ -210,22 +210,31 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
         {
             continue;
         }
-        NSError *error;
-//        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\+codecs=\".*\"" options:NSRegularExpressionCaseInsensitive error:&error];
-//        NSString *modifiedString = [regex stringByReplacingMatchesInString:resultUrl options:0 range:NSMakeRange(0, [videoUrl length]) withTemplate:@""];
+        
+        if (!youtubeVideoID)
+        {
+            youtubeVideoID = queryItems[@"id"];
+        }
+        
         self.resultDict[quality] = [resultUrl substringFromIndex:4];
-        //[videoUrl stringByReplacingOccurrencesOfString:@"%2C" withString:@","];
+    }
+    
+    if (!youtubeVideoID)
+    {
+        if (self.completionBlock)
+            self.completionBlock(self.youTubeURL, nil, nil,nil);
+        return;
     }
     
     if ([self.resultDict count] <= 0)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil,nil);
         return;
     }
     
     if (self.completionBlock)
-        self.completionBlock(self.youTubeURL, self.resultDict,nil);
+        self.completionBlock(self.youTubeURL, youtubeVideoID, self.resultDict,nil);
 }
 
 #pragma mark -
@@ -256,7 +265,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     {
         if (self.completionBlock)
         {
-            self.completionBlock(self.youTubeURL, nil, [NSError errorWithDomain:kYDYouTubePlayerExtractorErrorDomain code:1 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't download the HTML source code. URL might be invalid." forKey:NSLocalizedDescriptionKey]]);
+            self.completionBlock(self.youTubeURL, nil, nil, [NSError errorWithDomain:kYDYouTubePlayerExtractorErrorDomain code:1 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't download the HTML source code. URL might be invalid." forKey:NSLocalizedDescriptionKey]]);
         }
         return;
     }
@@ -272,7 +281,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     
     if (self.completionBlock)
     {
-        self.completionBlock(self.youTubeURL , nil, error);
+        self.completionBlock(self.youTubeURL , nil, nil, error);
     }
 }
 

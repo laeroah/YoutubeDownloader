@@ -19,12 +19,14 @@
 @interface YDDownloadManager ()
 {
     NSTimer *_refreshPlayStatusTimer;
-    
+    NSTimer *_getVideoInfoTimer;
 }
 
 @property (atomic, strong)      NSNumber *downloadTaskID;
 @property (atomic, strong)      AFHTTPRequestOperation *downloadOperation;
 @property (atomic, strong)      NSDate *lastWriteProgressTime;
+
+@property (atomic, strong)      NSString *currentGetVideoInfoID;
 
 @end
 
@@ -54,10 +56,11 @@
 - (void)startRefreshTimer
 {
     [self  stopRefreshTimer];
-    _refreshPlayStatusTimer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(checkNewDownloadTask:) userInfo:nil repeats:YES];
+    _refreshPlayStatusTimer = [NSTimer timerWithTimeInterval:5 target:self selector:@selector(checkNewDownloadTask:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_refreshPlayStatusTimer forMode:NSRunLoopCommonModes];
-    
 }
+
+
 
 - (void)checkNewDownloadTask:(NSTimer*)timer
 {
@@ -100,7 +103,7 @@
     });
 }
 
-- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success))completion
+- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success))completion
 {
     DownloadTask *task = [DownloadTask createDownloadTaskInContext:context];
     if (!task)
@@ -118,6 +121,7 @@
 	task.videoDescription = videoDescription;
 	task.videoImagePath = nil;
 	task.videoDownloadUrl = videoDownloadUrl;
+    task.youtubeVideoID = youtubeVideoID;
     
     Video *video = [Video createVideoWithContext:context];
     video.createDate = [NSDate date];
@@ -143,7 +147,6 @@
 
 - (BOOL)createBackgroundTaskWithUrl:(NSString*)url
 {
-    
     if (![url hasPrefix:@"http"] && ![url hasPrefix:@"https"])
     {
         return NO;
@@ -230,7 +233,6 @@
     else {
         downloadingTask.downloadTaskStatus = @(DownloadTaskFailed);
     }
-    
     
     if (!success)
     {

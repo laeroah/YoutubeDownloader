@@ -33,7 +33,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
-
+@property (nonatomic, strong) NSString *youtubeVideoID;
 @end
 
 @implementation YDSearchViewController
@@ -158,7 +158,8 @@
     _downloadPageUrl = [self  getURL];
     _title = [self getTitle];
     _urlExtractor = [[YDVideoLinksExtractorManager alloc] initWithURL:[NSURL URLWithString:_downloadPageUrl] quality:YDYouTubeVideoQualityMedium];
-    [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSDictionary *dictionary, NSError *error) {
+    [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSString *youtubeVideoID, NSDictionary *dictionary, NSError *error) {
+        self.youtubeVideoID = youtubeVideoID;
         [self dismissAllToastMessages];
         if(!error && dictionary)
         {
@@ -184,6 +185,7 @@
     }
     
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        [self showToastMessage:@"Please wait..." hideAfterDelay:0 withProgress:YES];
         NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
@@ -204,7 +206,7 @@
                 });
                 return;
             }
-            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
+            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];
                 });
