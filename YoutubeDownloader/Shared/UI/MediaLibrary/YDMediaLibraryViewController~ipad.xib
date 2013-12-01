@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="deviceSpaceStatusBar" destination="LCq-Sx-FaY" id="bpm-yk-lQx"/>
                 <outlet property="mediaCollectionView" destination="WF5-Gn-dpt" id="IpY-2W-mt3"/>
+                <outlet property="noVideoView" destination="zPW-m1-1EG" id="Qzd-rQ-Le7"/>
                 <outlet property="searchBar" destination="oWw-mS-b6u" id="bWX-5u-zi7"/>
                 <outlet property="totalSpaceLabel" destination="e0A-Zd-8bf" id="xZ7-zK-dUt"/>
                 <outlet property="view" destination="1" id="o7I-cs-3Mi"/>
@@ -88,6 +89,7 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="WF5-Gn-dpt">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="972"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tYa-EH-K6o">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -100,6 +102,30 @@
                         <outlet property="delegate" destination="-1" id="wOt-qO-MUf"/>
                     </connections>
                 </collectionView>
+                <view contentMode="scaleToFill" id="zPW-m1-1EG" userLabel="No video view">
+                    <rect key="frame" x="282" y="409" width="204" height="206"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to watch yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RVk-1S-LVW">
+                            <rect key="frame" x="21" y="13" width="162" height="61"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N5x-er-gNx">
+                            <rect key="frame" x="25" y="99" width="155" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <state key="normal" title="Let's get some videos!">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="findVideoButtonTapped:" destination="-1" eventType="touchUpInside" id="tA7-XN-0vV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

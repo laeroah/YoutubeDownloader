@@ -46,6 +46,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *totalSpaceLabel;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIView *noVideoView;
 
 @end
 
@@ -224,6 +225,7 @@ typedef enum
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    self.noVideoView.hidden = [self.fetchResultController.fetchedObjects count] != 0;
     return [self.fetchResultController.fetchedObjects count];
 }
 
@@ -250,6 +252,8 @@ typedef enum
     if (video.videoImagePath)
     {
         [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
+    }else{
+        mediaCell.videoThumbnailImageView.image = nil;
     }
     mediaCell.videoID = video.videoID;
     
@@ -342,6 +346,10 @@ typedef enum
 - (void)dismiss
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)findVideoButtonTapped:(id)sender {
+    [self dismiss];
 }
 
 - (void)toggleLayout
