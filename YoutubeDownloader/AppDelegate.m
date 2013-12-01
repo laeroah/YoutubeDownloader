@@ -52,8 +52,31 @@
     
     [[YDDownloadManager sharedInstance] startRefreshTimer];
     
+    // register notification for video download status change
+    /** this is hard because when the app is in the background, the notification for video status change won't be sent **/
+    //[self registerVideoDownloadNotification];
+    
     return YES;
 }
+
+//- (void)registerVideoDownloadNotification
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(receivedDownloadStatusNotification:)
+//                                                 name:kDownloadTaskStatusChangeNotification
+//                                               object:nil];
+//}
+//
+//- (void)receivedDownloadStatusNotification: (NSNotification *)notification
+//{
+//    NSNumber *videoID = [notification.userInfo objectForKey:@"videoID"];
+//    Video *video = [Video findByVideoID:videoID inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+//    DownloadTask *downloadTask = video.downloadTask;
+//    BOOL downloadFinished = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+//    if (downloadFinished) {
+//        
+//    }
+//}
 
 - (void)recordNewOrReturningUser
 {

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="deviceSpaceStatusBar" destination="JY4-0f-Eiz" id="9ge-BK-8hG"/>
                 <outlet property="mediaCollectionView" destination="HHL-Pz-UGy" id="1ES-yO-YAf"/>
+                <outlet property="noVideoView" destination="aVD-jk-04n" id="lGB-He-F1v"/>
                 <outlet property="searchBar" destination="Z8P-gD-toj" id="P8h-0D-Tqe"/>
                 <outlet property="totalSpaceLabel" destination="rrt-5k-R7c" id="KYz-qo-sk9"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -104,6 +105,30 @@
                         <outlet property="delegate" destination="-1" id="HSn-9b-ub9"/>
                     </connections>
                 </searchBar>
+                <view contentMode="scaleToFill" id="aVD-jk-04n" userLabel="No video view">
+                    <rect key="frame" x="58" y="174" width="204" height="205"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to watch yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lQp-BE-VJb">
+                            <rect key="frame" x="21" y="13" width="162" height="54"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5cI-CZ-9ql">
+                            <rect key="frame" x="25" y="99" width="155" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <state key="normal" title="Let's get some videos!">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="findVideoButtonTapped:" destination="-1" eventType="touchUpInside" id="FPV-4l-LaJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

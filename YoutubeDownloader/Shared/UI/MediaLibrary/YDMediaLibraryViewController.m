@@ -46,6 +46,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UICollectionView *mediaCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *totalSpaceLabel;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIView *noVideoView;
 
 @end
 
@@ -224,6 +225,7 @@ typedef enum
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    self.noVideoView.hidden = [self.fetchResultController.fetchedObjects count] != 0;
     return [self.fetchResultController.fetchedObjects count];
 }
 
@@ -250,6 +252,8 @@ typedef enum
     if (video.videoImagePath)
     {
         [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
+    }else{
+        mediaCell.videoThumbnailImageView.image = nil;
     }
     mediaCell.videoID = video.videoID;
     
@@ -257,10 +261,19 @@ typedef enum
     [mediaCell enterEditMode:_editMode animated:NO];
     
     DownloadTask *downloadTask = video.downloadTask;
-    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskDownloading)] ||
+                         [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskWaiting)];
     [mediaCell enterDownloadMode:isDownloading];
     
     mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
+    
+    mediaCell.downloadProgressBar.progress = downloadTask.downloadProgress.floatValue;
+    
+    //register the cell to receive the download status update notification
+    [[NSNotificationCenter defaultCenter] addObserver:mediaCell
+                                             selector:@selector(updateVideoDownloadProgress:)
+                                                 name:kDownloadTaskStatusChangeNotification
+                                               object:nil];
     
     return mediaCell;
 }
@@ -305,14 +318,20 @@ typedef enum
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*debug*/
-    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
-    YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
-    [playerViewController presentPlayerViewControllerFromViewController:self];
-    [playerViewController playLocalVideoWithPath:video.videoFilePath];
     
-    [video setIsNewValue:NO];
-    [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];
+    Video *video = [self.fetchResultController.fetchedObjects objectAtIndex:indexPath.item];
+    DownloadTask *downloadTask = video.downloadTask;
+    BOOL downloadFinished = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
+    
+    if (downloadFinished) {
+        YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
+        [playerViewController presentPlayerViewControllerFromViewController:self];
+        [playerViewController playLocalVideoWithPath:video.videoFilePath];
+        
+        [video setIsNewValue:NO];
+        [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];
+    }
+    
     
 }
 
@@ -329,6 +348,10 @@ typedef enum
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)findVideoButtonTapped:(id)sender {
+    [self dismiss];
+}
+
 - (void)toggleLayout
 {
     if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
@@ -340,6 +363,8 @@ typedef enum
     }
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
     [self.mediaCollectionView reloadData];
+    
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_USE_THUMBNAILVIEW label:SCREEN_NAME_LIBRARY_VIEW value:nil];
 }
 
 - (void)toggleEditMode
@@ -350,6 +375,12 @@ typedef enum
         [cell enterEditMode:_editMode animated:YES];
     }
     _deleteButton.selected = _editMode;
+    
+    if (_editMode) {
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_ENTER_EDIT_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+    }else{
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_FINISH_EDIT_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+    }
 }
 
 - (void)toggleSearchBar
@@ -365,6 +396,9 @@ typedef enum
         mediaLibraryTableFrame.origin.y = SEARCH_BAR_HEIGHT;
         mediaLibraryTableFrame.size.height -= SEARCH_BAR_HEIGHT;
         [self.searchBar becomeFirstResponder];
+        
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_SEARCH_LIBRARY label:SCREEN_NAME_LIBRARY_VIEW value:nil];
+        
     }else{
         //hide search bar
         searchBarFrame.origin.y -= SEARCH_BAR_HEIGHT;

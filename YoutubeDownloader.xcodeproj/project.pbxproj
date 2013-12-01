@@ -38,7 +38,6 @@
 		AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD38183C2E0C00711B5F /* YDPlayer.m */; };
 		AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */; };
 		AFD2AD3F183C2E2E00711B5F /* YDPlayerViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */; };
-		AFD2AD41183C2E8D00711B5F /* VID_0001.m4v in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -181,7 +180,6 @@
 		AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayerViewController.h; sourceTree = "<group>"; };
 		AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayerViewController.m; sourceTree = "<group>"; };
 		AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
-		AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = VID_0001.m4v; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -460,7 +458,6 @@
 		AFD2AD3A183C2E2800711B5F /* YDMediaPlayerController */ = {
 			isa = PBXGroup;
 			children = (
-				AFD2AD40183C2E8D00711B5F /* VID_0001.m4v */,
 				AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */,
 				AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */,
 				AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */,
@@ -1015,7 +1012,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD2AD35183C10D900711B5F /* YDMediaLibraryThumbnailCell~iphone.xib in Resources */,
-				AFD2AD41183C2E8D00711B5F /* VID_0001.m4v in Resources */,
 				AFE6AA261822E29E0037B389 /* InfoPlist.strings in Resources */,
 				AF295AE8183EEC64001FBAE5 /* YDMediaLibraryThumbnailCell~ipad.xib in Resources */,
 				AFA064E1183EE0D000AA0C4D /* YDMediaLibraryViewController~ipad.xib in Resources */,
@@ -1297,6 +1293,7 @@
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1316,6 +1313,7 @@
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

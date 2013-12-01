@@ -24,6 +24,7 @@
 
 - (void)enterEditMode:(BOOL)enter animated:(BOOL)animated;
 - (void)enterDownloadMode:(BOOL)enter;
+- (void)updateVideoDownloadProgress:(NSNotification *) notification;
 
 @end
 

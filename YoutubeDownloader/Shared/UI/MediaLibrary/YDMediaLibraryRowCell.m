@@ -7,6 +7,8 @@
 //
 
 #import "YDMediaLibraryRowCell.h"
+#import "Video.h"
+#import "DownloadTask.h"
 
 @implementation YDMediaLibraryRowCell
 
@@ -57,6 +59,28 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTappOnPauseButtonFromCell:)]) {
         [self.delegate didTappOnPauseButtonFromCell:self];
     }
+}
+
+- (void)updateVideoDownloadProgress:(NSNotification *) notification
+{
+    if ([notification.userInfo objectForKey:@"downloadProgress"]) {
+        if (self.videoID) {
+            NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+            Video *video = [Video findByVideoID:self.videoID inContext:context];
+            
+            self.downloadProgressBar.progress = video.downloadTask.downloadProgress.floatValue;
+            
+            CGFloat fileSize = video.downloadTask.videoFileSize.integerValue;
+            CGFloat downloadedSize = video.downloadTask.downloadProgress.floatValue * fileSize / 1024 / 1024; //in MB
+            
+            self.currentProgressLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%.1fMB/%.1fMB", nil), downloadedSize, fileSize/1024/1024];
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

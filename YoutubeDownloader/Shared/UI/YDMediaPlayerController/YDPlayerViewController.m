@@ -10,6 +10,7 @@
 #import "YDBaseNavigationViewController.h"
 #import "YDConstants.h"
 #import "YDDeviceUtility.h"
+#import "YDAnalyticManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface YDPlayerViewController ()
@@ -165,9 +166,11 @@
 
 - (IBAction)brightnessSliderValueChanged:(id)sender {
     [UIScreen mainScreen].brightness = self.brightnessSlider.value;
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_VIDEO_PLAYER_CONTROL action:EVENT_ACTION_ADJUST_PLAYER_BRIGHTNESS label:nil value:nil];
 }
 
 - (IBAction)audioDelaySliderValueChanged:(id)sender {
+    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_VIDEO_PLAYER_CONTROL action:EVENT_ACTION_ADJUST_AUDIO_DELAY label:nil value:nil];
     CGFloat offsetValue = self.audioDelaySlider.value;
     NSString *audioLabelTextFormat = NSLocalizedString(@"Audio Offset: %.2f", @"the label for audio offset");
     self.audioOffsetLabel.text = [NSString stringWithFormat:audioLabelTextFormat, offsetValue];
