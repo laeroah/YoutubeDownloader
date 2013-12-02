@@ -183,6 +183,8 @@
         else
         {
             [self showToastMessage:NSLocalizedString(@"No downloadable video found.", @"No downloadable video found or the page was not loaded completly.") hideAfterDelay:2];
+            
+            [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_VIDEO_DOWNLOAD action:EVENT_ACTION_CHOOSE_VIDEO_QUALITY label:SCREEN_NAME_SEARCH_VIEW value:nil];
         }
     }];
 

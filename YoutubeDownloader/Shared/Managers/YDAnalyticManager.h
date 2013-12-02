@@ -21,7 +21,8 @@ static NSString *EVENT_ACTION_NAVIGATION_BACK = @"go back";
 static NSString *EVENT_ACTION_NAVIGATION_LIBRARY = @"go to library";
 static NSString *EVENT_ACTION_NAVIGATION_HOME = @"webview go home";
 static NSString *EVENT_ACTION_NAVIGATION_DOWNLOAD = @"try download video";
-static NSString *EVENT_ACTION_USE_THUMBNAILVIEW = @"use thumbnail layout";
+static NSString *EVENT_ACTION_USE_THUMBNAILLAYOUT = @"use thumbnail layout";
+static NSString *EVENT_ACTION_USE_ROWLAYOUT = @"use row layout";
 static NSString *EVENT_ACTION_SEARCH_LIBRARY = @"search in library";
 static NSString *EVENT_ACTION_ENTER_EDIT_LIBRARY = @"enter edit mode";
 static NSString *EVENT_ACTION_FINISH_EDIT_LIBRARY = @"finish edit mode";
@@ -31,6 +32,9 @@ static NSString *EVENT_ACTION_CHOOSE_VIDEO_QUALITY = @"choose video quality";
 static NSString *EVENT_ACTION_ADJUST_PLAYER_BRIGHTNESS = @"adjust brightness";
 static NSString *EVENT_ACTION_ADJUST_AUDIO_DELAY = @"adjust audio delay";
 
+
+static NSString *EVENT_ACTION_DOWNLOADFAIL = @"video download failed";
+static NSString *EVENT_ACTION_DOWNLOADFAIL_RUNOUT = @"video download failed due to space run out";
 
 // screen names
 static NSString *SCREEN_NAME_SEARCH_VIEW = @"search view";
