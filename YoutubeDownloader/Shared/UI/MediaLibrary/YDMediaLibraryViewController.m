@@ -357,14 +357,15 @@ typedef enum
     if (_currentLayout == YDMediaLibraryViewControllerLayoutRow) {
         _thumbnailButton.selected = YES;
         _currentLayout = YDMediaLibraryViewControllerLayoutThumbnail;
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_USE_THUMBNAILLAYOUT label:SCREEN_NAME_LIBRARY_VIEW value:nil];
     }else{
         _thumbnailButton.selected = NO;
         _currentLayout = YDMediaLibraryViewControllerLayoutRow;
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_USE_ROWLAYOUT label:SCREEN_NAME_LIBRARY_VIEW value:nil];
     }
     [self.mediaCollectionView.collectionViewLayout invalidateLayout];
     [self.mediaCollectionView reloadData];
     
-    [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_LIBRARY_VIEW action:EVENT_ACTION_USE_THUMBNAILVIEW label:SCREEN_NAME_LIBRARY_VIEW value:nil];
 }
 
 - (void)toggleEditMode
