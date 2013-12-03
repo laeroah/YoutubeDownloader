@@ -60,6 +60,15 @@
     return  [Video MR_findFirstWithPredicate:predicate inContext:context];
 }
 
++ (void)removeVideo:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
+{
+    Video *video = [Video findByVideoID:videoID inContext:context];
+    [video setIsRemovedValue:YES];
+    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        completion (success, error);
+    }];
+}
+
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
 {
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {

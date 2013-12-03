@@ -417,9 +417,7 @@ typedef enum
 - (void)didChooseToRemoveCell:(YDMediaLibraryRowCell *)cell
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
-    Video *video = [Video findByVideoID:cell.videoID inContext:context];
-    [video setIsRemovedValue:YES];
-    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+    [Video removeVideo:cell.videoID inContext:context completion:^(BOOL success, NSError *error) {
         if (!success) {
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Failed to remove video, please try again.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
