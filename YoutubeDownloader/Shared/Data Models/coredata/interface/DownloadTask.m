@@ -71,7 +71,7 @@
 
 + (DownloadTask*)findVideoInfoNotDownloadTaskWithContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoFileSize = %@ and videoImagePath == NULL"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(videoFileSize = 0 or videoImagePath == NULL) and downloadTaskStatus != %d",DownloadTaskDeleting];
     
     return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
 }

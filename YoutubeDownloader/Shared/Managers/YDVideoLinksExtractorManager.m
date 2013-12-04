@@ -125,7 +125,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
          vid = resultDict[@"content"][@"player_data"][@"player_vars"][@"video_id"];
     }
     
-    //length_seconds
+    NSNumber *duration = resultDict[@"content"][@"player_data"][@"player_vars"][@"length_seconds"];
     
     // get url_encoded_fmt_stream_map
     NSString *streamMappingString = @"\\\"url_encoded_fmt_stream_map\\\"";
@@ -133,7 +133,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (streamMappingRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
         return;
     }
     
@@ -143,7 +143,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (beginRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
         return;
     }
     
@@ -153,7 +153,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (endRange.location == NSNotFound)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
         return;
     }
     
@@ -262,19 +262,19 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (!youtubeVideoID)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
         return;
     }
     
     if ([self.resultDict count] <= 0)
     {
         if (self.completionBlock)
-            self.completionBlock(self.youTubeURL, nil, nil,nil);
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
         return;
     }
     
     if (self.completionBlock)
-        self.completionBlock(self.youTubeURL, vid, self.resultDict,nil);
+        self.completionBlock(self.youTubeURL, vid, duration, self.resultDict,nil);
 }
 
 #pragma mark -
@@ -305,7 +305,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     {
         if (self.completionBlock)
         {
-            self.completionBlock(self.youTubeURL, nil, nil, [NSError errorWithDomain:kYDYouTubePlayerExtractorErrorDomain code:1 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't download the HTML source code. URL might be invalid." forKey:NSLocalizedDescriptionKey]]);
+            self.completionBlock(self.youTubeURL, nil,  nil, nil, [NSError errorWithDomain:kYDYouTubePlayerExtractorErrorDomain code:1 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't download the HTML source code. URL might be invalid." forKey:NSLocalizedDescriptionKey]]);
         }
         return;
     }
@@ -321,7 +321,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     
     if (self.completionBlock)
     {
-        self.completionBlock(self.youTubeURL , nil, nil, error);
+        self.completionBlock(self.youTubeURL ,nil, nil, nil, error);
     }
 }
 

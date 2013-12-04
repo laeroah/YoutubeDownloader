@@ -35,6 +35,7 @@
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSString *youtubeVideoID;
+@property (nonatomic, strong) NSNumber *youtubeVideoDuration;
 @end
 
 @implementation YDSearchViewController
@@ -182,8 +183,9 @@
     _downloadPageUrl = [self  getURL];
     _title = [self getTitle];
     _urlExtractor = [[YDVideoLinksExtractorManager alloc] initWithURL:[NSURL URLWithString:_downloadPageUrl] quality:YDYouTubeVideoQualityMedium];
-    [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSString *youtubeVideoID, NSDictionary *dictionary, NSError *error) {
+    [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSString *youtubeVideoID, NSNumber *duration, NSDictionary *dictionary, NSError *error) {
         self.youtubeVideoID = youtubeVideoID;
+        self.youtubeVideoDuration = duration;
         [self dismissAllToastMessages];
         if(!error && dictionary)
         {
@@ -235,7 +237,7 @@
                 });
                 return;
             }
-            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
+            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
                 [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];

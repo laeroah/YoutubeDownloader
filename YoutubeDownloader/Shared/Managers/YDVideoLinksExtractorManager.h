@@ -13,7 +13,7 @@ extern NSInteger const YDYouTubePlayerExtractorErrorCodeInvalidHTML;
 extern NSInteger const YDYouTubePlayerExtractorErrorCodeNoStreamURL;
 extern NSInteger const YDYouTubePlayerExtractorErrorCodeNoJSONData;
 
-typedef void (^YDYouTubeExtractorCompletionBlock)(NSURL *videoUrl , NSString *youtubeVideoID, NSDictionary *videoURLDict, NSError *error);
+typedef void (^YDYouTubeExtractorCompletionBlock)(NSURL *videoUrl , NSString *youtubeVideoID, NSNumber *duration, NSDictionary *videoURLDict, NSError *error);
 
 typedef enum {
     YDYouTubeVideoQualitySmall    = 0,

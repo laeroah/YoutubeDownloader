@@ -80,7 +80,7 @@
 {
     [self stopGetVideoInfoTimer];
     NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    DownloadTask *downloadTask = [DownloadTask getWaitingDownloadTaskInContext:privateQueueContext];
+    DownloadTask *downloadTask = [DownloadTask findVideoInfoNotDownloadTaskWithContext:privateQueueContext];
     if (!downloadTask) {
         [self startGetVideoInfoTimer];
         return;
@@ -122,7 +122,7 @@
 
 - (void)downloadVideoImageWithVideoID:(NSString *)youtubeVideoID
 {
-    NSString *imageUrlString = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/sddefault.jpg",youtubeVideoID];
+    NSString *imageUrlString = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/default.jpg",youtubeVideoID];
     NSURL *imageUrl = [NSURL URLWithString:imageUrlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageUrl];
     AFHTTPRequestOperation *postOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -232,7 +232,7 @@
     });
 }
 
-- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success, NSNumber *downloadTaskID))completion
+- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID videoDuration:(NSNumber*)duration qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success, NSNumber *downloadTaskID))completion
 {
     
     DownloadTask *task = [DownloadTask createDownloadTaskInContext:context];
@@ -263,6 +263,7 @@
     video.videoFilePath = nil;
     video.videoImagePath = nil;
     video.videoTitle = videoTitle;
+    video.duration = duration;
     
     task.video = video;
     video.downloadTask = task;
@@ -374,7 +375,6 @@
         return;
     }
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
-        [self createCurrentDownloadVideoThumbWithDownloadTask:downloadingTask];
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
     }];
 }
