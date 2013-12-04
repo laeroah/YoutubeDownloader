@@ -26,7 +26,7 @@
 @property (atomic, strong)      AFHTTPRequestOperation *downloadOperation;
 @property (atomic, strong)      NSDate *lastWriteProgressTime;
 
-@property (atomic, strong)      NSString *currentGetVideoInfoID;
+@property (atomic, strong)      NSNumber *currentGetVideoInfoID;
 
 @end
 
@@ -60,7 +60,136 @@
     [[NSRunLoop mainRunLoop] addTimer:_refreshPlayStatusTimer forMode:NSRunLoopCommonModes];
 }
 
+- (void)startGetVideoInfoTimer
+{
+    [self  stopGetVideoInfoTimer];
+    _getVideoInfoTimer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(checkVideoInfoNotBeDownloaded:) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_getVideoInfoTimer forMode:NSRunLoopCommonModes];
+}
 
+- (void)stopGetVideoInfoTimer
+{
+    if (_getVideoInfoTimer)
+    {
+        [_getVideoInfoTimer invalidate];
+        _getVideoInfoTimer = nil;
+    }
+}
+
+- (void)checkVideoInfoNotBeDownloaded:(NSTimer*)timer
+{
+    [self stopGetVideoInfoTimer];
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    DownloadTask *downloadTask = [DownloadTask getWaitingDownloadTaskInContext:privateQueueContext];
+    if (!downloadTask) {
+        [self startGetVideoInfoTimer];
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self downloadVideoInfoWithDownloadTaskID:downloadTask.downloadID];
+    });
+}
+
+- (void)downloadVideoInfoWithDownloadTaskID:(NSNumber *)downloadTaskID
+{
+    if (self.currentGetVideoInfoID)
+    {
+        return;
+    }
+    
+    self.currentGetVideoInfoID = downloadTaskID;
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    
+    DownloadTask *downloadTask =  [DownloadTask findByDownloadID:downloadTaskID inContext:privateQueueContext];
+    
+    if (!downloadTask || downloadTask.downloadTaskStatusValue == DownloadTaskDeleting)
+    {
+        [self checkVideoInfoNotBeDownloaded:nil];
+        return;
+    }
+    
+    if (!downloadTask.videoImagePath) {
+        [self downloadVideoImageWithVideoID:downloadTask.youtubeVideoID];
+        return;
+    }
+    
+    if (downloadTask.videoFileSizeValue == 0){
+        [self getVideoFileSize];
+        return;
+    }
+}
+
+- (void)downloadVideoImageWithVideoID:(NSString *)youtubeVideoID
+{
+    NSString *imageUrlString = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/sddefault.jpg",youtubeVideoID];
+    NSURL *imageUrl = [NSURL URLWithString:imageUrlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageUrl];
+    AFHTTPRequestOperation *postOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    postOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [postOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *imagePath = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"images"];
+        [YDFileUtil createAbsoluteDirectory:imagePath];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@.jpeg", self.currentGetVideoInfoID];
+        NSString *imageFilePath = [imagePath stringByAppendingPathComponent:imageFileName];
+        UIImage *thumbnail = [YDImageUtil scaleImage:responseObject maxSize:CGSizeMake(80,80)];
+        NSData* imageData = UIImageJPEGRepresentation(thumbnail, 1.0);
+        [imageData writeToFile:imageFilePath atomically:YES];
+        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        DownloadTask *downloadingTask = [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
+        downloadingTask.videoImagePath = imageFilePath;
+        Video *video = downloadingTask.video;
+        video.videoImagePath = imageFilePath;
+        [video updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self getVideoFileSize];
+            });
+        }];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self startGetVideoInfoTimer];
+        return;
+    }];
+    
+    [postOperation start];
+}
+
+- (void)getVideoFileSize
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    
+    DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
+    
+    if (!downloadTask)
+    {
+        [self checkVideoInfoNotBeDownloaded:nil];
+        return;
+    }
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSLog(@"downloadUrl = %@",downloadTask.videoDownloadUrl);
+    NSString *downloadFileUrl = downloadTask.videoDownloadUrl;
+    [manager HEAD:downloadFileUrl parameters:nil success:^(AFHTTPRequestOperation *operation) {
+        if ([operation.response respondsToSelector:@selector(expectedContentLength)])
+        {
+            long long contentLength = [operation.response expectedContentLength];
+            NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+            DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
+            downloadTask.videoFileSize = @(contentLength);
+            [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+                [self checkVideoInfoNotBeDownloaded:nil];
+            }];
+        }
+        else
+        {
+            NSLog(@"no content length found");
+            [self startGetVideoInfoTimer];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self startGetVideoInfoTimer];
+    }];
+}
 
 - (void)checkNewDownloadTask:(NSTimer*)timer
 {
@@ -103,16 +232,17 @@
     });
 }
 
-- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success))completion
+- (void)createDownloadTaskWithDownloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success, NSNumber *downloadTaskID))completion
 {
+    
     DownloadTask *task = [DownloadTask createDownloadTaskInContext:context];
     if (!task)
     {
         if (completion)
-            completion(NO);
+            completion(NO,nil);
         return;
     }
-    
+    NSNumber *downloadTaskID = task.downloadID;
     task.downloadPageUrl = downloadPageUrl;
 	task.downloadPriority = DOWNLOAD_TASK_DEFAULT_PRIORITY;
 	task.downloadTaskStatus = @(DownloadTaskWaiting);
@@ -140,7 +270,7 @@
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (completion)
         {
-            completion(YES);
+            completion(YES,downloadTaskID);
         }
     }];
 }

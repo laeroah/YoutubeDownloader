@@ -153,7 +153,8 @@
 - (void)goHomePage
 {
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = ''"];
-    NSString *homeUrl = @"http://m.youtube.com";
+    //NSString *homeUrl = @"http://m.youtube.com";
+    NSString *homeUrl = @"http://www.youtube.com";
     [self loadUrl:[NSURL URLWithString:homeUrl]];
     
     [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_DOWNLOAD label:SCREEN_NAME_SEARCH_VIEW value:nil];
@@ -223,7 +224,8 @@
                 });
                 return;
             }
-            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success) {
+            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
+                [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];
                 });

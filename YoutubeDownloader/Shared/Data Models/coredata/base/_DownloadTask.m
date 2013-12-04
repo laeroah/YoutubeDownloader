@@ -15,6 +15,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 	.videoDownloadUrl = @"videoDownloadUrl",
 	.videoFilePath = @"videoFilePath",
 	.videoFileSize = @"videoFileSize",
+	.videoImageDownloadUrl = @"videoImageDownloadUrl",
 	.videoImagePath = @"videoImagePath",
 	.videoTitle = @"videoTitle",
 	.youtubeVideoID = @"youtubeVideoID",
@@ -252,6 +253,13 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 - (void)setPrimitiveVideoFileSizeValue:(int64_t)value_ {
 	[self setPrimitiveVideoFileSize:[NSNumber numberWithLongLong:value_]];
 }
+
+
+
+
+
+@dynamic videoImageDownloadUrl;
+
 
 
 

@@ -16,6 +16,7 @@ extern const struct DownloadTaskAttributes {
 	__unsafe_unretained NSString *videoDownloadUrl;
 	__unsafe_unretained NSString *videoFilePath;
 	__unsafe_unretained NSString *videoFileSize;
+	__unsafe_unretained NSString *videoImageDownloadUrl;
 	__unsafe_unretained NSString *videoImagePath;
 	__unsafe_unretained NSString *videoTitle;
 	__unsafe_unretained NSString *youtubeVideoID;
@@ -29,6 +30,7 @@ extern const struct DownloadTaskFetchedProperties {
 } DownloadTaskFetchedProperties;
 
 @class Video;
+
 
 
 
@@ -188,6 +190,16 @@ extern const struct DownloadTaskFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* videoImageDownloadUrl;
+
+
+
+//- (BOOL)validateVideoImageDownloadUrl:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* videoImagePath;
 
 
@@ -312,6 +324,12 @@ extern const struct DownloadTaskFetchedProperties {
 
 - (int64_t)primitiveVideoFileSizeValue;
 - (void)setPrimitiveVideoFileSizeValue:(int64_t)value_;
+
+
+
+
+- (NSString*)primitiveVideoImageDownloadUrl;
+- (void)setPrimitiveVideoImageDownloadUrl:(NSString*)value;
 
 
 

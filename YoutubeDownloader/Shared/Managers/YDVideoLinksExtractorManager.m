@@ -39,7 +39,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 
 -(id)initWithID:(NSString *)videoID quality:(YDYouTubeVideoQuality)quality
 {
-    NSURL* URL = (videoID) ? [NSURL URLWithString:[NSString stringWithFormat:@"http://m.youtube.com/watch?v=%@", videoID]] : nil;
+    NSURL* URL = (videoID) ? [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", videoID]] : nil;
     return [self initWithURL:URL quality:quality];
 }
 
@@ -87,6 +87,46 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
 
 -(void)extractYouTubeURLFromFile:(NSString *)html
 {
+    NSLog(@"html = %@",html);
+    // get thumbnail
+    NSError  *error  = nil;
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:
+                                  @"(?:var bootstrap_data = \\\"\\)\\]\\}').*?\\}\\\";"
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:&error];
+    
+    NSRange rangeBootStrapData   = [regex rangeOfFirstMatchInString:html
+                                               options:0
+                                                 range:NSMakeRange(0, [html length])];
+    NSMutableString* result = [NSMutableString stringWithString:[html substringWithRange:rangeBootStrapData]];
+    
+    [result replaceOccurrencesOfString:@"var bootstrap_data = \")]}'" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [result length])];
+    
+    [result replaceOccurrencesOfString:@"}\";" withString:@"}" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [result length])];
+
+    [result replaceOccurrencesOfString:@"\\\"" withString:@"\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, result.length)];
+
+    [result replaceOccurrencesOfString:@"\\\\" withString:@"\\" options:NSCaseInsensitiveSearch range:NSMakeRange(0, result.length)];
+    
+    
+    [result replaceOccurrencesOfString:@"\\u0026" withString:@"&" options:NSCaseInsensitiveSearch range:NSMakeRange(0, result.length)];
+    
+    [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:&error];
+    
+    NSLog(@"resultDict = %@", result);
+    
+    NSString *vid = resultDict[@"content"][@"player_data"][@"player_vars"][@"vid"];
+    
+    if (!vid)
+    {
+         vid = resultDict[@"content"][@"player_data"][@"player_vars"][@"video_id"];
+    }
+    
+    //length_seconds
+    
     // get url_encoded_fmt_stream_map
     NSString *streamMappingString = @"\\\"url_encoded_fmt_stream_map\\\"";
     NSRange streamMappingRange = [html rangeOfString:streamMappingString];
@@ -234,7 +274,7 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     }
     
     if (self.completionBlock)
-        self.completionBlock(self.youTubeURL, youtubeVideoID, self.resultDict,nil);
+        self.completionBlock(self.youTubeURL, vid, self.resultDict,nil);
 }
 
 #pragma mark -

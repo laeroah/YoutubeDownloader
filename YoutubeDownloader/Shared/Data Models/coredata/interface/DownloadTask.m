@@ -69,6 +69,13 @@
     return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
 }
 
++ (DownloadTask*)findVideoInfoNotDownloadTaskWithContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoFileSize = %@ and videoImagePath == NULL"];
+    
+    return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
+}
+
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
 {
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
