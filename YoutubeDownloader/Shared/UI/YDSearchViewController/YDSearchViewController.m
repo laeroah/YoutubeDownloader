@@ -63,6 +63,12 @@
     
     // setup the screen name for GA tracking
     self.screenName = SCREEN_NAME_SEARCH_VIEW;
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivesVideoDownloadStatusChangeNotification:)
+                                                 name:kDownloadTaskStatusChangeNotification
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -91,6 +97,11 @@
 - (NSString *)getTitle
 {
     return [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
+- (void)receivesVideoDownloadStatusChangeNotification:(NSNotification *) notification
+{
+    [self updateNewVideoBadge];
 }
 
 - (void)createControlButtons

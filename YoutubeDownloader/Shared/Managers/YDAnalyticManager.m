@@ -32,7 +32,7 @@ static NSString *const kTrackingId = @"UA-31727751-2";
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     if (DEBUG) {
         // Optional: set Logger to VERBOSE for debug information.
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     }
     self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
 }
