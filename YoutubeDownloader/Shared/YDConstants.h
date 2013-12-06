@@ -34,3 +34,8 @@
 #pragma mark - Google Analytics
 
 #define kDownloadTaskStatusChangeNotification       @"kDownloadTaskStatusChangeNotification"
+
+#define kYoutubeDownloadErrorDomain @"YDErrorDomain"
+
+#define kYDErrorInvalidUrl 1000
+

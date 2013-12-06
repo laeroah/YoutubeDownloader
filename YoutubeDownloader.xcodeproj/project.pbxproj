@@ -107,6 +107,7 @@
 		E3739FB9184238D0000F77BA /* YDFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3739FB8184238D0000F77BA /* YDFileUtil.m */; };
 		E3739FBC1842391E000F77BA /* YDErrorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3739FBB1842391E000F77BA /* YDErrorUtil.m */; };
 		E3739FC218423A22000F77BA /* YDAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3739FC118423A22000F77BA /* YDAlbumManager.m */; };
+		E3A553E5184FA8D40047127B /* YDNetworkUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A553E4184FA8D40047127B /* YDNetworkUtility.m */; };
 		E3AFA688182FCFEE008CABB6 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA687182FCFEE008CABB6 /* NSString+Util.m */; };
 		E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA68A182FD629008CABB6 /* WebUtility.m */; };
 		E3AFA6AE182FDC62008CABB6 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AFA6AC182FDC62008CABB6 /* Appirater.m */; };
@@ -314,6 +315,8 @@
 		E3739FBB1842391E000F77BA /* YDErrorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDErrorUtil.m; sourceTree = "<group>"; };
 		E3739FC018423A22000F77BA /* YDAlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDAlbumManager.h; sourceTree = "<group>"; };
 		E3739FC118423A22000F77BA /* YDAlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDAlbumManager.m; sourceTree = "<group>"; };
+		E3A553E3184FA8D40047127B /* YDNetworkUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDNetworkUtility.h; sourceTree = "<group>"; };
+		E3A553E4184FA8D40047127B /* YDNetworkUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDNetworkUtility.m; sourceTree = "<group>"; };
 		E3AFA686182FCFED008CABB6 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		E3AFA687182FCFEE008CABB6 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
 		E3AFA689182FD629008CABB6 /* WebUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebUtility.h; sourceTree = "<group>"; };
@@ -886,6 +889,8 @@
 				E3739FB8184238D0000F77BA /* YDFileUtil.m */,
 				E3739FBA1842391E000F77BA /* YDErrorUtil.h */,
 				E3739FBB1842391E000F77BA /* YDErrorUtil.m */,
+				E3A553E3184FA8D40047127B /* YDNetworkUtility.h */,
+				E3A553E4184FA8D40047127B /* YDNetworkUtility.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1113,6 +1118,7 @@
 				E3F71C73184A756A00E22C31 /* AFSecurityPolicy.m in Sources */,
 				E3739FAD1842387D000F77BA /* SDWebImageCompat.m in Sources */,
 				E3AFA6B2182FDC8C008CABB6 /* MBProgressHUD.m in Sources */,
+				E3A553E5184FA8D40047127B /* YDNetworkUtility.m in Sources */,
 				AFA064DD183EB92000AA0C4D /* YDAnalyticManager.m in Sources */,
 				E3BCF2041827F13300517124 /* UIBarButtonItem+Private.m in Sources */,
 				E322A6FA183266E600BA77A2 /* MagicalImportFunctions.m in Sources */,

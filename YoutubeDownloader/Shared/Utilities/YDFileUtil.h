@@ -22,6 +22,7 @@
 + (NSString *)pathForTempDirectory:(NSString *)directoryName;
 + (BOOL)createAbsoluteDirectory:(NSString *)directoryName;
 + (void)removeFile:(NSString *)filePath;
-
++ (BOOL)removeFileWithFilePathURL:(NSURL*)fileURL;
++ (BOOL)moveFileFrom:(NSURL*)fromLocation to:(NSURL*)toLocation error:(NSError**)perror;
 
 @end

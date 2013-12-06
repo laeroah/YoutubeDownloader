@@ -15,6 +15,7 @@
 #import "WebUtility.h"
 #import "YDImageUtil.h"
 #import "YDConstants.h"
+#import "YDNetworkUtility.h"
 
 @interface YDDownloadManager ()
 {
@@ -25,7 +26,7 @@
 @property (atomic, strong)      NSNumber *downloadTaskID;
 @property (atomic, strong)      AFHTTPRequestOperation *downloadOperation;
 @property (atomic, strong)      NSDate *lastWriteProgressTime;
-
+@property (atomic, strong)      YDNetworkUtility *networkUtility;
 @property (atomic, strong)      NSNumber *currentGetVideoInfoID;
 
 @end
@@ -276,7 +277,7 @@
     }];
 }
 
-- (BOOL)createBackgroundTaskWithUrl:(NSString*)url
+- (BOOL)createBackgroundTaskWithUrl1:(NSString*)url
 {
     if (![url hasPrefix:@"http"] && ![url hasPrefix:@"https"])
     {
@@ -314,6 +315,42 @@
    
     [self.downloadOperation start];
  
+    return YES;
+}
+
+
+- (BOOL)createBackgroundTaskWithUrl:(NSString*)url
+{
+    if (![url hasPrefix:@"http"] && ![url hasPrefix:@"https"])
+    {
+        return NO;
+    }
+    
+    self.networkUtility = [[YDNetworkUtility alloc] init];
+    __weak YDDownloadManager *weakSelf = self;
+    [self.networkUtility downloadFileFromUrl:url toDestination:[self getCurrentDownloadFileDestPath:self.downloadTaskID] success:^{
+        [weakSelf setDownloadTaskStatus:YES];
+    } failure:^(NSError *error) {
+        [weakSelf setDownloadTaskStatus:NO];
+    } progress:^(int64_t totalBytesDownload, int64_t totalBytesExpectedDownload) {
+        NSDate *currentTime = [NSDate date];
+        if ([currentTime compare:[weakSelf.lastWriteProgressTime dateByAddingTimeInterval:1]] == NSOrderedAscending)
+        {
+            return;
+        }
+        float currentProgress = totalBytesExpectedDownload > 0 ? (float)totalBytesDownload / totalBytesExpectedDownload : 0.0;
+        weakSelf.lastWriteProgressTime = currentTime;
+        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        DownloadTask *downloadingTask = [DownloadTask findByDownloadID:weakSelf.downloadTaskID inContext:privateQueueContext];
+        if (downloadingTask) {
+            downloadingTask.downloadProgress = @(currentProgress);
+            downloadingTask.videoFileSize = @(totalBytesExpectedDownload);
+            [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+            }];
+            [weakSelf sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadProgress" statusValue:@(currentProgress)];
+        }
+    }];
+    
     return YES;
 }
 

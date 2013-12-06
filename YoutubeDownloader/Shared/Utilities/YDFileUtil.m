@@ -119,6 +119,12 @@
     }
 }
 
++ (BOOL)removeFileWithFilePathURL:(NSURL*)fileURL
+{
+    NSString *filePath = [fileURL absoluteString];
+    return [self removeFileWithFilePath:filePath];
+}
+
 + (BOOL)createAbsoluteDirectory:(NSString *)directoryName
 {
     // Make sure FileUtil release memory
@@ -150,5 +156,18 @@
     }
 }
 
+
++ (BOOL)moveFileFrom:(NSURL*)fromLocation to:(NSURL*)toLocation error:(NSError**)perror
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager moveItemAtURL:fromLocation
+                             toURL:toLocation
+                             error: perror])
+    {
+       return YES;
+    }
+    
+    return NO;
+}
 
 @end
