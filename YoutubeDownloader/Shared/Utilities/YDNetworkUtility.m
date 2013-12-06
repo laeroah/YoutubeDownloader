@@ -22,6 +22,7 @@
 - (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath
                     success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress
 {
+    
     NSURL *downloadUrl = [NSURL URLWithString:downloadUrlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:downloadUrl];
     if (!downloadUrl || !request) {
@@ -35,6 +36,8 @@
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"YDNetworkBackground"];
         self.sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        [self.sessionManager invalidateSessionCancelingTasks:YES];
         
         self.downloadTask = [self.sessionManager downloadTaskWithRequest:request progress:nil
             destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
@@ -62,8 +65,9 @@
                 return;
             }];
         
+        __weak YDNetworkUtility *weakSelf = self;
         [self.sessionManager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-            if (progress) {
+            if (weakSelf.downloadTask == downloadTask && progress) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     progress(totalBytesWritten, totalBytesExpectedToWrite);
                 });
