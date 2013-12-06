@@ -7,8 +7,7 @@ typedef enum
     DownloadTaskWaiting,
     DownloadTaskDownloading,
     DownloadTaskFailed,
-    DownloadTaskFinished,
-    DownloadTaskDeleting
+    DownloadTaskFinished
 }DownloadTaskStatus;
 
 #define DOWNLOAD_TASK_DEFAULT_PRIORITY @(100)
@@ -24,5 +23,6 @@ typedef enum
 - (void)updateWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 - (void)deleteWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 + (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context;
++ (NSArray*)getRemovedTasksWithContext:(NSManagedObjectContext *)context;
 
 @end

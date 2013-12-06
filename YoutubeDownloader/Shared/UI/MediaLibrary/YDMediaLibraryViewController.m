@@ -326,7 +326,9 @@ typedef enum
     if (downloadFinished) {
         YDPlayerViewController *playerViewController = [[YDPlayerViewController alloc]init];
         [playerViewController presentPlayerViewControllerFromViewController:self];
-        [playerViewController playLocalVideoWithPath:video.videoFilePath];
+        if (video.videoFilePath) {
+            [playerViewController playLocalVideoWithPath:video.videoFilePath];
+        }
         
         [video setIsNewValue:NO];
         [[NSManagedObjectContext MR_contextForCurrentThread]MR_saveOnlySelfWithCompletion:nil];

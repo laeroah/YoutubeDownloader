@@ -24,5 +24,6 @@
 - (void)getVideoFileSize;
 - (void)downloadVideoInfoWithDownloadTaskID:(NSNumber *)downloadTaskID;
 - (void)startGetVideoInfoTimer;
+- (void)startClearTimer;
 
 @end

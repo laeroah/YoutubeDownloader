@@ -50,14 +50,14 @@
 
 + (DownloadTask*)getDownloadingTaskInContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d",DownloadTaskDownloading];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d and video.isRemoved == 0",DownloadTaskDownloading];
     
     return  [DownloadTask MR_findFirstWithPredicate:predicate sortedBy:@"downloadPriority,createDate" ascending:YES inContext:context];
 }
 
 + (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d",DownloadTaskWaiting];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d and  video.isRemoved == 0",DownloadTaskWaiting];
     
     return  [DownloadTask MR_findFirstWithPredicate:predicate sortedBy:@"downloadPriority,createDate" ascending:YES inContext:context];
 }
@@ -71,7 +71,7 @@
 
 + (DownloadTask*)findVideoInfoNotDownloadTaskWithContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(videoFileSize = 0 or videoImagePath == NULL) and downloadTaskStatus != %d",DownloadTaskDeleting];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(videoFileSize = 0 or videoImagePath == NULL) and video.isRemoved == 0"];
     
     return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
 }
@@ -95,6 +95,13 @@
             completion(success, error);
         }
     }];
+}
+
++ (NSArray*)getRemovedTasksWithContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video.isRemoved == 1",DownloadTaskWaiting];
+    
+    return  [DownloadTask MR_findAllWithPredicate:predicate inContext:context];
 }
 
 

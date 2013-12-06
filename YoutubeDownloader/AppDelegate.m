@@ -52,6 +52,7 @@
     
     [[YDDownloadManager sharedInstance] startRefreshTimer];
     [[YDDownloadManager sharedInstance] startGetVideoInfoTimer];
+    [[YDDownloadManager sharedInstance] startClearTimer];
     
     // register notification for video download status change
     /** this is hard because when the app is in the background, the notification for video status change won't be sent **/

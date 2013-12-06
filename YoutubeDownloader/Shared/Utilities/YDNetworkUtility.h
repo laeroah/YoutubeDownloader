@@ -18,5 +18,6 @@ typedef void (^YDDownloadProgress)(int64_t totalBytesDownload, int64_t totalByte
 
 - (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath
                     success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress;
+- (void)cancelCurrentDownloadTask;
 
 @end

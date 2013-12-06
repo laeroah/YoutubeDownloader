@@ -102,5 +102,13 @@
     return;
 }
 
-
+- (void)cancelCurrentDownloadTask
+{
+    if ([YDDeviceUtility isIOS7orAbove]) {
+         [self.downloadTask cancel];
+         return;
+    }
+    
+    [self.httpRequestOperation cancel];
+}
 @end
