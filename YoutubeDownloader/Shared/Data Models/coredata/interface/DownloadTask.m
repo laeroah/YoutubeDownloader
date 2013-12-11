@@ -57,7 +57,7 @@
 
 + (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d and  video.isRemoved == 0",DownloadTaskWaiting];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d and  video.isRemoved == 0 and videoFileSize > 0",DownloadTaskWaiting];
     
     return  [DownloadTask MR_findFirstWithPredicate:predicate sortedBy:@"downloadPriority,createDate" ascending:YES inContext:context];
 }

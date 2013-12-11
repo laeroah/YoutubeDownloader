@@ -19,7 +19,7 @@
 
 @implementation YDNetworkUtility
 
-- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath
+- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath configureName:(NSString*)configureName
                     success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress
 {
     
@@ -34,7 +34,7 @@
 
     if ([YDDeviceUtility isIOS7orAbove]) {
         
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"YDNetworkBackground"];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:configureName];
         
         if  (!self.sessionManager)
             self.sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

@@ -16,12 +16,14 @@
 #import "YDImageUtil.h"
 #import "YDConstants.h"
 #import "YDNetworkUtility.h"
+#import "YDVideoLinksExtractorManager.h"
 
 @interface YDDownloadManager ()
 {
     NSTimer *_refreshPlayStatusTimer;
     NSTimer *_getVideoInfoTimer;
     NSTimer *_clearTimer;
+    YDVideoLinksExtractorManager *_urlExtractor;
 }
 
 @property (atomic, strong)      NSNumber *downloadTaskID;
@@ -200,6 +202,8 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSLog(@"downloadUrl = %@",downloadTask.videoDownloadUrl);
     NSString *downloadFileUrl = downloadTask.videoDownloadUrl;
+    NSString *downloadPageUrl = downloadTask.downloadPageUrl;
+    NSString *qualityType = downloadTask.qualityType;
     [manager HEAD:downloadFileUrl parameters:nil success:^(AFHTTPRequestOperation *operation) {
         if ([operation.response respondsToSelector:@selector(expectedContentLength)])
         {
@@ -219,14 +223,27 @@
             [self startGetVideoInfoTimer];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-        DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
-        downloadTask.downloadTaskStatus = @(DownloadTaskFailed);
-        [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
-            self.currentGetVideoInfoID = nil;
-            [self startGetVideoInfoTimer];
-        }];
+        _urlExtractor = [[YDVideoLinksExtractorManager alloc] initWithURL:[NSURL URLWithString:downloadPageUrl] quality:YDYouTubeVideoQualityMedium];
+        [_urlExtractor extractVideoURLWithCompletionBlock:^(NSURL *videoUrl, NSString *youtubeVideoID, NSNumber *duration, NSDictionary *dictionary, NSError *error) {
+             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+             DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
+            if (dictionary[qualityType]) {
+                downloadTask.videoDownloadUrl = dictionary[qualityType];
+            }
+            else
+            {
+                 downloadTask.downloadTaskStatus = @(DownloadTaskFailed);
+            }
+            [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+                self.currentGetVideoInfoID = nil;
+                [self startGetVideoInfoTimer];
+            }];
+
     }];
+       
+       
+       
+           }];
 }
 
 - (void)checkNewDownloadTask:(NSTimer*)timer
@@ -365,7 +382,7 @@
     if (!self.networkUtility)
         self.networkUtility = [[YDNetworkUtility alloc] init];
     __weak YDDownloadManager *weakSelf = self;
-    [self.networkUtility downloadFileFromUrl:url toDestination:[self getCurrentDownloadFileDestPath:self.downloadTaskID] success:^{
+    [self.networkUtility downloadFileFromUrl:url toDestination:[self getCurrentDownloadFileDestPath:self.downloadTaskID] configureName:@"YDDownloader" success:^{
         [weakSelf setDownloadTaskStatus:YES];
     } failure:^(NSError *error) {
         [weakSelf setDownloadTaskStatus:NO];

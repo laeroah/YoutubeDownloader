@@ -16,7 +16,7 @@ typedef void (^YDDownloadProgress)(int64_t totalBytesDownload, int64_t totalByte
 
 @interface YDNetworkUtility : NSObject
 
-- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath
+- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath configureName:(NSString*)configureName
                     success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress;
 - (void)cancelCurrentDownloadTask;
 
