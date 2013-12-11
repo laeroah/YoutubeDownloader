@@ -9,9 +9,15 @@
 #import "YDVideoLinksExtractorManager.h"
 #import "NSString+Util.h"
 #import "WebUtility.h"
+#import "YDDeviceUtility.h"
 
 static NSString* const kUserAgent = @"Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorErrorDomain";
+
+
+static NSString* const kUserAgentiPad = @"Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25";
+
+static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.13+ (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
 
 @interface YDVideoLinksExtractorManager ()
 
@@ -58,7 +64,8 @@ NSString* const kYDYouTubePlayerExtractorErrorDomain = @"YDYouTubeExtractorError
     if (!self.buffer || !self.resultDict)
     {
         NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.youTubeURL];
-        [request setValue:kUserAgent forHTTPHeaderField:@"User-Agent"];
+        NSString *userAgent = [YDDeviceUtility isIPad] ? kUserAgentiPad : kUserAgent;
+        [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
         
         self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
         [self.connection start];
