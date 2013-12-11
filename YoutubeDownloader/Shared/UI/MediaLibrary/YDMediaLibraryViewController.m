@@ -251,7 +251,7 @@ typedef enum
     mediaCell.ribbonImageView.hidden = !video.isNewValue;
     if (video.videoImagePath)
     {
-        [mediaCell.videoThumbnailImageView setImageWithURL:[NSURL fileURLWithPath:video.videoImagePath]];
+        mediaCell.videoThumbnailImageView.image = [UIImage imageWithContentsOfFile:video.videoImagePath];
     }else{
         mediaCell.videoThumbnailImageView.image = nil;
     }

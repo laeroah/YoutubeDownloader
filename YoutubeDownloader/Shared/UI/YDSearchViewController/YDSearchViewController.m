@@ -221,14 +221,18 @@
             
             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
             DownloadTask *downloadTask = [DownloadTask findByDownloadPageUrl:_downloadPageUrl qualityType:selectedValue inContext:privateQueueContext];
-            if (downloadTask && [downloadTask.downloadTaskStatus integerValue] == DownloadTaskFailed)
-            {
-                downloadTask.downloadTaskStatus = @(DownloadTaskWaiting);
-                dispatch_async(dispatch_get_main_queue(),^{
-                    [self dismissAllToastMessages];
-                });
+            
+            if (downloadTask && downloadTask.downloadTaskStatusValue == DownloadTaskFailed) {
+                [[YDDownloadManager sharedInstance] updateDownloadTask:downloadTask downloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
+                    [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
+                    dispatch_async(dispatch_get_main_queue(),^{
+                        [self dismissAllToastMessages];
+                    });
+                }];
+
                 return;
             }
+            
             if (downloadTask)
             {
                 dispatch_async(dispatch_get_main_queue(),^{

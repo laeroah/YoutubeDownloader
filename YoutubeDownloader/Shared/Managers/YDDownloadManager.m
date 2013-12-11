@@ -143,16 +143,17 @@
 
 - (void)downloadVideoImageWithVideoID:(NSString *)youtubeVideoID
 {
+    NSString *imagePath = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"images"];
+    [YDFileUtil createAbsoluteDirectory:imagePath];
+    NSString *imageFileName = [NSString stringWithFormat:@"%@.jpeg", self.currentGetVideoInfoID];
+    NSString *imageFilePath = [imagePath stringByAppendingPathComponent:imageFileName];
+    [YDFileUtil removeFile:imageFilePath];
     NSString *imageUrlString = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/default.jpg",youtubeVideoID];
     NSURL *imageUrl = [NSURL URLWithString:imageUrlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageUrl];
     AFHTTPRequestOperation *postOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     postOperation.responseSerializer = [AFImageResponseSerializer serializer];
     [postOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *imagePath = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"images"];
-        [YDFileUtil createAbsoluteDirectory:imagePath];
-        NSString *imageFileName = [NSString stringWithFormat:@"%@.jpeg", self.currentGetVideoInfoID];
-        NSString *imageFilePath = [imagePath stringByAppendingPathComponent:imageFileName];
         UIImage *thumbnail = [YDImageUtil scaleImage:responseObject maxSize:CGSizeMake(80,80)];
         NSData* imageData = UIImageJPEGRepresentation(thumbnail, 1.0);
         [imageData writeToFile:imageFilePath atomically:YES];
@@ -218,8 +219,13 @@
             [self startGetVideoInfoTimer];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        self.currentGetVideoInfoID = nil;
-        [self startGetVideoInfoTimer];
+        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
+        downloadTask.downloadTaskStatus = @(DownloadTaskFailed);
+        [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+            self.currentGetVideoInfoID = nil;
+            [self startGetVideoInfoTimer];
+        }];
     }];
 }
 
@@ -309,6 +315,42 @@
         if (completion)
         {
             completion(YES,downloadTaskID);
+        }
+    }];
+}
+
+- (void)updateDownloadTask:(DownloadTask*)task downloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID videoDuration:(NSNumber*)duration qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success, NSNumber *downloadTaskID))completion
+{
+    
+    task.downloadPageUrl = downloadPageUrl;
+	task.downloadPriority = DOWNLOAD_TASK_DEFAULT_PRIORITY;
+	task.downloadTaskStatus = @(DownloadTaskWaiting);
+	task.qualityType = qualityType;
+    task.videoTitle = videoTitle;
+	task.videoDescription = videoDescription;
+	task.videoImagePath = nil;
+	task.videoDownloadUrl = videoDownloadUrl;
+    task.youtubeVideoID = youtubeVideoID;
+    
+    Video *video = task.video;
+    video.createDate = [NSDate date];
+    video.duration = @(0);
+    video.isNew = @(NO);
+    video.isRemoved = @(NO);
+    video.qualityType = qualityType;
+    video.videoDescription = videoDescription;
+    video.videoFilePath = nil;
+    video.videoImagePath = nil;
+    video.videoTitle = videoTitle;
+    video.duration = duration;
+    
+    task.video = video;
+    video.downloadTask = task;
+    
+    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (completion)
+        {
+            completion(YES,task.downloadID);
         }
     }];
 }
