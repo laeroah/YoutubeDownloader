@@ -320,7 +320,8 @@
         return NO;
     }
     
-    self.networkUtility = [[YDNetworkUtility alloc] init];
+    if (!self.networkUtility)
+        self.networkUtility = [[YDNetworkUtility alloc] init];
     __weak YDDownloadManager *weakSelf = self;
     [self.networkUtility downloadFileFromUrl:url toDestination:[self getCurrentDownloadFileDestPath:self.downloadTaskID] success:^{
         [weakSelf setDownloadTaskStatus:YES];
@@ -369,14 +370,12 @@
         [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
             [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
             self.downloadTaskID = nil;
-            self.networkUtility = nil;
         }];
         return;
     }
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
         self.downloadTaskID = nil;
-        self.networkUtility = nil;
     }];
     
 }

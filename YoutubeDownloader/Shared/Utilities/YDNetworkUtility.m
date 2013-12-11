@@ -35,9 +35,11 @@
     if ([YDDeviceUtility isIOS7orAbove]) {
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"YDNetworkBackground"];
-        self.sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         
-        [self.sessionManager invalidateSessionCancelingTasks:YES];
+        if  (!self.sessionManager)
+            self.sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        //[self.sessionManager invalidateSessionCancelingTasks:YES];
         
         self.downloadTask = [self.sessionManager downloadTaskWithRequest:request progress:nil
             destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
@@ -49,7 +51,6 @@
                                 failure(error);
                             }
                             self.downloadTask = nil;
-                            self.sessionManager = nil;
                     });
                     return;
                 }
@@ -59,7 +60,6 @@
                             success();
                         }
                         self.downloadTask = nil;
-                        self.sessionManager = nil;
                     });
                 });
                 return;
