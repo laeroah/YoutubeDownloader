@@ -235,6 +235,10 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex == actionSheet.cancelButtonIndex)
+    {
+        return;
+    }
     NSString *selectedValue = [actionSheet buttonTitleAtIndex:buttonIndex];
     
     [self showToastMessage:@"Please wait..." hideAfterDelay:0 withProgress:YES];
