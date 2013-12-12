@@ -45,7 +45,7 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
 
 -(id)initWithID:(NSString *)videoID quality:(YDYouTubeVideoQuality)quality
 {
-    NSURL* URL = (videoID) ? [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", videoID]] : nil;
+    NSURL* URL = (videoID) ? [NSURL URLWithString:[NSString stringWithFormat:@"http://m.youtube.com/watch?v=%@", videoID]] : nil;
     return [self initWithURL:URL quality:quality];
 }
 

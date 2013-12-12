@@ -166,7 +166,7 @@
 {
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = ''"];
     //NSString *homeUrl = @"http://m.youtube.com";
-    NSString *homeUrl = @"http://www.youtube.com";
+    NSString *homeUrl = @"http://m.youtube.com";
     [self loadUrl:[NSURL URLWithString:homeUrl]];
     
     [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_NAVIGATION_DOWNLOAD label:SCREEN_NAME_SEARCH_VIEW value:nil];
