@@ -108,7 +108,7 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus != %d",DownloadTaskFailed];
     
-    return  [DownloadTask MR_aggregateOperation:@"sum" onAttribute:@"videoFileSize" withPredicate:predicate];
+    return  [DownloadTask MR_aggregateOperation:@"sum:" onAttribute:@"videoFileSize" withPredicate:predicate];
 }
 
 
