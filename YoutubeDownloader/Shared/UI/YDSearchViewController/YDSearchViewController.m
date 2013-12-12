@@ -256,7 +256,7 @@
     };
     
     NSArray *mediaQualities = [NSArray arrayWithArray:[downloadableVideos allKeys]];                          
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Media Quality" rows:mediaQualities initialSelection:0 doneBlock:done cancelBlock:cancel origin:_downloadButton];
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Media Quality" rows:mediaQualities initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.webView];
 
 }
 
