@@ -106,6 +106,14 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
     NSRange rangeBootStrapData   = [regex rangeOfFirstMatchInString:html
                                                options:0
                                                  range:NSMakeRange(0, [html length])];
+    
+    if (rangeBootStrapData.location == NSNotFound)
+    {
+        if (self.completionBlock)
+            self.completionBlock(self.youTubeURL, nil, nil, nil,nil);
+        return;
+    }
+    
     NSMutableString* result = [NSMutableString stringWithString:[html substringWithRange:rangeBootStrapData]];
     
     [result replaceOccurrencesOfString:@"var bootstrap_data = \")]}'" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [result length])];

@@ -212,52 +212,71 @@
         return;
     }
     
-    ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-        [self showToastMessage:@"Please wait..." hideAfterDelay:0 withProgress:YES];
-        NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_CHOOSE_VIDEO_QUALITY label:SCREEN_NAME_SEARCH_VIEW value:@(selectedIndex)];
-            
-            NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-            DownloadTask *downloadTask = [DownloadTask findByDownloadPageUrl:_downloadPageUrl qualityType:selectedValue inContext:privateQueueContext];
-            
-            if (downloadTask && downloadTask.downloadTaskStatusValue == DownloadTaskFailed) {
-                [[YDDownloadManager sharedInstance] updateDownloadTask:downloadTask downloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
-                    [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
-                    dispatch_async(dispatch_get_main_queue(),^{
-                        [self dismissAllToastMessages];
-                    });
-                }];
+    NSArray *mediaQualities = [NSArray arrayWithArray:[downloadableVideos allKeys]];                          
+  
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"Select a Media Quality"
+                                  delegate:self
+                                  cancelButtonTitle:nil
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:nil];
+    
+    for (NSString *quality in mediaQualities) {
+        [actionSheet addButtonWithTitle:quality];
+    }
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [actionSheet showFromRect:[self.view convertRect:_downloadButton.frame fromView:_downloadButton.superview] inView:self.view animated:YES]; //this need to show from the button for iPad
+    }else{
+        [actionSheet showInView:self.view];
+    }
 
-                return;
-            }
-            
-            if (downloadTask)
-            {
-                dispatch_async(dispatch_get_main_queue(),^{
-                    [self dismissAllToastMessages];
-                    [self showToastMessage:@"You have selected this video" hideAfterDelay:3.0];
-                });
-                return;
-            }
-            [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *selectedValue = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    [self showToastMessage:@"Please wait..." hideAfterDelay:0 withProgress:YES];
+    NSString *videoFileDownloadUrl = downloadableVideos[selectedValue];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_SEARCH_VIEW action:EVENT_ACTION_CHOOSE_VIDEO_QUALITY label:SCREEN_NAME_SEARCH_VIEW value:@(buttonIndex)];
+        
+        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        DownloadTask *downloadTask = [DownloadTask findByDownloadPageUrl:_downloadPageUrl qualityType:selectedValue inContext:privateQueueContext];
+        
+        if (downloadTask && downloadTask.downloadTaskStatusValue == DownloadTaskFailed) {
+            [[YDDownloadManager sharedInstance] updateDownloadTask:downloadTask downloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
                 [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];
                 });
             }];
-        });
-
-    };
-    
-    ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
+            
+            return;
+        }
         
-    };
-    
-    NSArray *mediaQualities = [NSArray arrayWithArray:[downloadableVideos allKeys]];                          
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Media Quality" rows:mediaQualities initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.webView];
+        if (downloadTask)
+        {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self dismissAllToastMessages];
+                [self showToastMessage:@"You have selected this video" hideAfterDelay:3.0];
+            });
+            return;
+        }
+        [[YDDownloadManager sharedInstance] createDownloadTaskWithDownloadPageUrl:_downloadPageUrl youtubeVideoID:self.youtubeVideoID videoDuration:self.youtubeVideoDuration qualityType:selectedValue videoDescription:_title videoTitle:_title videoDownloadUrl:videoFileDownloadUrl inContext:privateQueueContext completion:^(BOOL success, NSNumber *downloadTaskID) {
+            [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self dismissAllToastMessages];
+            });
+        }];
+    });
 
+    
+}
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    
 }
 
 #pragma mark UIWebViewDelegate methods
