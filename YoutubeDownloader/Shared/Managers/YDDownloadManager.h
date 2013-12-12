@@ -26,5 +26,6 @@
 - (void)startGetVideoInfoTimer;
 - (void)startClearTimer;
 - (void)updateDownloadTask:(DownloadTask*)task downloadPageUrl:(NSString*)downloadPageUrl youtubeVideoID:(NSString*)youtubeVideoID videoDuration:(NSNumber*)duration qualityType:(NSString*)qualityType videoDescription:(NSString*)videoDescription videoTitle:(NSString*)videoTitle videoDownloadUrl:(NSString*)videoDownloadUrl inContext:(NSManagedObjectContext *)context completion:(void(^)(BOOL success, NSNumber *downloadTaskID))completion;
+- (void)retryToDownloadWithTaskID:(NSNumber*)downloadTaskID;
 
 @end

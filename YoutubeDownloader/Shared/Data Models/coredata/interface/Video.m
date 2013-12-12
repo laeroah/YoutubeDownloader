@@ -95,7 +95,6 @@
     NSInteger videoDuration = self.durationValue;
     NSInteger min = videoDuration/60;
     NSInteger sec = videoDuration%60;
-    
     return [NSString stringWithFormat:@"%d:%.2d", min, sec];
 }
 

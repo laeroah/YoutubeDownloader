@@ -212,6 +212,7 @@
             DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
             downloadTask.videoFileSize = @(contentLength);
             [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+                [self sendTotalVideoSizeChangeNotification];
                 self.currentGetVideoInfoID = nil;
                 [self checkVideoInfoNotBeDownloaded:nil];
             }];
@@ -514,12 +515,41 @@
         }
         
         [privateQueueContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            [self sendTotalVideoSizeChangeNotification];
             self.isClearing = NO;
         }];
 
     });
 }
 
+- (void)retryToDownloadWithTaskID:(NSNumber*)downloadTaskID
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    DownloadTask   *downloadingTask = [DownloadTask getDownloadingTaskInContext:privateQueueContext];
+    if (!downloadingTask || downloadingTask.downloadTaskStatusValue != DownloadTaskFailed) {
+        return;
+    }
+    
+    downloadingTask.videoFileSize = 0;
+    downloadingTask.downloadTaskStatus = @(DownloadTaskWaiting);
+    [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+        [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskWaiting)];
+    }];
+}
 
+- (void)sendTotalVideoSizeChangeNotification
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSNumber *totalVideoSize = [DownloadTask getTotalVideoSizeWithContext:privateQueueContext];
+    if (!totalVideoSize) {
+        return;
+    }
+    
+    NSDictionary *userInfo = @{
+                               @"videoSize" : [totalVideoSize copy],
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName: kTotalVideoSizeChangeNotification object: nil userInfo:userInfo];
+    
+}
 
 @end

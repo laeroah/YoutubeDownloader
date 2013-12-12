@@ -24,5 +24,6 @@ typedef enum
 - (void)deleteWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 + (DownloadTask*)getWaitingDownloadTaskInContext:(NSManagedObjectContext *)context;
 + (NSArray*)getRemovedTasksWithContext:(NSManagedObjectContext *)context;
++ (NSNumber*)getTotalVideoSizeWithContext:(NSManagedObjectContext *)context;
 
 @end

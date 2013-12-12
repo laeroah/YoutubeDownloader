@@ -34,6 +34,7 @@
 #pragma mark - Google Analytics
 
 #define kDownloadTaskStatusChangeNotification       @"kDownloadTaskStatusChangeNotification"
+#define kTotalVideoSizeChangeNotification       @"kTotalVideoSizeChangeNotification"
 
 #define kYoutubeDownloadErrorDomain @"YDErrorDomain"
 
