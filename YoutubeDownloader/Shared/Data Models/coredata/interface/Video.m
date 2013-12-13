@@ -79,16 +79,12 @@
     }];
 }
 
-- (void)deleteWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
+
+- (void)updateWithContext:(NSManagedObjectContext *)context
 {
-    [self MR_inContext:context];
-    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (completion)
-        {
-            completion(success, error);
-        }
-    }];
+    [context MR_saveToPersistentStoreAndWait];
 }
+
 
 - (NSString *)formattedVideoDuration
 {

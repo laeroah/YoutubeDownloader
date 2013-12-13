@@ -15,9 +15,11 @@ typedef void (^YDDownloadFailuer)(NSError *error);
 typedef void (^YDDownloadProgress)(int64_t totalBytesDownload, int64_t totalBytesExpectedDownload);
 
 @interface YDNetworkUtility : NSObject
-
++ (YDNetworkUtility *)sharedInstance;
 - (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath configureName:(NSString*)configureName
                     success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress;
-- (void)cancelCurrentDownloadTask;
+- (void)cancelDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString;
+- (void)pauseDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
+- (void)initializeForConfigureName:(NSString*)configureName;
 
 @end

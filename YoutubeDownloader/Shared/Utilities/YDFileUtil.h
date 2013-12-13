@@ -24,5 +24,8 @@
 + (void)removeFile:(NSString *)filePath;
 + (BOOL)removeFileWithFilePathURL:(NSURL*)fileURL;
 + (BOOL)moveFileFrom:(NSURL*)fromLocation to:(NSURL*)toLocation error:(NSError**)perror;
++ (NSData*)getDataFromFilePath:(NSString*)filePath;
++ (void)appendData:(NSData*)data intoFileWithFilePath:(NSString*)filePath;
++ (void)writeData:(NSData*)data intoFileWithFilePath:(NSString*)filePath;
 
 @end

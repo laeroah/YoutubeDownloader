@@ -12,5 +12,6 @@
 + (NSInteger)getNewVideosCountWithContext:(NSManagedObjectContext *)context;
 + (void)removeVideo:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion;
 - (NSString *)formattedVideoDuration;
+- (void)updateWithContext:(NSManagedObjectContext *)context;
 
 @end

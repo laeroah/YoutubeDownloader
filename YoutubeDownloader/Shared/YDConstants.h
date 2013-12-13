@@ -39,4 +39,6 @@
 #define kYoutubeDownloadErrorDomain @"YDErrorDomain"
 
 #define kYDErrorInvalidUrl 1000
+#define kYDErrorConfigureNameMustProvide 1001
 
+#define kVideoDownloadConfigureName @"YDDownloader" 

@@ -62,6 +62,19 @@
     return  [DownloadTask MR_findFirstWithPredicate:predicate sortedBy:@"downloadPriority,createDate" ascending:YES inContext:context];
 }
 
++ (NSArray*)getAllWaitingOrDownloadingTasksInContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus in %@ and video.isRemoved == 0 and videoFileSize > 0",@[@(DownloadTaskWaiting),@(DownloadTaskDownloading)]];
+    return  [DownloadTask MR_findAllWithPredicate:predicate inContext:context];
+}
+
++ (NSArray*)getAllWaitingTasksInContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d and video.isRemoved == 0 and videoFileSize > 0",DownloadTaskWaiting];
+    return  [DownloadTask MR_findAllWithPredicate:predicate inContext:context];
+}
+
+
 + (DownloadTask*)findByDownloadPageUrl:(NSString*)downloadPageUrl qualityType:(NSString*)qualityType  inContext:(NSManagedObjectContext *)context
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadPageUrl = %@ and qualityType = %@",downloadPageUrl,qualityType];
@@ -86,15 +99,9 @@
     }];
 }
 
-- (void)deleteWithContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
+- (void)updateWithContext:(NSManagedObjectContext *)context
 {
-    [self MR_deleteInContext:context];
-    [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (completion)
-        {
-            completion(success, error);
-        }
-    }];
+    [context MR_saveToPersistentStoreAndWait];
 }
 
 + (NSArray*)getRemovedTasksWithContext:(NSManagedObjectContext *)context
@@ -109,6 +116,17 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus != %d",DownloadTaskFailed];
     
     return  [DownloadTask MR_aggregateOperation:@"sum:" onAttribute:@"videoFileSize" withPredicate:predicate];
+}
+
++ (DownloadTask*)getDownloadingTaskWithDownloadUrl:(NSString*)downloadUrl inContext:(NSManagedObjectContext *)context
+{
+    if (!downloadUrl) {
+        return nil;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoDownloadUrl = %@",downloadUrl];
+    
+    return  [DownloadTask MR_findFirstWithPredicate:predicate inContext:context];
 }
 
 

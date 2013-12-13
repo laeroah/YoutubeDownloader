@@ -170,4 +170,24 @@
     return NO;
 }
 
++ (NSData*)getDataFromFilePath:(NSString*)filePath
+{
+    if (!filePath) {
+        return nil;
+    }
+    return [NSData dataWithContentsOfFile:filePath];
+}
+
++ (void)appendData:(NSData*)data intoFileWithFilePath:(NSString*)filePath
+{
+    NSFileHandle *myHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+    [myHandle seekToEndOfFile];
+    [myHandle writeData:data];
+}
+
++ (void)writeData:(NSData*)data intoFileWithFilePath:(NSString*)filePath
+{
+    [data writeToFile:filePath atomically:YES];
+}
+
 @end

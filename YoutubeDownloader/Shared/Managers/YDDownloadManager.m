@@ -20,15 +20,12 @@
 
 @interface YDDownloadManager ()
 {
-    NSTimer *_refreshPlayStatusTimer;
     NSTimer *_getVideoInfoTimer;
     NSTimer *_clearTimer;
     YDVideoLinksExtractorManager *_urlExtractor;
 }
 
-@property (atomic, strong)      NSNumber *downloadTaskID;
 @property (atomic, strong)      NSDate *lastWriteProgressTime;
-@property (atomic, strong)      YDNetworkUtility *networkUtility;
 @property (atomic, strong)      NSNumber *currentGetVideoInfoID;
 @property (atomic, assign)      BOOL isClearing;
 
@@ -46,22 +43,6 @@
         [YDFileUtil createAbsoluteDirectory:videoDirectory];
     });
     return instance;
-}
-
-- (void)stopRefreshTimer
-{
-    if (_refreshPlayStatusTimer)
-    {
-        [_refreshPlayStatusTimer invalidate];
-        _refreshPlayStatusTimer = nil;
-    }
-}
-
-- (void)startRefreshTimer
-{
-    [self  stopRefreshTimer];
-    _refreshPlayStatusTimer = [NSTimer timerWithTimeInterval:5 target:self selector:@selector(checkNewDownloadTask:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:_refreshPlayStatusTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stopClearTimer
@@ -105,6 +86,7 @@
     NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
     DownloadTask *downloadTask = [DownloadTask findVideoInfoNotDownloadTaskWithContext:privateQueueContext];
     if (!downloadTask) {
+        [self processForWaitingDownloadTasks];//may be some task will be skipped for some issue then force to download it
         [self startGetVideoInfoTimer];
         return;
     }
@@ -211,8 +193,10 @@
             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
             DownloadTask *downloadTask =  [DownloadTask findByDownloadID:self.currentGetVideoInfoID inContext:privateQueueContext];
             downloadTask.videoFileSize = @(contentLength);
+            NSNumber *downloadTaskID = downloadTask.downloadID;
             [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
                 [self sendTotalVideoSizeChangeNotification];
+                [self checkNewDownloadTaskWithDownloadTaskID:downloadTaskID];
                 self.currentGetVideoInfoID = nil;
                 [self checkVideoInfoNotBeDownloaded:nil];
             }];
@@ -242,53 +226,33 @@
 
     }];
        
-       
-       
            }];
 }
 
-- (void)checkNewDownloadTask:(NSTimer*)timer
+- (void)checkNewDownloadTaskWithDownloadTaskID:(NSNumber*)downloadTaskID
 {
-    if (self.isClearing)
-    {
-        return;
-    }
-    
-    if (self.downloadTaskID)
-    {
-        return;
-    }
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (self.downloadTaskID)
+        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+        DownloadTask   *downloadingTask = [DownloadTask findByDownloadID:downloadTaskID inContext:privateQueueContext];
+        if (!downloadingTask || (downloadingTask.downloadTaskStatusValue != DownloadTaskDownloading && downloadingTask.downloadTaskStatusValue != DownloadTaskWaiting))
         {
             return;
         }
         
-        NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-        DownloadTask   *downloadingTask = [DownloadTask getDownloadingTaskInContext:privateQueueContext];
-        if (!downloadingTask) {
-            downloadingTask = [DownloadTask getWaitingDownloadTaskInContext:privateQueueContext];
-        }
-        
-        if (downloadingTask)
-        {
-            self.downloadTaskID = downloadingTask.downloadID;
-            self.lastWriteProgressTime = [NSDate date];
-            downloadingTask.downloadTaskStatus = @(DownloadTaskDownloading);
-            NSString *downloadUrl = downloadingTask.videoDownloadUrl;
-            NSNumber *videoID = downloadingTask.video.videoID;
-            [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+        downloadingTask.downloadTaskStatus = @(DownloadTaskDownloading);
+        NSString *downloadUrl = downloadingTask.videoDownloadUrl;
+        NSNumber *videoID = downloadingTask.video.videoID;
+        [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
                 
                 [self sendDownloadStatusChangeNotificationWithVideoID:videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskDownloading)];
                 
-                if (![self createBackgroundTaskWithUrl:downloadUrl])
+                if (![self createBackgroundTaskWithUrl:downloadUrl destFilePath:downloadingTask.videoFilePath])
                 {
-                    [self setDownloadTaskStatus:NO];
+                    [self setDownloadTaskStatus:NO downloadUrl:downloadUrl];
                 }
                 
-             }];
-        }
+        }];
+        
     
     });
 }
@@ -313,6 +277,7 @@
 	task.videoImagePath = nil;
 	task.videoDownloadUrl = videoDownloadUrl;
     task.youtubeVideoID = youtubeVideoID;
+    task.videoFilePath = [self getDownloadFileDestPathWithDownloadTaskID:downloadTaskID];
     
     Video *video = [Video createVideoWithContext:context];
     video.createDate = [NSDate date];
@@ -373,20 +338,17 @@
     }];
 }
 
-- (BOOL)createBackgroundTaskWithUrl:(NSString*)url
+- (BOOL)createBackgroundTaskWithUrl:(NSString*)url destFilePath:(NSString*)destFilePath
 {
     if (![url hasPrefix:@"http"] && ![url hasPrefix:@"https"])
     {
         return NO;
     }
-    
-    if (!self.networkUtility)
-        self.networkUtility = [[YDNetworkUtility alloc] init];
     __weak YDDownloadManager *weakSelf = self;
-    [self.networkUtility downloadFileFromUrl:url toDestination:[self getCurrentDownloadFileDestPath:self.downloadTaskID] configureName:@"YDDownloader" success:^{
-        [weakSelf setDownloadTaskStatus:YES];
+    [[YDNetworkUtility sharedInstance] downloadFileFromUrl:url toDestination:destFilePath configureName:kVideoDownloadConfigureName success:^{
+        [weakSelf setDownloadTaskStatus:YES downloadUrl:url];
     } failure:^(NSError *error) {
-        [weakSelf setDownloadTaskStatus:NO];
+        [weakSelf setDownloadTaskStatus:NO downloadUrl:url];
     } progress:^(int64_t totalBytesDownload, int64_t totalBytesExpectedDownload) {
         NSDate *currentTime = [NSDate date];
         if ([currentTime compare:[weakSelf.lastWriteProgressTime dateByAddingTimeInterval:1]] == NSOrderedAscending)
@@ -396,7 +358,7 @@
         float currentProgress = totalBytesExpectedDownload > 0 ? (float)totalBytesDownload / totalBytesExpectedDownload : 0.0;
         weakSelf.lastWriteProgressTime = currentTime;
         NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-        DownloadTask *downloadingTask = [DownloadTask findByDownloadID:weakSelf.downloadTaskID inContext:privateQueueContext];
+        DownloadTask *downloadingTask = [DownloadTask getDownloadingTaskWithDownloadUrl:url  inContext:privateQueueContext];
         if (downloadingTask) {
             downloadingTask.downloadProgress = @(currentProgress);
             downloadingTask.videoFileSize = @(totalBytesExpectedDownload);
@@ -410,16 +372,16 @@
 }
 
 
-- (void)setDownloadTaskStatus:(BOOL)success
+- (void)setDownloadTaskStatus:(BOOL)success downloadUrl:(NSString*)downloadUrl
 {
+    
     NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    DownloadTask *downloadingTask = [DownloadTask findByDownloadID:self.downloadTaskID inContext:privateQueueContext];
+    DownloadTask *downloadingTask = [DownloadTask getDownloadingTaskWithDownloadUrl:downloadUrl inContext:privateQueueContext];
     if (success) {
         downloadingTask.downloadProgress = @(1.0);
         downloadingTask.downloadTaskStatus = @(DownloadTaskFinished);
-        downloadingTask.videoFilePath = [self getCurrentDownloadFileDestPath:self.downloadTaskID];
         Video *video = downloadingTask.video;
-        video.videoFilePath = [self getCurrentDownloadFileDestPath:self.downloadTaskID];
+        video.videoFilePath = downloadingTask.videoFilePath;
     }
     else {
         downloadingTask.downloadTaskStatus = @(DownloadTaskFailed);
@@ -429,18 +391,16 @@
     {
         [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
             [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
-            self.downloadTaskID = nil;
         }];
         return;
     }
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
-        self.downloadTaskID = nil;
     }];
     
 }
 
-- (NSString*)getCurrentDownloadFileDestPath:(NSNumber*)downloadTaskID
+- (NSString*)getDownloadFileDestPathWithDownloadTaskID:(NSNumber*)downloadTaskID
 {
     NSString *videoDirectory = [[YDFileUtil documentDirectoryPath] stringByAppendingPathComponent:@"videos"];
     [YDFileUtil createAbsoluteDirectory:videoDirectory];
@@ -481,18 +441,9 @@
             [NSThread sleepForTimeInterval:0.5];
         }
         
-        NSNumber *downloadTaskID = self.downloadTaskID;
-        if (downloadTaskID)
+        for (DownloadTask *downloadTask in removedTasks)
         {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadID = %@", downloadTaskID];
-            if ([[removedTasks filteredArrayUsingPredicate:predicate] count] > 0)
-            {
-               [self.networkUtility cancelCurrentDownloadTask];
-                while (self.downloadTaskID)
-                {
-                    [NSThread sleepForTimeInterval:0.5];
-                }
-            }
+            [[YDNetworkUtility sharedInstance] cancelDownloadTaskWithConfigureName:kVideoDownloadConfigureName downloadUrl:downloadTask.videoDownloadUrl];
         }
         
         for (DownloadTask *downloadTask in removedTasks)
@@ -550,6 +501,102 @@
                                };
     [[NSNotificationCenter defaultCenter] postNotificationName: kTotalVideoSizeChangeNotification object: nil userInfo:userInfo];
     
+}
+
+- (void)pauseDownloadTaskWithDownloadTaskID:(NSNumber *)downloadTaskID completion:(void(^)())completion
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    DownloadTask *downloadTask  = [DownloadTask findByDownloadID:downloadTaskID inContext:privateQueueContext];
+    if (!downloadTask || downloadTask.downloadTaskStatusValue != DownloadTaskDownloading) {
+        return;
+    }
+    
+    [[YDNetworkUtility sharedInstance] pauseDownloadTaskWithConfigureName:kVideoDownloadConfigureName downloadUrl:downloadTask.videoDownloadUrl saveResumeDataPath:downloadTask.videoFilePath];
+    
+    downloadTask.downloadTaskStatus = @(DownloadTaskPaused);
+    
+    if (!completion) {
+        [downloadTask updateWithContext:privateQueueContext];
+        return;
+    }
+    
+    [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
+- (void)resumeDownloadTaskWithDownloadTaskID:(NSNumber *)downloadTaskID completion:(void(^)())completion
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    DownloadTask *downloadTask  = [DownloadTask findByDownloadID:downloadTaskID inContext:privateQueueContext];
+    if (!downloadTask || downloadTask.downloadTaskStatusValue != DownloadTaskPaused) {
+        return;
+    }
+    
+    downloadTask.downloadTaskStatus = @(DownloadTaskDownloading);
+    NSString *downloadUrl = downloadTask.videoDownloadUrl;
+    NSNumber *videoID = downloadTask.video.videoID;
+    
+    if (!completion) {
+        [downloadTask updateWithContext:privateQueueContext];
+        if (![self createBackgroundTaskWithUrl:downloadUrl destFilePath:downloadTask.videoFilePath])
+        {
+            [self setDownloadTaskStatus:NO downloadUrl:downloadUrl];
+        }
+        else
+        {
+            [self sendDownloadStatusChangeNotificationWithVideoID:videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskDownloading)];
+        }
+        return;
+    }
+    [downloadTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
+        if (![self createBackgroundTaskWithUrl:downloadUrl destFilePath:downloadTask.videoFilePath])
+        {
+            [self setDownloadTaskStatus:NO downloadUrl:downloadUrl];
+        }
+        else
+        {
+            [self sendDownloadStatusChangeNotificationWithVideoID:videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskDownloading)];
+        }
+        
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
+
+- (void)processForWaitingDownloadTasks
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSArray *downloadTasks = [DownloadTask getAllWaitingTasksInContext:privateQueueContext];
+    for (DownloadTask *downloadTask in downloadTasks)
+    {
+        [self checkNewDownloadTaskWithDownloadTaskID:downloadTask.downloadID];
+    }
+}
+
+
+- (void)processForPendingDownloadTasks
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSArray *downloadTasks = [DownloadTask getAllWaitingOrDownloadingTasksInContext:privateQueueContext];
+    for (DownloadTask *downloadTask in downloadTasks)
+    {
+        [self checkNewDownloadTaskWithDownloadTaskID:downloadTask.downloadID];
+    }
+}
+
+- (void)initializeProcess
+{
+    [[YDNetworkUtility sharedInstance] initializeForConfigureName:kVideoDownloadConfigureName];
+    [self processForPendingDownloadTasks];
+    [self startGetVideoInfoTimer];
+    [self startClearTimer];
+    
+    return;
 }
 
 @end

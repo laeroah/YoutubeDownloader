@@ -47,12 +47,10 @@
     [self recordNewOrReturningUser];
     [[YDAnalyticManager sharedInstance]setUserType];
     
-    /*debug*/
-    //[self generateDebugData];
-    
-    [[YDDownloadManager sharedInstance] startRefreshTimer];
-    [[YDDownloadManager sharedInstance] startGetVideoInfoTimer];
-    [[YDDownloadManager sharedInstance] startClearTimer];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   ^{
+        [[YDDownloadManager sharedInstance] initializeProcess];
+    });
     
     // register notification for video download status change
     /** this is hard because when the app is in the background, the notification for video status change won't be sent **/
