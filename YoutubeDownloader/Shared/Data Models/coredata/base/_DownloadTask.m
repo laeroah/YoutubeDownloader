@@ -11,6 +11,7 @@ const struct DownloadTaskAttributes DownloadTaskAttributes = {
 	.downloadProgress = @"downloadProgress",
 	.downloadTaskStatus = @"downloadTaskStatus",
 	.qualityType = @"qualityType",
+	.resumeDataPath = @"resumeDataPath",
 	.videoDescription = @"videoDescription",
 	.videoDownloadUrl = @"videoDownloadUrl",
 	.videoFilePath = @"videoFilePath",
@@ -205,6 +206,13 @@ const struct DownloadTaskFetchedProperties DownloadTaskFetchedProperties = {
 
 
 @dynamic qualityType;
+
+
+
+
+
+
+@dynamic resumeDataPath;
 
 
 

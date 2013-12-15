@@ -8,6 +8,7 @@
         <attribute name="downloadProgress" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="downloadTaskStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="qualityType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resumeDataPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoDownloadUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoFilePath" optional="YES" attributeType="String" syncable="YES"/>

@@ -27,5 +27,6 @@
 + (NSData*)getDataFromFilePath:(NSString*)filePath;
 + (void)appendData:(NSData*)data intoFileWithFilePath:(NSString*)filePath;
 + (void)writeData:(NSData*)data intoFileWithFilePath:(NSString*)filePath;
++ (int64_t)getFileSizeWithPath:(NSString*)filePath;
 
 @end

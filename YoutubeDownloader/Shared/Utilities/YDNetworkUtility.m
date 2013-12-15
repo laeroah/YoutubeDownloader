@@ -9,217 +9,215 @@
 #import "YDNetworkUtility.h"
 #import "YDDeviceUtility.h"
 #import "YDFileUtil.h"
+#import "DownloadTask.h"
 
 @interface YDNetworkUtility()
 
-@property (nonatomic, strong) NSMutableDictionary *sessionManagerDict;
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) id<YDNetworkUtilityDelegate> delegate;
 @property (nonatomic, strong) NSMutableDictionary *downloadTasksMap;
 @property (nonatomic, strong) NSMutableDictionary *downloadTasksProgressMap;
+
 
 @end
 
 @implementation YDNetworkUtility
 
-+ (YDNetworkUtility *)sharedInstance
-{
-    static YDNetworkUtility *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[YDNetworkUtility alloc] init];
-    });
-    return instance;
-}
+- (id)initWithConfigureName:(NSString*)configureName delegate:(id<YDNetworkUtilityDelegate>)delegate completion:(void(^)())completion
 
-- (id)init
 {
     self = [super init];
     if (self) {
-        self.sessionManagerDict = [NSMutableDictionary dictionary];
         self.downloadTasksMap = [NSMutableDictionary dictionary];
         self.downloadTasksProgressMap = [NSMutableDictionary dictionary];
+        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:configureName];
+        self.session =  [NSURLSession sessionWithConfiguration:configuration
+                                      delegate:self
+                                 delegateQueue:nil];
+        self.delegate = delegate;
+        
+        [self.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            
+            if (!downloadTasks || [downloadTasks count] <= 0) {
+                if (completion){
+                    completion();
+                }
+                return;
+            }
+            
+            for (NSURLSessionDownloadTask *downloadTask in downloadTasks) {
+                NSString *urlString = [downloadTask.originalRequest.URL absoluteString];
+                self.downloadTasksMap[urlString] = downloadTask;
+            }
+            
+            if (completion){
+                completion();
+            }
+        }];
     }
     return self;
 }
 
-- (void)initializeForConfigureName:(NSString*)configureName
-{
-    AFURLSessionManager *sessionManager = self.sessionManagerDict[configureName];
-    
-    if  (sessionManager)
-    {
-        return;
-    }
-    
-    //for one configure name there should be only on session manager
-     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:configureName];
-    
-    sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    self.downloadTasksMap[configureName] = [NSMutableDictionary dictionary];
-    self.downloadTasksProgressMap[configureName] = [NSMutableDictionary dictionary];
-    
-    [sessionManager setDidFinishEventsForBackgroundURLSessionBlock:^(NSURLSession *session) {
-        
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (appDelegate.backgroundURLSessionCompletionHandler) {
-            void (^completionHandler)() = appDelegate.backgroundURLSessionCompletionHandler;
-            appDelegate.backgroundURLSessionCompletionHandler = nil;
-            completionHandler();
-        }
-    }];
-    self.sessionManagerDict[configureName] = sessionManager;
-}
-
-- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath configureName:(NSString*)configureName
-                    success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress
+- (void)downloadFileFromUrl:(NSString*)downloadUrlString resumeDataPath:(NSString*)resumeDataPath
 {
     
     NSURL *downloadUrl = [NSURL URLWithString:downloadUrlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:downloadUrl];
     if (!downloadUrl || !request) {
-        if (failure) {
-            failure([NSError errorWithDomain:@"kYoutubeDownloadErrorDomain" code:kYDErrorInvalidUrl userInfo:nil]);
+        if (self.delegate) {
+            [self.delegate downloadFailureWithUrl:downloadUrlString error:[NSError errorWithDomain:@"kYoutubeDownloadErrorDomain" code:kYDErrorInvalidUrl userInfo:nil]];
         }
         return;
     }
     
-    if (!configureName) {
-        if (failure) {
-                failure([NSError errorWithDomain:@"kYoutubeDownloadErrorDomain" code:kYDErrorConfigureNameMustProvide userInfo:nil]);
-        }
-        return;
-    }
-    
-    AFURLSessionManager *sessionManager = nil;
     @synchronized(self)
     {
-        sessionManager = self.sessionManagerDict[configureName];
-        if  (!sessionManager)
+        NSURLSessionDownloadTask  *downloadTask = self.downloadTasksMap[downloadUrlString];
+        if (downloadTask) {
+            if (downloadTask.state == NSURLSessionTaskStateSuspended) {
+                [downloadTask resume];
+            }
+            return;
+        }
+        
+        NSData *resumeData = [YDFileUtil getDataFromFilePath:resumeDataPath];
+        if (resumeData && [resumeData length] > 0)
         {
-            [self initializeForConfigureName:configureName];
+            //delete resume data
+            [YDFileUtil removeFile:resumeDataPath];
+            downloadTask = [self.session downloadTaskWithResumeData:resumeData];
         }
-    }
-        
-    NSMutableDictionary *urlTaskMap = self.downloadTasksMap[configureName];
-    if (urlTaskMap[downloadUrlString]) {
-        return;
-    }
-        
-    __weak YDNetworkUtility *weakSelf = self;
-    NSURLSessionDownloadTask  *downloadTask;
-    
-    NSData *resumeData = [YDFileUtil getDataFromFilePath:destinationPath];
-    if (resumeData && [resumeData length] > 0) {
-        [YDFileUtil removeFile:destinationPath];
-        [sessionManager downloadTaskWithResumeData:resumeData progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-            return [NSURL fileURLWithPath:destinationPath];
+        else
+        {
+            downloadTask = [self.session downloadTaskWithRequest:request];
         }
-        completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-            if (error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (failure) {
-                        failure(error);
-                    }
-                    @synchronized(self)
-                    {
-                        [weakSelf.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
-                    }
-                });
-                return;
-            }
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (success) {
-                        success();
-                    }
-                    @synchronized(self)
-                    {
-                        [weakSelf.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
-                    }
-                });
-            });
-            return;
-        }];
-    }
-    else
-    {
-        downloadTask = [sessionManager downloadTaskWithRequest:request progress:nil
-            destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-                return [NSURL fileURLWithPath:destinationPath];
-            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                if (error) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (failure) {
-                                failure(error);
-                            }
-                        @synchronized(self)
-                        {
-                            [weakSelf.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
-                        }
-                    });
-                    return;
-                }
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (success) {
-                            success();
-                        }
-                        @synchronized(self)
-                        {
-                            [weakSelf.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
-                        }
-                    });
-                });
-                return;
-            }];
-    }
-    
-    [sessionManager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-            if (progress) {
-                @synchronized(self)
-                {
-                    NSString *downloadUrl = [downloadTask.originalRequest.URL absoluteString];
-                    NSDate *lastReportProgressTime = self.downloadTasksProgressMap[configureName][downloadUrl];
-                
-                    NSDate *currentTime = [NSDate date];
-                    if (lastReportProgressTime && [currentTime compare:[lastReportProgressTime dateByAddingTimeInterval:1]] == NSOrderedAscending)
-                    {
-                        return;
-                    }
-                    weakSelf.downloadTasksProgressMap[configureName][downloadUrl] = currentTime;
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    progress(totalBytesWritten, totalBytesExpectedToWrite);
-                });
-            }
-            return;
-        }];
         
-    [downloadTask resume];
+        [downloadTask resume];
+        self.downloadTasksMap[downloadUrlString] = downloadTask;
+    }
     
     return;
 }
 
-- (void)cancelDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString
+#pragma mark - URLSession delegate
+-(void)URLSession:(NSURLSession *)session
+     downloadTask:(NSURLSessionDownloadTask *)downloadTask
+didFinishDownloadingToURL:(NSURL *)location
 {
-    NSURLSessionDownloadTask *downloadTask = self.downloadTasksMap[configureName][downloadUrlString];
+    NSString *downloadUrl = [downloadTask.originalRequest.URL absoluteString];
+    @synchronized(self)
+    {
+        [self.downloadTasksMap removeObjectForKey:downloadUrl];
+        [self.downloadTasksProgressMap removeObjectForKey:downloadUrl];
+    }
+    
+    if (self.delegate) {
+        [self.delegate downloadSuccessWithUrl:downloadUrl downloadToUrl:location];
+    }
+    return;
+}
+
+- (void) URLSession:(NSURLSession *)session
+               task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+        // !!Note:-cancel method resumeData is empty!
+        if (error.userInfo && [error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData]) {
+            NSData *resumeData = [error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData];
+            NSString *downloadUrl = [task.originalRequest.URL absoluteString];
+             NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+            DownloadTask *downloadTask = [DownloadTask getDownloadingTaskWithDownloadUrl:downloadUrl inContext:privateQueueContext];
+            if (downloadTask.downloadTaskStatusValue != DownloadTaskFinished) {
+                [YDFileUtil writeData:resumeData intoFileWithFilePath:downloadTask.videoFilePath];
+            }
+        }
+        return;
+    }
+    
+    if (error) {
+        NSString *downloadUrlString = [task.originalRequest.URL absoluteString];
+        @synchronized(self)
+        {
+            [self.downloadTasksMap removeObjectForKey:downloadUrlString];
+            [self.downloadTasksProgressMap removeObjectForKey:downloadUrlString];
+        }
+        
+        if (self.delegate) {
+            [self.delegate downloadFailureWithUrl:downloadUrlString error:error];
+        }
+    }
+}
+
+-(void)URLSession:(NSURLSession *)session
+     downloadTask:(NSURLSessionDownloadTask *)downloadTask
+     didWriteData:(int64_t)bytesWritten
+totalBytesWritten:(int64_t)totalBytesWritten
+totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    NSString *downloadUrl = [downloadTask.originalRequest.URL absoluteString];
+    @synchronized(self)
+    {
+        NSDate *lastReportProgressTime = self.downloadTasksProgressMap[downloadUrl];
+    
+        NSDate *currentTime = [NSDate date];
+        if (lastReportProgressTime && [currentTime compare:[lastReportProgressTime dateByAddingTimeInterval:1]] == NSOrderedAscending)
+        {
+            return;
+        }
+        self.downloadTasksProgressMap[downloadUrl] = currentTime;
+    }
+    
+    if (self.delegate) {
+        [self.delegate downloadProgressWithUrl:downloadUrl totalBytesDownload:totalBytesWritten totalBytesExpectedDownload:totalBytesExpectedToWrite];
+    }
+    return;
+}
+
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
+
+{
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.backgroundURLSessionCompletionHandler) {
+        
+        void (^completionHandler)() = appDelegate.backgroundURLSessionCompletionHandler;
+        
+        appDelegate.backgroundURLSessionCompletionHandler = nil;
+        
+        completionHandler();
+        
+    }
+    
+    NSLog(@"All tasks are finished");
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
+{
+    
+}
+
+- (void)cancelDownloadTaskDownloadUrl:(NSString*)downloadUrlString
+{
+    NSURLSessionDownloadTask *downloadTask = self.downloadTasksMap[downloadUrlString];
     if (!downloadTask) {
             return;
     }
     [downloadTask cancelByProducingResumeData:^(NSData *resumeData) {
         @synchronized(self)
         {
-            [self.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
+            [self.downloadTasksMap removeObjectForKey:downloadUrlString];
+            [self.downloadTasksProgressMap removeObjectForKey:downloadUrlString];
         }
     }];
     return;
 }
 
-- (void)pauseDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath
+- (void)pauseDownloadTaskWithDownloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath
 
 {
-    NSURLSessionDownloadTask *downloadTask = self.downloadTasksMap[configureName][downloadUrlString];
+    NSURLSessionDownloadTask *downloadTask = self.downloadTasksMap[downloadUrlString];
     if (!downloadTask) {
         return;
     }
@@ -228,9 +226,11 @@
         [YDFileUtil writeData:resumeData intoFileWithFilePath:saveResumeDataPath];
         @synchronized(self)
         {
-            [self.downloadTasksMap[configureName] removeObjectForKey:downloadUrlString];
+            [self.downloadTasksMap removeObjectForKey:downloadUrlString];
+            [self.downloadTasksProgressMap removeObjectForKey:downloadUrlString];
         }
     }];
     return;
 }
+
 @end

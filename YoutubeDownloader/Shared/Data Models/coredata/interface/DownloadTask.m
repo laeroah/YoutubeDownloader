@@ -130,4 +130,19 @@
 }
 
 
++ (NSString*)getDestinationPathWithDownloadUrl:(NSString*)downloadUrl
+{
+    if (!downloadUrl) {
+        return nil;
+    }
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoDownloadUrl = %@",downloadUrl];
+    DownloadTask *downloadTask = [DownloadTask MR_findFirstWithPredicate:predicate inContext:privateQueueContext];
+    if (!downloadTask) {
+        return nil;
+    }
+    return downloadTask.videoFilePath;
+}
+
+
 @end

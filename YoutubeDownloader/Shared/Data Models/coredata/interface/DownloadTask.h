@@ -29,4 +29,5 @@ typedef enum
 + (NSArray*)getAllWaitingOrDownloadingTasksInContext:(NSManagedObjectContext *)context;
 - (void)updateWithContext:(NSManagedObjectContext *)context;
 + (NSArray*)getAllWaitingTasksInContext:(NSManagedObjectContext *)context;
++ (NSString*)getDestinationPathWithDownloadUrl:(NSString*)downloadUrl;
 @end

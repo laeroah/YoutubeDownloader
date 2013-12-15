@@ -63,6 +63,11 @@
 + (void)removeVideo:(NSNumber*)videoID inContext:(NSManagedObjectContext *)context completion:(MRSaveCompletionHandler)completion
 {
     Video *video = [Video findByVideoID:videoID inContext:context];
+    if (!video)
+    {
+        completion (NO, nil);
+        return;
+    }
     [video setIsRemovedValue:YES];
     [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         completion (success, error);

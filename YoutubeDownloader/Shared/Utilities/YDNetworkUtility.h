@@ -10,16 +10,24 @@
 #import "AFNetworking.h"
 #import "YDConstants.h"
 
-typedef void (^YDDownloadSuccess)();
-typedef void (^YDDownloadFailuer)(NSError *error);
-typedef void (^YDDownloadProgress)(int64_t totalBytesDownload, int64_t totalBytesExpectedDownload);
 
-@interface YDNetworkUtility : NSObject
-+ (YDNetworkUtility *)sharedInstance;
-- (void)downloadFileFromUrl:(NSString*)downloadUrlString toDestination:(NSString*)destinationPath configureName:(NSString*)configureName
-                    success:(YDDownloadSuccess)success failure:(YDDownloadFailuer)failure progress:(YDDownloadProgress)progress;
-- (void)cancelDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString;
-- (void)pauseDownloadTaskWithConfigureName:(NSString*)configureName downloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
-- (void)initializeForConfigureName:(NSString*)configureName;
+@protocol YDNetworkUtilityDelegate <NSObject>
+
+- (void)downloadSuccessWithUrl:(NSString*)url downloadToUrl:(NSURL*)toLocation;
+- (void)downloadFailureWithUrl:(NSString*)url error:(NSError*)error;
+- (void)downloadProgressWithUrl:(NSString*)url totalBytesDownload:(int64_t)totalBytesDownload totalBytesExpectedDownload:(int64_t)totalBytesExpectedDownload;
 
 @end
+
+@interface YDNetworkUtility : NSObject <NSURLSessionDownloadDelegate>
+
+- (id)initWithConfigureName:(NSString*)configureName delegate:(id<YDNetworkUtilityDelegate>)delegate completion:(void(^)())completion;
+- (void)downloadFileFromUrl:(NSString*)downloadUrlString resumeDataPath:(NSString*)resumeDataPath;
+- (void)cancelDownloadTaskDownloadUrl:(NSString*)downloadUrlString;
+
+- (void)pauseDownloadTaskWithDownloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
+- (void)pauseDownloadTaskWithDownloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
+
+@end
+
+

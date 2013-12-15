@@ -190,4 +190,21 @@
     [data writeToFile:filePath atomically:YES];
 }
 
++ (int64_t)getFileSizeWithPath:(NSString*)filePath
+{
+    NSError *attributesError;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        return 0;
+    }
+        
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSURL fileURLWithPath:filePath]error:&attributesError];
+    if (!fileAttributes) {
+        return 0;
+    }
+    NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
+    return [fileSizeNumber longLongValue];
+}
+
 @end
