@@ -26,7 +26,7 @@
 - (void)cancelDownloadTaskDownloadUrl:(NSString*)downloadUrlString;
 
 - (void)pauseDownloadTaskWithDownloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
-- (void)pauseDownloadTaskWithDownloadUrl:(NSString*)downloadUrlString saveResumeDataPath:(NSString*)saveResumeDataPath;
+
 
 @end
 

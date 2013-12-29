@@ -135,18 +135,22 @@ didFinishDownloadingToURL:(NSURL *)location
         return;
     }
     
-    if (error) {
-        NSString *downloadUrlString = [task.originalRequest.URL absoluteString];
-        @synchronized(self)
-        {
+    if (error == nil)
+    {
+        return;
+    }
+    
+    NSString *downloadUrlString = [task.originalRequest.URL absoluteString];
+    @synchronized(self)
+    {
             [self.downloadTasksMap removeObjectForKey:downloadUrlString];
             [self.downloadTasksProgressMap removeObjectForKey:downloadUrlString];
-        }
-        
-        if (self.delegate) {
-            [self.delegate downloadFailureWithUrl:downloadUrlString error:error];
-        }
     }
+        
+    if (self.delegate) {
+            [self.delegate downloadFailureWithUrl:downloadUrlString error:error];
+    }
+    
 }
 
 -(void)URLSession:(NSURLSession *)session

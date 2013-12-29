@@ -479,7 +479,8 @@
     [YDFileUtil removeFile:downloadingTask.resumeDataPath];
     downloadingTask.videoFileSize = 0;
     downloadingTask.downloadProgress = @(0);
-    downloadingTask.downloadTaskStatus = @(DownloadTaskWaiting);
+    if (downloadingTask.downloadTaskStatusValue != DownloadTaskPaused)
+        downloadingTask.downloadTaskStatus = @(DownloadTaskWaiting);
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:@(DownloadTaskWaiting)];
     }];

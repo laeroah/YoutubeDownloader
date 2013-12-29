@@ -44,7 +44,6 @@
 - (void)enterDownloadMode:(BOOL)enter
 {
     self.currentProgressLabel.hidden = !enter;
-    self.downloadProgressBar.hidden = !enter;
     self.downloadControlButton.hidden = !enter;
 }
 

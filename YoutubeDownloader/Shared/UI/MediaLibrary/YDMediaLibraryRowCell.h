@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum
+{
+    YDDownloadControlPause,
+    YDDownloadControlResume,
+    YDDownloadControlDisable
+}YDDownloadControlState;
+
 @interface YDMediaLibraryRowCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *videoThumbnailImageView;
@@ -21,6 +28,7 @@
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) NSNumber *videoID;
+@property (nonatomic, assign) YDDownloadControlState downloadControlState;
 
 - (void)enterEditMode:(BOOL)enter animated:(BOOL)animated;
 - (void)enterDownloadMode:(BOOL)enter;

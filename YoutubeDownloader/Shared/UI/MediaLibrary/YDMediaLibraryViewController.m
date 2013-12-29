@@ -17,6 +17,7 @@
 #import "DownloadTask.h"
 #import "UIImageView+WebCache.h"
 #import "CoreData+MagicalRecord.h"
+#import "YDDownloadManager.h"
 
 typedef enum
 {
@@ -47,6 +48,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UILabel *totalSpaceLabel;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIView *noVideoView;
+
 
 @end
 
@@ -265,6 +267,24 @@ typedef enum
                          [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskWaiting)];
     [mediaCell enterDownloadMode:isDownloading];
     
+    mediaCell.downloadControlButton.enabled = YES;
+    mediaCell.downloadControlButton.hidden = NO;
+    mediaCell.downloadControlState = YDDownloadControlDisable;
+    if (isDownloading) {
+        [mediaCell.downloadControlButton setImage:[UIImage imageNamed:@"btn_downloadpause"]  forState:UIControlStateNormal];
+        mediaCell.downloadControlState = YDDownloadControlPause;
+    }
+    else
+    if ([downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskPaused)])
+    {
+        [mediaCell.downloadControlButton setImage:[UIImage imageNamed:@"btn_downloadResume"]  forState:UIControlStateNormal];
+        mediaCell.downloadControlState = YDDownloadControlResume;
+    }
+    else
+    {
+        mediaCell.downloadControlButton.hidden = YES;
+    }
+    
     mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
     
     mediaCell.downloadProgressBar.progress = downloadTask.downloadProgress.floatValue;
@@ -427,9 +447,42 @@ typedef enum
     }];
 }
 
+- (void)refreshCellWithVideoID:(NSNumber*)videoID
+{
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    Video  *video = [Video findByVideoID:videoID inContext:privateQueueContext];
+    NSIndexPath *indexPath = [_fetchResultController indexPathForObject:video];
+    [self.mediaCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+}
+
 - (void)didTappOnPauseButtonFromCell:(YDMediaLibraryRowCell *)cell
 {
-    
+    if (cell.downloadControlState == YDDownloadControlDisable) {
+        return;
+    }
+    NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSNumber *videoID = cell.videoID;
+    Video  *video = [Video findByVideoID:videoID inContext:privateQueueContext];
+    if (!video) {
+        return;
+    }
+    DownloadTask *downloadTask = video.downloadTask;
+    NSNumber *downloadID = downloadTask.downloadID;
+    if (cell.downloadControlState == YDDownloadControlPause) {
+        [[YDDownloadManager sharedInstance] pauseDownloadTaskWithDownloadTaskID:downloadID completion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshCellWithVideoID:videoID];
+                           });
+        }];
+    }
+    else
+    {
+        [[YDDownloadManager sharedInstance] resumeDownloadTaskWithDownloadTaskID:downloadID completion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshCellWithVideoID:videoID];
+            });
+        }];
+    }
 }
 
 #pragma mark - UISearchBarDelegate

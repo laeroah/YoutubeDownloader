@@ -160,6 +160,9 @@
 + (BOOL)moveFileFrom:(NSURL*)fromLocation to:(NSURL*)toLocation error:(NSError**)perror
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:[toLocation path]])
+        [fileManager removeItemAtPath:[toLocation path] error:nil];
+        
     if ([fileManager moveItemAtURL:fromLocation
                              toURL:toLocation
                              error: perror])
