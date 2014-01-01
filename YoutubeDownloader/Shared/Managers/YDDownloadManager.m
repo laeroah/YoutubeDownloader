@@ -372,6 +372,7 @@
         downloadingTask.downloadTaskStatus = @(DownloadTaskFinished);
         Video *video = downloadingTask.video;
         video.videoFilePath = downloadingTask.videoFilePath;
+        video.isNew = @(YES);
     }
     
     if (!success)
@@ -384,6 +385,7 @@
         [self retryToDownloadWithTaskID:downloadingTask.downloadID];
         return;
     }
+    
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
     }];

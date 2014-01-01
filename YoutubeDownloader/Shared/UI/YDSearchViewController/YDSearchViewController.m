@@ -196,7 +196,7 @@
         }
         else
         {
-            [self showToastMessage:NSLocalizedString(@"No downloadable video found.", @"No downloadable video found or the page was not loaded completly.") hideAfterDelay:2];
+            [self showToastMessage:NSLocalizedString(@"No video found.", @"No downloadable video found or the page was not loaded completly.") hideAfterDelay:2];
             
             [[YDAnalyticManager sharedInstance]trackWithCategory:EVENT_CATEGORY_VIDEO_DOWNLOAD action:EVENT_ACTION_CHOOSE_VIDEO_QUALITY label:SCREEN_NAME_SEARCH_VIEW value:nil];
         }
@@ -217,13 +217,14 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"Select a Media Quality"
                                   delegate:self
-                                  cancelButtonTitle:nil
+                                  cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
                                   otherButtonTitles:nil];
     
     for (NSString *quality in mediaQualities) {
         [actionSheet addButtonWithTitle:quality];
     }
+    
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [actionSheet showFromRect:[self.view convertRect:_downloadButton.frame fromView:_downloadButton.superview] inView:self.view animated:YES]; //this need to show from the button for iPad
@@ -265,7 +266,7 @@
         {
             dispatch_async(dispatch_get_main_queue(),^{
                 [self dismissAllToastMessages];
-                [self showToastMessage:@"You have selected this video" hideAfterDelay:3.0];
+                [self showToastMessage:@"This video is already buffered for you" hideAfterDelay:3.0];
             });
             return;
         }

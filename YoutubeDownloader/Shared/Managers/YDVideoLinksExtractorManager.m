@@ -325,7 +325,7 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
         return;
     }
     
-    NSLog(@"html = %@",html);
+    //NSLog(@"html = %@",html);
     
     [self extractYouTubeURLFromFile:html];
 }
