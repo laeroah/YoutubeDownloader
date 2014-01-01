@@ -14,6 +14,6 @@
 
 - (BOOL)shouldDeleteAfterWatch;
 - (void)setShouldDeleteAfterWatch:(BOOL)deleteAfterWatch;
-
+- (NSTimeInterval)timeToDeleteAfterDownload;
 
 @end

@@ -25,6 +25,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIImageView *ribbonImageView;
 @property (weak, nonatomic) IBOutlet UILabel *currentProgressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *videoDurationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeToDeleteLabel;
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) NSNumber *videoID;

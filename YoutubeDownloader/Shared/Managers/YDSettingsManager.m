@@ -35,6 +35,12 @@
     }
 }
 
+- (NSTimeInterval)timeToDeleteAfterDownload
+{
+    NSNumber *timeToDelete = [[NSUserDefaults standardUserDefaults]valueForKey:@"VideoDeleteDuration"];
+    return [timeToDelete integerValue] * 60;
+}
+
 - (BOOL)shouldDeleteAfterWatch
 {
     BOOL deleteAfterWatch = [[NSUserDefaults standardUserDefaults]boolForKey:@"DeleteVideoAfterWatch"];

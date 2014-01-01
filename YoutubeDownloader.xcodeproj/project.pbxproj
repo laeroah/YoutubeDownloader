@@ -40,6 +40,7 @@
 		AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD38183C2E0C00711B5F /* YDPlayer.m */; };
 		AFD2AD3E183C2E2E00711B5F /* YDPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */; };
 		AFD2AD3F183C2E2E00711B5F /* YDPlayerViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */; };
+		AFDF6F341874909500DEEDEF /* YDVideoLifeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDF6F331874909500DEEDEF /* YDVideoLifeManager.m */; };
 		AFE6AA1A1822E29D0037B389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA191822E29D0037B389 /* Foundation.framework */; };
 		AFE6AA1C1822E29E0037B389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */; };
 		AFE6AA1E1822E29E0037B389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6AA1D1822E29E0037B389 /* UIKit.framework */; };
@@ -186,6 +187,8 @@
 		AFD2AD3B183C2E2E00711B5F /* YDPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayerViewController.h; sourceTree = "<group>"; };
 		AFD2AD3C183C2E2E00711B5F /* YDPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayerViewController.m; sourceTree = "<group>"; };
 		AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
+		AFDF6F321874909500DEEDEF /* YDVideoLifeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDVideoLifeManager.h; sourceTree = "<group>"; };
+		AFDF6F331874909500DEEDEF /* YDVideoLifeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDVideoLifeManager.m; sourceTree = "<group>"; };
 		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -791,7 +794,7 @@
 				E3BCF1E11827E63F00517124 /* Data Models */,
 				E3BCF1E21827E63F00517124 /* Helpers */,
 				E3BCF1E31827E63F00517124 /* Managers */,
-				E3BCF1E41827E63F00517124 /* Resource */,
+				E3BCF1E41827E63F00517124 /* Resources */,
 				E3BCF1E71827E63F00517124 /* UI */,
 				E3BCF1E81827E63F00517124 /* Utilities */,
 				E3BCF2001827F08D00517124 /* YDConstants.h */,
@@ -827,17 +830,20 @@
 				E3739FC118423A22000F77BA /* YDAlbumManager.m */,
 				AF8F6FF6184E6EF90071A3BC /* YDSettingsManager.h */,
 				AF8F6FF7184E6EF90071A3BC /* YDSettingsManager.m */,
+				AFDF6F321874909500DEEDEF /* YDVideoLifeManager.h */,
+				AFDF6F331874909500DEEDEF /* YDVideoLifeManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		E3BCF1E41827E63F00517124 /* Resource */ = {
+		E3BCF1E41827E63F00517124 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				E3BCF1E51827E63F00517124 /* fonts */,
 				E3BCF1E61827E63F00517124 /* images */,
 				AF8F6FF9184E71370071A3BC /* DefaultSettings.plist */,
 			);
+			name = Resources;
 			path = Resource;
 			sourceTree = "<group>";
 		};
@@ -995,6 +1001,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "HAO WANG";
 				TargetAttributes = {
+					AFE6AA151822E29D0037B389 = {
+						DevelopmentTeam = D46VS8E76C;
+					};
 					AFE6AA351822E29E0037B389 = {
 						TestTargetID = AFE6AA151822E29D0037B389;
 					};
@@ -1110,6 +1119,7 @@
 				E322A70E183266E600BA77A2 /* MagicalRecord+ErrorHandling.m in Sources */,
 				E3739F8D18423816000F77BA /* YDImageUtil.m in Sources */,
 				E322A702183266E600BA77A2 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				AFDF6F341874909500DEEDEF /* YDVideoLifeManager.m in Sources */,
 				E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */,
 				AF3CBF581836B2DE0025957C /* YDMediaLibraryViewController.m in Sources */,
 				E3AFA688182FCFEE008CABB6 /* NSString+Util.m in Sources */,
@@ -1299,6 +1309,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
 				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
@@ -1309,6 +1321,7 @@
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1319,6 +1332,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Omnigon Communications LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Omnigon Communications LLC";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
 				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
@@ -1329,6 +1344,7 @@
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

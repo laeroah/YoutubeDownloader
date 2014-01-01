@@ -65,7 +65,7 @@
     Video *video = [Video findByVideoID:videoID inContext:context];
     if (!video)
     {
-        completion (NO, nil);
+        completion (YES, nil);
         return;
     }
     [video setIsRemovedValue:YES];

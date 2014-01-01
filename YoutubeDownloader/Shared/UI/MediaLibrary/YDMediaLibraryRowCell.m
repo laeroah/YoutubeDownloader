@@ -9,6 +9,15 @@
 #import "YDMediaLibraryRowCell.h"
 #import "Video.h"
 #import "DownloadTask.h"
+#import "YDSettingsManager.h"
+
+@interface YDMediaLibraryRowCell()
+{
+    NSTimer *deleteTimer;
+    NSDate *deleteDate;
+}
+
+@end
 
 @implementation YDMediaLibraryRowCell
 
@@ -19,6 +28,15 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)setVideoID:(NSNumber *)videoID
+{
+    _videoID = videoID;
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    Video *video = [Video findByVideoID:videoID inContext:context];
+    
+    deleteDate = [video.createDate dateByAddingTimeInterval:[YDSettingsManager sharedInstance].timeToDeleteAfterDownload];
 }
 
 - (void)enterEditMode:(BOOL)enter animated:(BOOL)animated
@@ -45,6 +63,40 @@
 {
     self.currentProgressLabel.hidden = !enter;
     self.downloadControlButton.hidden = !enter;
+    self.timeToDeleteLabel.hidden = enter;
+    
+    if (!enter) {
+        // start the delete timer after the video is downloaded
+        if (!deleteTimer) {
+            deleteTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(checkDeleteDate) userInfo:nil repeats:YES];
+        }
+    }else{
+        if (deleteTimer) {
+            [deleteTimer invalidate];
+            deleteTimer = nil;
+        }
+    }
+}
+
+- (void)checkDeleteDate
+{
+    NSTimeInterval timeInterval = [deleteDate timeIntervalSinceDate:[NSDate date]];
+    self.timeToDeleteLabel.text = [self timeDeleteLabelTextFromTimeInterval:timeInterval];
+    
+    if (timeInterval <= 0) { // delete the video when the delete time reaches
+        [self deleteButtonTapped:nil];
+        [deleteTimer invalidate];
+        deleteTimer = nil;
+    }
+}
+
+- (NSString *)timeDeleteLabelTextFromTimeInterval:(NSTimeInterval)timeToDelete
+{
+    NSInteger hours = timeToDelete/3600;
+    NSInteger mins = (long)timeToDelete%3600/60;
+    NSInteger secs = (long)timeToDelete%60;
+    
+    return [NSString stringWithFormat:@"expires in %.2d:%.2d:%.2d", hours, mins, secs];
 }
 
 - (IBAction)deleteButtonTapped:(id)sender {
@@ -82,6 +134,10 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (deleteTimer) {
+        [deleteTimer invalidate];
+        deleteTimer = nil;
+    }
 }
 
 @end

@@ -30,10 +30,10 @@ static NSString *const kTrackingId = @"UA-31727751-2";
 {
     [GAI sharedInstance].dispatchInterval = 20;
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-    if (DEBUG) {
+#ifdef DEBUG
         // Optional: set Logger to VERBOSE for debug information.
         //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    }
+#endif
     self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
 }
 
@@ -42,11 +42,10 @@ static NSString *const kTrackingId = @"UA-31727751-2";
     // need to add logic here to see if the user is paying user or normal user
     // also track if the user is developer or beta user
     NSString *userTypeValue = nil;
-    if (DEBUG) {
-        userTypeValue = @"Developer";
-    }else{
-        userTypeValue = @"Customer";
-    }
+    userTypeValue = @"Customer";
+#ifdef DEBUG
+    userTypeValue = @"Developer";
+#endif
     [self.tracker set:[GAIFields customDimensionForIndex:1] value:userTypeValue];
 }
 
