@@ -288,6 +288,14 @@ typedef enum
     mediaCell.videoDurationLabel.text = [video formattedVideoDuration];
     
     mediaCell.downloadProgressBar.progress = downloadTask.downloadProgress.floatValue;
+    if (downloadTask.downloadProgressValue >= 1.0)
+    {
+        mediaCell.downloadProgressBar.hidden = YES;
+    }
+    else
+    {
+        mediaCell.downloadProgressBar.hidden = NO;
+    }
     
     //register the cell to receive the download status update notification
     [[NSNotificationCenter defaultCenter] addObserver:mediaCell

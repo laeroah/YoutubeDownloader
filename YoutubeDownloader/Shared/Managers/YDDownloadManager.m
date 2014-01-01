@@ -373,6 +373,7 @@
         Video *video = downloadingTask.video;
         video.videoFilePath = downloadingTask.videoFilePath;
         video.isNew = @(YES);
+        video.createDate = [NSDate date];
     }
     
     if (!success)
