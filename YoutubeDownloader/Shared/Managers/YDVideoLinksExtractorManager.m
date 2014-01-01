@@ -143,7 +143,7 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
     NSNumber *duration = resultDict[@"content"][@"player_data"][@"player_vars"][@"length_seconds"];
     
     // get url_encoded_fmt_stream_map
-    NSString *streamMappingString = @"\\\"url_encoded_fmt_stream_map\\\"";
+    NSString *streamMappingString = @"\\\"url_encoded_fmt_stream_map\\\":";
     NSRange streamMappingRange = [html rangeOfString:streamMappingString];
     if (streamMappingRange.location == NSNotFound)
     {

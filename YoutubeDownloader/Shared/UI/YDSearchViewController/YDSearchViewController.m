@@ -214,16 +214,13 @@
     
     NSArray *mediaQualities = [NSArray arrayWithArray:[downloadableVideos allKeys]];                          
   
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"Select a Media Quality"
-                                  delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:nil];
-    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.title = @"Select a Media Quality";
+    actionSheet.delegate = self;
     for (NSString *quality in mediaQualities) {
         [actionSheet addButtonWithTitle:quality];
     }
+    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
