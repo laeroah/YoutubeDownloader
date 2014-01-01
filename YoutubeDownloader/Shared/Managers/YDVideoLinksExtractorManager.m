@@ -259,7 +259,8 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
         
         resultUrl = [NSString stringWithFormat:@"%@&%@",beginString,[components componentsJoinedByString:@"&"]];
         
-        NSDictionary *queryItems = [WebUtility parseQueryStringToDictionary:resultUrl];
+        range = [resultUrl rangeOfString:@"?"];
+        NSDictionary *queryItems = [WebUtility parseQueryStringToDictionary:[resultUrl substringFromIndex:range.location+1]];
         NSString *quality = queryItems[@"quality"];
         if (!quality)
         {
