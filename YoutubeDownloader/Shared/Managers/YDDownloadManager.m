@@ -480,7 +480,7 @@
     }
     [YDFileUtil removeFile:downloadingTask.videoFilePath];
     [YDFileUtil removeFile:downloadingTask.resumeDataPath];
-    downloadingTask.videoFileSize = 0;
+    downloadingTask.videoFileSize = @(0);
     downloadingTask.downloadProgress = @(0);
     if (downloadingTask.downloadTaskStatusValue != DownloadTaskPaused)
         downloadingTask.downloadTaskStatus = @(DownloadTaskWaiting);
