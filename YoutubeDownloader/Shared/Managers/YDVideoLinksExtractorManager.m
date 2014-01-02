@@ -53,13 +53,13 @@ static NSString* const kUserAgentPC = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 1
 #pragma mark Other Methods
 
 -(void)startExtracting {
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *cookies = [cookieStorage cookies];
-    for (NSHTTPCookie *cookie in cookies) {
-        if ([cookie.domain rangeOfString:@"youtube"].location != NSNotFound) {
-            [cookieStorage deleteCookie:cookie];
-        }
-    }
+//    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    NSArray *cookies = [cookieStorage cookies];
+//    for (NSHTTPCookie *cookie in cookies) {
+//        if ([cookie.domain rangeOfString:@"youtube"].location != NSNotFound) {
+//            [cookieStorage deleteCookie:cookie];
+//        }
+//    }
     
     if (!self.buffer || !self.resultDict)
     {

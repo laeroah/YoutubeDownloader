@@ -284,6 +284,7 @@
 #pragma mark UIWebViewDelegate methods
 - (BOOL)webView:(UIWebView *)wv shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    NSLog(@"load url %@", [request.URL absoluteString]);
     return YES;
 }
 
