@@ -474,8 +474,8 @@
 - (void)retryToDownloadWithTaskID:(NSNumber*)downloadTaskID
 {
     NSManagedObjectContext *privateQueueContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    DownloadTask   *downloadingTask = [DownloadTask getDownloadingTaskInContext:privateQueueContext];
-    if (!downloadingTask || downloadingTask.downloadTaskStatusValue != DownloadTaskFailed) {
+    DownloadTask   *downloadingTask = [DownloadTask findByDownloadID:downloadTaskID inContext:privateQueueContext];
+    if (!downloadingTask) {
         return;
     }
     [YDFileUtil removeFile:downloadingTask.videoFilePath];

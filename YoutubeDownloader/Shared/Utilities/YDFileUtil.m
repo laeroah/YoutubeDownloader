@@ -201,8 +201,8 @@
     {
         return 0;
     }
-        
-    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSURL fileURLWithPath:filePath]error:&attributesError];
+    
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&attributesError];
     if (!fileAttributes) {
         return 0;
     }
