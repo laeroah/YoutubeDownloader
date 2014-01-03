@@ -9,6 +9,7 @@
 #define MAC_PLATFORM_ONLY YES
 #endif
 
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
 

@@ -608,6 +608,24 @@
     NSURL *toURL = [NSURL fileURLWithPath:task.videoFilePath];
     [YDFileUtil moveFileFrom:toLocation to:toURL error:nil];
     [self setDownloadTaskStatus:YES downloadUrl:url];
+    
+    //push local notification
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = [NSDate date];
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+	// Notification details
+    localNotif.alertBody = [NSString stringWithFormat:@"%@ has downloaded",task.videoDescription ];
+	// Set the action button
+    localNotif.alertAction = @"Ok";
+    
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    NSInteger currentBadge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    localNotif.applicationIconBadgeNumber = ++currentBadge;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
 - (void)downloadFailureWithUrl:(NSString*)url error:(NSError*)error

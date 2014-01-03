@@ -154,7 +154,7 @@ typedef enum
 #pragma mark - fetch result controller and delegate
 - (NSFetchedResultsController *)fetchResultController
 {
- 	NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"createDate"
+ 	NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"videoID"
                                                          ascending:NO
                                                           selector:@selector(compare:)];
     
