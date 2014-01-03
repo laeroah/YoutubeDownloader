@@ -25,9 +25,11 @@
     NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
     [Video removeVideo:video.videoID inContext:context completion:^(BOOL success, NSError *error) {
         if (!success) {
-            if (DEBUG) {
-                NSLog(@"Failed to remove video: %@", video.videoID);
-            }
+
+#ifdef DEBUG
+            NSLog(@"Failed to remove video: %@", video.videoID);
+#endif
+            
         }
     }];
 }
