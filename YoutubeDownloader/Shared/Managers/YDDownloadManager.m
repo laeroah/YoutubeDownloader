@@ -625,7 +625,7 @@
     NSInteger currentBadge = [UIApplication sharedApplication].applicationIconBadgeNumber;
     localNotif.applicationIconBadgeNumber = ++currentBadge;
     
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    [[UIApplication sharedApplication]  presentLocalNotificationNow:localNotif];
 }
 
 - (void)downloadFailureWithUrl:(NSString*)url error:(NSError*)error
