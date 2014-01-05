@@ -83,6 +83,8 @@ typedef enum
     
     // setup the screen name for GA tracking
     self.screenName = SCREEN_NAME_LIBRARY_VIEW;
+    
+    [Video removeExpiredVideos];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -449,8 +451,9 @@ typedef enum
     NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
     [Video removeVideo:cell.videoID inContext:context completion:^(BOOL success, NSError *error) {
         if (!success) {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Failed to remove video, please try again.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
+#ifdef DEBUG
+            NSLog(@"Failed to remove video : %@", cell.videoID);
+#endif
         }
     }];
 }

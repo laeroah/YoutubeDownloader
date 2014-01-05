@@ -7,6 +7,6 @@
 	<key>DeleteVideoAfterDuration</key>
 	<true/>
 	<key>VideoDeleteDuration</key>
-	<integer>180</integer>
+	<integer>2</integer>
 </dict>
 </plist>

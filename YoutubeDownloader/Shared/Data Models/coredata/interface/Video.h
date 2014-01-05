@@ -14,4 +14,6 @@
 - (NSString *)formattedVideoDuration;
 - (void)updateWithContext:(NSManagedObjectContext *)context;
 
++ (void)removeExpiredVideos;
+
 @end

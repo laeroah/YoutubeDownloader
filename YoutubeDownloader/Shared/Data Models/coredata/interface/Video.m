@@ -1,6 +1,5 @@
 #import "Video.h"
-
-
+#import "YDSettingsManager.h"
 
 @interface Video ()
 
@@ -97,6 +96,32 @@
     NSInteger min = videoDuration/60;
     NSInteger sec = videoDuration%60;
     return [NSString stringWithFormat:@"%d:%.2d", min, sec];
+}
+
++ (void)removeExpiredVideos
+{
+    NSArray *videos = [Video findAll];
+    
+    for (Video *video in videos) {
+        NSNumber *videoID = video.videoID;
+        NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+        Video *video = [Video findByVideoID:videoID inContext:context];
+        
+        NSDate *deleteDate = [video.createDate dateByAddingTimeInterval:[YDSettingsManager sharedInstance].timeToDeleteAfterDownload];
+        
+        NSTimeInterval timeInterval = [deleteDate timeIntervalSinceDate:[NSDate date]];
+        
+        if (timeInterval <= 0) { // delete the video when the delete time reaches
+            [Video removeVideo:videoID inContext:context completion:^(BOOL success, NSError *error) {
+                if (!success) {
+#ifdef DEBUG
+                    NSLog(@"Failed to remove video : %@", videoID);
+#endif
+                }
+            }];
+        }
+    }
+    
 }
 
 @end
