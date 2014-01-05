@@ -33,7 +33,6 @@
     NSDictionary *downloadableVideos;
 }
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSString *youtubeVideoID;
 @property (nonatomic, strong) NSNumber *youtubeVideoDuration;
 @end

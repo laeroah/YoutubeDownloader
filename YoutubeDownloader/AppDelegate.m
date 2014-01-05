@@ -15,6 +15,7 @@
 #import "YDConstants.h"
 #import "YDAnalyticManager.h"
 #import "YDDownloadManager.h"
+#import "YDIntroAnimationView.h"
 
 @implementation AppDelegate
 
@@ -27,10 +28,8 @@
     [MagicalRecord setupCoreDataStack];
     
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
-        // Set icon badge number to zero
-        application.applicationIconBadgeNumber = 0;
-    }
+    
+    application.applicationIconBadgeNumber = 0;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -58,9 +57,15 @@
         [[YDDownloadManager sharedInstance] initializeProcess];
     });
     
-    // register notification for video download status change
-    /** this is hard because when the app is in the background, the notification for video status change won't be sent **/
-    //[self registerVideoDownloadNotification];
+    // do an animation
+    YDIntroAnimationView *introAnimationView = [[YDIntroAnimationView alloc]initWithFrame:searchViewController.view.frame];
+    [introAnimationView presentOnView:searchViewController withCompletion:^{
+        searchViewController.navigationController.navigationBarHidden = NO;
+        searchViewController.webView.hidden = NO;
+        [introAnimationView removeFromSuperview];
+    }];
+    searchViewController.navigationController.navigationBarHidden = YES;
+    searchViewController.webView.hidden = YES;
     
     return YES;
 }

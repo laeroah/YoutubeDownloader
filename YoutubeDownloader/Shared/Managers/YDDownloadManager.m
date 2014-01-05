@@ -617,7 +617,7 @@
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
 	// Notification details
-    localNotif.alertBody = [NSString stringWithFormat:@"%@ has downloaded",task.videoDescription ];
+    localNotif.alertBody = [NSString stringWithFormat:@"%@ is ready to watch",task.videoDescription ];
 	// Set the action button
     localNotif.alertAction = @"Ok";
     

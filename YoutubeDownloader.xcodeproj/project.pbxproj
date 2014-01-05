@@ -31,6 +31,7 @@
 		AF454232183AE33A00A06A07 /* BadgedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF454231183AE33A00A06A07 /* BadgedButton.m */; };
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
+		AF5A43D218788F7A00BFA982 /* YDIntroAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A43D118788F7A00BFA982 /* YDIntroAnimationView.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
 		AF8F6FF8184E6EF90071A3BC /* YDSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8F6FF7184E6EF90071A3BC /* YDSettingsManager.m */; };
 		AF8F6FFA184E71370071A3BC /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF8F6FF9184E71370071A3BC /* DefaultSettings.plist */; };
@@ -173,6 +174,8 @@
 		AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDMediaLibraryRowCell~iphone.xib"; sourceTree = "<group>"; };
 		AF4FB41F18275E06008F906D /* YDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDViewController.h; sourceTree = "<group>"; };
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
+		AF5A43D018788F7A00BFA982 /* YDIntroAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDIntroAnimationView.h; sourceTree = "<group>"; };
+		AF5A43D118788F7A00BFA982 /* YDIntroAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDIntroAnimationView.m; sourceTree = "<group>"; };
 		AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryRowCell.h; sourceTree = "<group>"; };
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
 		AF8F6FF6184E6EF90071A3BC /* YDSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDSettingsManager.h; sourceTree = "<group>"; };
@@ -455,6 +458,15 @@
 				AF4FB42018275E06008F906D /* YDViewController.m */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		AF5A43CF18788F6B00BFA982 /* IntroAnimationView */ = {
+			isa = PBXGroup;
+			children = (
+				AF5A43D018788F7A00BFA982 /* YDIntroAnimationView.h */,
+				AF5A43D118788F7A00BFA982 /* YDIntroAnimationView.m */,
+			);
+			path = IntroAnimationView;
 			sourceTree = "<group>";
 		};
 		AFD2AD36183C2E0C00711B5F /* Player */ = {
@@ -864,6 +876,7 @@
 		E3BCF1E71827E63F00517124 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AF5A43CF18788F6B00BFA982 /* IntroAnimationView */,
 				AFD2AD3A183C2E2800711B5F /* YDMediaPlayerController */,
 				AF45422B183AE2ED00A06A07 /* BadgedButton */,
 				AF3CBF541836B2B80025957C /* MediaLibrary */,
@@ -1118,6 +1131,7 @@
 				E3AFA6C2182FEEB2008CABB6 /* ActionSheetStringPicker.m in Sources */,
 				E322A70E183266E600BA77A2 /* MagicalRecord+ErrorHandling.m in Sources */,
 				E3739F8D18423816000F77BA /* YDImageUtil.m in Sources */,
+				AF5A43D218788F7A00BFA982 /* YDIntroAnimationView.m in Sources */,
 				E322A702183266E600BA77A2 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				AFDF6F341874909500DEEDEF /* YDVideoLifeManager.m in Sources */,
 				E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */,
