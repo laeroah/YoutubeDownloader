@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
+#import "JDStatusBarNotification.h"
 
 @interface YDBaseViewController ()
 {
@@ -257,5 +258,27 @@
     return NO;
 }
 
+
+- (void)showErrorStatusBarMessage:(NSString *)msg
+{
+    [self showStatusBarMessage:msg withType:JDStatusBarStyleError];
+}
+
+- (void)showInfoStatusBarMessage:(NSString *)msg
+{
+    [self showStatusBarMessage:msg withType:JDStatusBarStyleDefault];
+}
+
+- (void)showSuccessStatusBarMessage:(NSString *)msg
+{
+    [self showStatusBarMessage:msg withType:JDStatusBarStyleSuccess];
+}
+
+- (void)showStatusBarMessage:(NSString *)msg withType:(NSString *)type
+{
+    [JDStatusBarNotification showWithStatus:msg
+                               dismissAfter:2.0
+                                  styleName:type];
+}
 
 @end

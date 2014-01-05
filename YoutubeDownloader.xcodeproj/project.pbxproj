@@ -32,6 +32,9 @@
 		AF4913AD1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4913AC1837E26A0014F0A8 /* YDMediaLibraryRowCell~iphone.xib */; };
 		AF4FB42118275E06008F906D /* YDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4FB42018275E06008F906D /* YDViewController.m */; };
 		AF5A43D218788F7A00BFA982 /* YDIntroAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A43D118788F7A00BFA982 /* YDIntroAnimationView.m */; };
+		AF5A43ED1879E23400BFA982 /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A43E81879E23400BFA982 /* JDStatusBarNotification.m */; };
+		AF5A43EE1879E23400BFA982 /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A43EA1879E23400BFA982 /* JDStatusBarStyle.m */; };
+		AF5A43EF1879E23400BFA982 /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A43EC1879E23400BFA982 /* JDStatusBarView.m */; };
 		AF614A5E1838296F003192FB /* YDMediaLibraryRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */; };
 		AF8F6FF8184E6EF90071A3BC /* YDSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8F6FF7184E6EF90071A3BC /* YDSettingsManager.m */; };
 		AF8F6FFA184E71370071A3BC /* DefaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF8F6FF9184E71370071A3BC /* DefaultSettings.plist */; };
@@ -176,6 +179,12 @@
 		AF4FB42018275E06008F906D /* YDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDViewController.m; sourceTree = "<group>"; };
 		AF5A43D018788F7A00BFA982 /* YDIntroAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDIntroAnimationView.h; sourceTree = "<group>"; };
 		AF5A43D118788F7A00BFA982 /* YDIntroAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDIntroAnimationView.m; sourceTree = "<group>"; };
+		AF5A43E71879E23400BFA982 /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
+		AF5A43E81879E23400BFA982 /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
+		AF5A43E91879E23400BFA982 /* JDStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarStyle.h; sourceTree = "<group>"; };
+		AF5A43EA1879E23400BFA982 /* JDStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarStyle.m; sourceTree = "<group>"; };
+		AF5A43EB1879E23400BFA982 /* JDStatusBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarView.h; sourceTree = "<group>"; };
+		AF5A43EC1879E23400BFA982 /* JDStatusBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarView.m; sourceTree = "<group>"; };
 		AF614A5C1838296F003192FB /* YDMediaLibraryRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDMediaLibraryRowCell.h; sourceTree = "<group>"; };
 		AF614A5D1838296F003192FB /* YDMediaLibraryRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDMediaLibraryRowCell.m; sourceTree = "<group>"; };
 		AF8F6FF6184E6EF90071A3BC /* YDSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDSettingsManager.h; sourceTree = "<group>"; };
@@ -469,6 +478,19 @@
 			path = IntroAnimationView;
 			sourceTree = "<group>";
 		};
+		AF5A43E61879E23400BFA982 /* JDStatusBarNotification */ = {
+			isa = PBXGroup;
+			children = (
+				AF5A43E71879E23400BFA982 /* JDStatusBarNotification.h */,
+				AF5A43E81879E23400BFA982 /* JDStatusBarNotification.m */,
+				AF5A43E91879E23400BFA982 /* JDStatusBarStyle.h */,
+				AF5A43EA1879E23400BFA982 /* JDStatusBarStyle.m */,
+				AF5A43EB1879E23400BFA982 /* JDStatusBarView.h */,
+				AF5A43EC1879E23400BFA982 /* JDStatusBarView.m */,
+			);
+			path = JDStatusBarNotification;
+			sourceTree = "<group>";
+		};
 		AFD2AD36183C2E0C00711B5F /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +771,7 @@
 		E3AFA68C182FDC17008CABB6 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				AF5A43E61879E23400BFA982 /* JDStatusBarNotification */,
 				E3F71C5B184A756A00E22C31 /* AFNetworking */,
 				E3739F8E1842387D000F77BA /* SDWebImage */,
 				AFF21300183E726F00CC1E4C /* GoogleAnalytics */,
@@ -1132,6 +1155,7 @@
 				E322A70E183266E600BA77A2 /* MagicalRecord+ErrorHandling.m in Sources */,
 				E3739F8D18423816000F77BA /* YDImageUtil.m in Sources */,
 				AF5A43D218788F7A00BFA982 /* YDIntroAnimationView.m in Sources */,
+				AF5A43EF1879E23400BFA982 /* JDStatusBarView.m in Sources */,
 				E322A702183266E600BA77A2 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				AFDF6F341874909500DEEDEF /* YDVideoLifeManager.m in Sources */,
 				E3AFA68B182FD629008CABB6 /* WebUtility.m in Sources */,
@@ -1170,6 +1194,8 @@
 				E322A6FE183266E600BA77A2 /* NSObject+MagicalDataImport.m in Sources */,
 				E322A704183266E600BA77A2 /* NSManagedObject+MagicalRecord.m in Sources */,
 				E322A70A183266E600BA77A2 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				AF5A43ED1879E23400BFA982 /* JDStatusBarNotification.m in Sources */,
+				AF5A43EE1879E23400BFA982 /* JDStatusBarStyle.m in Sources */,
 				AFD2AD39183C2E0C00711B5F /* YDPlayer.m in Sources */,
 				E3BCF1FA1827EADA00517124 /* YDDeviceUtility.m in Sources */,
 				E3739FBC1842391E000F77BA /* YDErrorUtil.m in Sources */,

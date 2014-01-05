@@ -35,4 +35,8 @@
 - (void)dismissToastMessage;
 - (void)dismissAllToastMessages;
 
+- (void)showErrorStatusBarMessage:(NSString *)msg;
+- (void)showInfoStatusBarMessage:(NSString *)msg;
+- (void)showSuccessStatusBarMessage:(NSString *)msg;
+
 @end

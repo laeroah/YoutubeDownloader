@@ -30,9 +30,19 @@ typedef void (^IntroAnimationCompletionBlock) (void);
         self.playArrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"blueTriangle"]];
         self.downloadArrow.alpha = 0.0f;
         self.playArrow.alpha = 0.0f;
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientationChanged:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
         
     }
     return self;
+}
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+    self.center = self.superview.center;
 }
 
 - (void)presentOnView:(UIViewController *)viewController withCompletion:(void (^)(void))complete

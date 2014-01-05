@@ -16,6 +16,7 @@
 #import "YDAnalyticManager.h"
 #import "YDDownloadManager.h"
 #import "YDIntroAnimationView.h"
+#import "YDBaseViewController.h"
 
 @implementation AppDelegate
 

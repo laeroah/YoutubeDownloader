@@ -252,6 +252,7 @@
                 [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
                 dispatch_async(dispatch_get_main_queue(),^{
                     [self dismissAllToastMessages];
+                    [self showSuccessStatusBarMessage:@"Started to buffer video ..."];
                 });
             }];
             
@@ -270,8 +271,10 @@
             [[YDDownloadManager sharedInstance] downloadVideoInfoWithDownloadTaskID:downloadTaskID];
             dispatch_async(dispatch_get_main_queue(),^{
                 [self dismissAllToastMessages];
+                [self showSuccessStatusBarMessage:@"Started to buffer video ..."];
             });
         }];
+        
     });
 
     
