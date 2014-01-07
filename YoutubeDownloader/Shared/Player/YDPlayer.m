@@ -45,6 +45,7 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
 
 - (void)placeEmbeddedAudioAdjustableVideoOnView:(UIView *)view WithSize:(CGSize)size andVideoPath:(NSString *)videoPath
 {
+    
     _audioDelay = kCMTimeZero;
     
     AVURLAsset *asset;

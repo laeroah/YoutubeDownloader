@@ -17,6 +17,7 @@
 #import "YDDownloadManager.h"
 #import "YDIntroAnimationView.h"
 #import "YDBaseViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation AppDelegate
 
@@ -53,9 +54,17 @@
     [self recordNewOrReturningUser];
     [[YDAnalyticManager sharedInstance]setUserType];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                   ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[YDDownloadManager sharedInstance] initializeProcess];
+        
+        
+        NSError *error = nil;
+        BOOL success = [[AVAudioSession sharedInstance]
+                        setCategory:AVAudioSessionCategoryPlayback
+                        error:&error];
+        if (!success) {
+            // Handle error here, as appropriate
+        }
     });
     
     // do an animation
