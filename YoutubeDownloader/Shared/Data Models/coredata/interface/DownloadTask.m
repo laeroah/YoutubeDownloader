@@ -113,7 +113,7 @@
 
 + (NSNumber*)getTotalVideoSizeWithContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus != %d",DownloadTaskFailed];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadTaskStatus = %d",DownloadTaskFinished];
     
     return  [DownloadTask MR_aggregateOperation:@"sum:" onAttribute:@"videoFileSize" withPredicate:predicate];
 }

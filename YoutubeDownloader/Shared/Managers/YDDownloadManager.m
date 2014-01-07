@@ -389,6 +389,7 @@
     
     [downloadingTask updateWithContext:privateQueueContext completion:^(BOOL success, NSError *error) {
         [self sendDownloadStatusChangeNotificationWithVideoID:downloadingTask.video.videoID statusKey:@"downloadTaskStatus" statusValue:downloadingTask.downloadTaskStatus];
+        [self sendTotalVideoSizeChangeNotification];
     }];
     
 }
