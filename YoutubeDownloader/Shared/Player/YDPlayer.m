@@ -227,15 +227,18 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
     [self rewind];
     [self.player play];
     [self.audioPlayer play];
+    self.isPlaying = YES;
     if (self.player.rate > 0 ) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(didStartPlayer:)]) {
             [self.delegate didStartPlayer:self];
         }
     }
+
 }
 
 - (void)pause
 {
+    self.isPlaying = NO;
     [self.player pause];
     [self.audioPlayer pause];
 
@@ -248,6 +251,7 @@ static const NSString *ItemStatusContext = @"ItemStatusContext";
 
 - (void)resume
 {
+    self.isPlaying = YES;
     [self.player play];
     [self.audioPlayer play];
     if (self.player.rate > 0 ) {

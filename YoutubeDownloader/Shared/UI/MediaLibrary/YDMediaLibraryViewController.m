@@ -265,8 +265,7 @@ typedef enum
     [mediaCell enterEditMode:_editMode animated:NO];
     
     DownloadTask *downloadTask = video.downloadTask;
-    BOOL isDownloading = [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskDownloading)] ||
-                         [downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskWaiting)];
+    BOOL isDownloading = ![downloadTask.downloadTaskStatus isEqualToNumber: @(DownloadTaskFinished)];
     [mediaCell enterDownloadMode:isDownloading];
     
     mediaCell.downloadControlButton.enabled = YES;
@@ -485,6 +484,7 @@ typedef enum
                 [self refreshCellWithVideoID:videoID];
                            });
         }];
+        cell.downloadControlState = YDDownloadControlResume;
     }
     else
     {
@@ -493,6 +493,7 @@ typedef enum
                 [self refreshCellWithVideoID:videoID];
             });
         }];
+        cell.downloadControlState = YDDownloadControlPause;
     }
 }
 

@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *audioOffsetLabel;
 @property (weak, nonatomic) IBOutlet UIView *airplayButtonView;
 
+@property (assign, nonatomic) BOOL isPlayingWhenEnterBackground;
 @end
 
 @implementation YDPlayerViewController
@@ -73,6 +74,35 @@
     [self colorNavigationBar];
     
     [self layoutAirplayButton];
+    
+    if(&UIApplicationWillResignActiveNotification != nil)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
+    }
+    
+    // On iOS 4.0+ only, listen for foreground notification
+    if(&UIApplicationDidBecomeActiveNotification != nil)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterForeGround) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
+}
+
+- (void)willEnterBackground
+{
+    self.isPlayingWhenEnterBackground = NO;
+    if (_player && _player.isPlaying)
+    {
+        [_player pause];
+        self.isPlayingWhenEnterBackground = YES;
+    }
+}
+
+- (void)didEnterForeGround
+{
+    if (_player && self.isPlayingWhenEnterBackground) {
+        [_player resume];
+    }
+    self.isPlayingWhenEnterBackground = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

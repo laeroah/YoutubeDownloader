@@ -12,7 +12,7 @@
 @interface YDPlayer : NSObject
 
 @property (nonatomic, weak) id delegate;
-
+@property (nonatomic, assign) BOOL isPlaying;
 #pragma mark - create player view
 - (void)placeEmbeddedVideoOnView:(UIView *)view WithSize:(CGSize)size andVideoPath:(NSString *)videoPath;
 - (void)placeEmbeddedAudioAdjustableVideoOnView:(UIView *)view WithSize:(CGSize)size andVideoPath:(NSString *)videoPath;
