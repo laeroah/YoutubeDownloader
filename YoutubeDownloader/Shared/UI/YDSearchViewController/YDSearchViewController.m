@@ -69,14 +69,24 @@
                                                  name:kDownloadTaskStatusChangeNotification
                                                object:nil];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
-    tapGestureRecognizer.delegate = self;
-    [self.webView addGestureRecognizer:tapGestureRecognizer];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(playbackStateDidChange:)
+                                                 name:@"MPAVControllerPlaybackStateChangedNotification"
+     
+                                               object:nil];
+
 }
 
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (void)playbackStateDidChange:(NSNotification *)note
+{
+    if ([[note.userInfo objectForKey:@"MPAVControllerOldStateParameter"] intValue] == 0)
+    {
+        NSString *script = @"var videos = document.querySelectorAll(\"video\"); for (var i = videos.length - 1; i >= 0; i--) { videos[i].pause(); videos[i].currentTime = 0;};";
+        [self.webView stringByEvaluatingJavaScriptFromString:script];
+    }
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -293,7 +303,6 @@
 #pragma mark UIWebViewDelegate methods
 - (BOOL)webView:(UIWebView *)wv shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"load url %@", [request.URL absoluteString]);
     return YES;
 }
 
@@ -313,16 +322,6 @@
     {
         NSLog(@"error = %@",[error description]);
     }
-}
-
-- (void)tapped:(UITapGestureRecognizer *)tapGestureRecognizer
-{
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        NSString *script = @"var videos = document.querySelectorAll(\"video\"); for (var i = videos.length - 1; i >= 0; i--) { videos[i].pause(); videos[i].currentTime = 0;};";
-        [self.webView stringByEvaluatingJavaScriptFromString:script];
-    });
 }
 
 @end
