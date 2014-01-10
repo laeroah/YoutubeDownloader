@@ -9,7 +9,7 @@
 #import "YDBaseViewController.h"
 #import "YDAnalyticManager.h"
 
-@interface YDSearchViewController : YDBaseViewController<UIWebViewDelegate,UIActionSheetDelegate>
+@interface YDSearchViewController : YDBaseViewController<UIWebViewDelegate,UIActionSheetDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIButton *downloadButton;
 @property (nonatomic, weak) IBOutlet UIWebView *webView;

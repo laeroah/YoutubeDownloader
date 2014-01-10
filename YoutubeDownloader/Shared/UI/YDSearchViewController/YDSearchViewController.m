@@ -58,17 +58,24 @@
 	// Do any additional setup after loading the view.
     
     [self createControlButtons];
-    self.webView.mediaPlaybackRequiresUserAction = YES;
     [self goHomePage];
     
     // setup the screen name for GA tracking
     self.screenName = SCREEN_NAME_SEARCH_VIEW;
     
-    
+    [self.webView setMediaPlaybackRequiresUserAction:NO];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receivesVideoDownloadStatusChangeNotification:)
                                                  name:kDownloadTaskStatusChangeNotification
                                                object:nil];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped:)];
+    tapGestureRecognizer.delegate = self;
+    [self.webView addGestureRecognizer:tapGestureRecognizer];
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -308,6 +315,14 @@
     }
 }
 
-
+- (void)tapped:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSString *script = @"var videos = document.querySelectorAll(\"video\"); for (var i = videos.length - 1; i >= 0; i--) { videos[i].pause(); videos[i].currentTime = 0;};";
+        [self.webView stringByEvaluatingJavaScriptFromString:script];
+    });
+}
 
 @end
