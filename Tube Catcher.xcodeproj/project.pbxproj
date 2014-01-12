@@ -201,21 +201,21 @@
 		AFD2AD3D183C2E2E00711B5F /* YDPlayerViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "YDPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
 		AFDF6F321874909500DEEDEF /* YDVideoLifeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDVideoLifeManager.h; sourceTree = "<group>"; };
 		AFDF6F331874909500DEEDEF /* YDVideoLifeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDVideoLifeManager.m; sourceTree = "<group>"; };
-		AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeDownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFE6AA161822E29D0037B389 /* Tube Catcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tube Catcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA191822E29D0037B389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFE6AA1B1822E29D0037B389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AFE6AA1D1822E29E0037B389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFE6AA1F1822E29E0037B389 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		AFE6AA231822E29E0037B389 /* YoutubeDownloader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YoutubeDownloader-Info.plist"; sourceTree = "<group>"; };
+		AFE6AA231822E29E0037B389 /* Tube Catcher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tube Catcher-Info.plist"; sourceTree = "<group>"; };
 		AFE6AA251822E29E0037B389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE6AA271822E29E0037B389 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AFE6AA291822E29E0037B389 /* YoutubeDownloader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YoutubeDownloader-Prefix.pch"; sourceTree = "<group>"; };
+		AFE6AA291822E29E0037B389 /* Tube Catcher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tube Catcher-Prefix.pch"; sourceTree = "<group>"; };
 		AFE6AA2A1822E29E0037B389 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFE6AA2B1822E29E0037B389 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AFE6AA301822E29E0037B389 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AFE6AA361822E29E0037B389 /* YoutubeDownloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YoutubeDownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFE6AA361822E29E0037B389 /* Tube CatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tube CatcherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE6AA371822E29E0037B389 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		AFE6AA401822E29E0037B389 /* YoutubeDownloaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YoutubeDownloaderTests-Info.plist"; sourceTree = "<group>"; };
+		AFE6AA401822E29E0037B389 /* Tube CatcherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tube CatcherTests-Info.plist"; sourceTree = "<group>"; };
 		AFE6AA421822E29E0037B389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE6AA441822E29E0037B389 /* YoutubeDownloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeDownloaderTests.m; sourceTree = "<group>"; };
 		AFF212FA183E70AD00CC1E4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -524,8 +524,8 @@
 		AFE6AA171822E29D0037B389 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */,
-				AFE6AA361822E29E0037B389 /* YoutubeDownloaderTests.xctest */,
+				AFE6AA161822E29D0037B389 /* Tube Catcher.app */,
+				AFE6AA361822E29E0037B389 /* Tube CatcherTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -562,10 +562,10 @@
 		AFE6AA221822E29E0037B389 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AFE6AA231822E29E0037B389 /* YoutubeDownloader-Info.plist */,
+				AFE6AA231822E29E0037B389 /* Tube Catcher-Info.plist */,
 				AFE6AA241822E29E0037B389 /* InfoPlist.strings */,
 				AFE6AA271822E29E0037B389 /* main.m */,
-				AFE6AA291822E29E0037B389 /* YoutubeDownloader-Prefix.pch */,
+				AFE6AA291822E29E0037B389 /* Tube Catcher-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -582,7 +582,7 @@
 		AFE6AA3F1822E29E0037B389 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AFE6AA401822E29E0037B389 /* YoutubeDownloaderTests-Info.plist */,
+				AFE6AA401822E29E0037B389 /* Tube CatcherTests-Info.plist */,
 				AFE6AA411822E29E0037B389 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -990,9 +990,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AFE6AA151822E29D0037B389 /* YoutubeDownloader */ = {
+		AFE6AA151822E29D0037B389 /* Tube Catcher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFE6AA481822E29E0037B389 /* Build configuration list for PBXNativeTarget "YoutubeDownloader" */;
+			buildConfigurationList = AFE6AA481822E29E0037B389 /* Build configuration list for PBXNativeTarget "Tube Catcher" */;
 			buildPhases = (
 				AFE6AA121822E29D0037B389 /* Sources */,
 				AFE6AA131822E29D0037B389 /* Frameworks */,
@@ -1004,14 +1004,14 @@
 			dependencies = (
 				E322A6A31832600600BA77A2 /* PBXTargetDependency */,
 			);
-			name = YoutubeDownloader;
+			name = "Tube Catcher";
 			productName = YoutubeDownloader;
-			productReference = AFE6AA161822E29D0037B389 /* YoutubeDownloader.app */;
+			productReference = AFE6AA161822E29D0037B389 /* Tube Catcher.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AFE6AA351822E29E0037B389 /* YoutubeDownloaderTests */ = {
+		AFE6AA351822E29E0037B389 /* Tube CatcherTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFE6AA4B1822E29E0037B389 /* Build configuration list for PBXNativeTarget "YoutubeDownloaderTests" */;
+			buildConfigurationList = AFE6AA4B1822E29E0037B389 /* Build configuration list for PBXNativeTarget "Tube CatcherTests" */;
 			buildPhases = (
 				AFE6AA321822E29E0037B389 /* Sources */,
 				AFE6AA331822E29E0037B389 /* Frameworks */,
@@ -1022,9 +1022,9 @@
 			dependencies = (
 				AFE6AA3D1822E29E0037B389 /* PBXTargetDependency */,
 			);
-			name = YoutubeDownloaderTests;
+			name = "Tube CatcherTests";
 			productName = YoutubeDownloaderTests;
-			productReference = AFE6AA361822E29E0037B389 /* YoutubeDownloaderTests.xctest */;
+			productReference = AFE6AA361822E29E0037B389 /* Tube CatcherTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1045,7 +1045,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AFE6AA111822E29D0037B389 /* Build configuration list for PBXProject "YoutubeDownloader" */;
+			buildConfigurationList = AFE6AA111822E29D0037B389 /* Build configuration list for PBXProject "Tube Catcher" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1057,8 +1057,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AFE6AA151822E29D0037B389 /* YoutubeDownloader */,
-				AFE6AA351822E29E0037B389 /* YoutubeDownloaderTests */,
+				AFE6AA151822E29D0037B389 /* Tube Catcher */,
+				AFE6AA351822E29E0037B389 /* Tube CatcherTests */,
 				E322A69A18325B6C00BA77A2 /* mogenerator */,
 			);
 		};
@@ -1240,7 +1240,7 @@
 /* Begin PBXTargetDependency section */
 		AFE6AA3D1822E29E0037B389 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AFE6AA151822E29D0037B389 /* YoutubeDownloader */;
+			target = AFE6AA151822E29D0037B389 /* Tube Catcher */;
 			targetProxy = AFE6AA3C1822E29E0037B389 /* PBXContainerItemProxy */;
 		};
 		E322A6A31832600600BA77A2 /* PBXTargetDependency */ = {
@@ -1352,15 +1352,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
-				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
+				GCC_PREFIX_HEADER = "YoutubeDownloader/Tube Catcher-Prefix.pch";
+				INFOPLIST_FILE = "YoutubeDownloader/Tube Catcher-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices\"",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Tube Catcher";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -1375,15 +1375,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
-				INFOPLIST_FILE = "YoutubeDownloader/YoutubeDownloader-Info.plist";
+				GCC_PREFIX_HEADER = "YoutubeDownloader/Tube Catcher-Prefix.pch";
+				INFOPLIST_FILE = "YoutubeDownloader/Tube Catcher-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalyticsServices\"",
 					"\"$(SRCROOT)/YoutubeDownloader/ThirdParty/GoogleAnalytics\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Tube Catcher";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -1406,8 +1406,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "YoutubeDownloaderTests/YoutubeDownloaderTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "YoutubeDownloaderTests/Tube CatcherTests-Info.plist";
+				PRODUCT_NAME = "Tube CatcherTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1425,8 +1425,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YoutubeDownloader/YoutubeDownloader-Prefix.pch";
-				INFOPLIST_FILE = "YoutubeDownloaderTests/YoutubeDownloaderTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "YoutubeDownloaderTests/Tube CatcherTests-Info.plist";
+				PRODUCT_NAME = "Tube CatcherTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1449,7 +1449,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AFE6AA111822E29D0037B389 /* Build configuration list for PBXProject "YoutubeDownloader" */ = {
+		AFE6AA111822E29D0037B389 /* Build configuration list for PBXProject "Tube Catcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFE6AA461822E29E0037B389 /* Debug */,
@@ -1458,7 +1458,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFE6AA481822E29E0037B389 /* Build configuration list for PBXNativeTarget "YoutubeDownloader" */ = {
+		AFE6AA481822E29E0037B389 /* Build configuration list for PBXNativeTarget "Tube Catcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFE6AA491822E29E0037B389 /* Debug */,
@@ -1467,7 +1467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFE6AA4B1822E29E0037B389 /* Build configuration list for PBXNativeTarget "YoutubeDownloaderTests" */ = {
+		AFE6AA4B1822E29E0037B389 /* Build configuration list for PBXNativeTarget "Tube CatcherTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFE6AA4C1822E29E0037B389 /* Debug */,

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFE6AA151822E29D0037B389"
                BuildableName = "YoutubeDownloader.app"
-               BlueprintName = "YoutubeDownloader"
-               ReferencedContainer = "container:YoutubeDownloader.xcodeproj">
+               BlueprintName = "Tube Catcher"
+               ReferencedContainer = "container:Tube Catcher.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFE6AA351822E29E0037B389"
                BuildableName = "YoutubeDownloaderTests.xctest"
-               BlueprintName = "YoutubeDownloaderTests"
-               ReferencedContainer = "container:YoutubeDownloader.xcodeproj">
+               BlueprintName = "Tube CatcherTests"
+               ReferencedContainer = "container:Tube Catcher.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
             BuildableName = "YoutubeDownloader.app"
-            BlueprintName = "YoutubeDownloader"
-            ReferencedContainer = "container:YoutubeDownloader.xcodeproj">
+            BlueprintName = "Tube Catcher"
+            ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
             BuildableName = "YoutubeDownloader.app"
-            BlueprintName = "YoutubeDownloader"
-            ReferencedContainer = "container:YoutubeDownloader.xcodeproj">
+            BlueprintName = "Tube Catcher"
+            ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
             BuildableName = "YoutubeDownloader.app"
-            BlueprintName = "YoutubeDownloader"
-            ReferencedContainer = "container:YoutubeDownloader.xcodeproj">
+            BlueprintName = "Tube Catcher"
+            ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
