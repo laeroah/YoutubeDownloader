@@ -52,7 +52,7 @@ typedef void (^IntroAnimationCompletionBlock) (void);
     [self addSubview:self.downloadArrow];
     [self addSubview:self.playArrow];
     CGRect rightArrowFrame = self.playArrow.frame;
-    rightArrowFrame.origin.y = self.frame.size.height/2 - rightArrowFrame.size.height;
+    rightArrowFrame.origin.y = self.frame.size.height/2 - rightArrowFrame.size.height/2;
     self.playArrow.frame = rightArrowFrame;
     CGRect downArrowFrame = self.downloadArrow.frame;
     downArrowFrame.origin.x = (self.frame.size.width - downArrowFrame.size.width)/2;
@@ -74,7 +74,7 @@ typedef void (^IntroAnimationCompletionBlock) (void);
     CGRect downArrowFrame = self.downloadArrow.frame;
     downArrowFrame.origin.x = (self.frame.size.width - downArrowFrame.size.width)/2;
     self.downloadArrow.frame = downArrowFrame;
-    downArrowFrame.origin.y = self.frame.size.height/2 - downArrowFrame.size.height;
+    downArrowFrame.origin.y = self.frame.size.height/2;
     [UIView animateWithDuration:1 animations:^{
         self.downloadArrow.frame = downArrowFrame;
         self.downloadArrow.alpha = 1.0f;
@@ -86,7 +86,7 @@ typedef void (^IntroAnimationCompletionBlock) (void);
 - (void)performRightArrowAnimationWithCompletion:(void(^)(void))complete
 {
     CGRect rightArrowFrame = self.playArrow.frame;
-    rightArrowFrame.origin.y = self.frame.size.height/2 - rightArrowFrame.size.height;
+    rightArrowFrame.origin.y = self.frame.size.height/2 - rightArrowFrame.size.height/2;
     rightArrowFrame.origin.x = self.frame.size.width/2;
     [UIView animateWithDuration:1 animations:^{
         self.playArrow.frame = rightArrowFrame;
