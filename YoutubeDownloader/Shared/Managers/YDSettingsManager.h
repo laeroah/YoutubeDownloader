@@ -13,6 +13,7 @@
 + (YDSettingsManager*) sharedInstance;
 
 - (BOOL)shouldDeleteAfterWatch;
+- (BOOL)shouldDeleteAfterDuration;
 - (void)setShouldDeleteAfterWatch:(BOOL)deleteAfterWatch;
 - (NSTimeInterval)timeToDeleteAfterDownload;
 

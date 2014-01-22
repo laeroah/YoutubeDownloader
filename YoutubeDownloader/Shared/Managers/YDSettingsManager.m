@@ -47,6 +47,12 @@
     return deleteAfterWatch;
 }
 
+- (BOOL)shouldDeleteAfterDuration
+{
+    BOOL deleteAfterDuration = [[NSUserDefaults standardUserDefaults]boolForKey:@"DeleteVideoAfterDuration"];
+    return deleteAfterDuration;
+}
+
 - (void)setShouldDeleteAfterWatch:(BOOL)deleteAfterWatch
 {
     [[NSUserDefaults standardUserDefaults] setBool:deleteAfterWatch forKey:@"DeleteVideoAfterWatch"];

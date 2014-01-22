@@ -5,7 +5,7 @@
 	<key>DeleteVideoAfterWatch</key>
 	<true/>
 	<key>DeleteVideoAfterDuration</key>
-	<true/>
+	<false/>
 	<key>VideoDeleteDuration</key>
 	<integer>1440</integer>
 </dict>

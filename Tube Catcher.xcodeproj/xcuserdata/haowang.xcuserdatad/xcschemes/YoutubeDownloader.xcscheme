@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFE6AA151822E29D0037B389"
-               BuildableName = "YoutubeDownloader.app"
+               BuildableName = "Tube Catcher.app"
                BlueprintName = "Tube Catcher"
                ReferencedContainer = "container:Tube Catcher.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AFE6AA351822E29E0037B389"
-               BuildableName = "YoutubeDownloaderTests.xctest"
+               BuildableName = "Tube CatcherTests.xctest"
                BlueprintName = "Tube CatcherTests"
                ReferencedContainer = "container:Tube Catcher.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
-            BuildableName = "YoutubeDownloader.app"
+            BuildableName = "Tube Catcher.app"
             BlueprintName = "Tube Catcher"
             ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
-            BuildableName = "YoutubeDownloader.app"
+            BuildableName = "Tube Catcher.app"
             BlueprintName = "Tube Catcher"
             ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AFE6AA151822E29D0037B389"
-            BuildableName = "YoutubeDownloader.app"
+            BuildableName = "Tube Catcher.app"
             BlueprintName = "Tube Catcher"
             ReferencedContainer = "container:Tube Catcher.xcodeproj">
          </BuildableReference>

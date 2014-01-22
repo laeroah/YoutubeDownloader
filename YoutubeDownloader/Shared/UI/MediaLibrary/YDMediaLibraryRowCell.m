@@ -63,17 +63,19 @@
 {
     self.currentProgressLabel.hidden = !enter;
     self.downloadControlButton.hidden = !enter;
-    self.timeToDeleteLabel.hidden = enter;
+    self.timeToDeleteLabel.hidden = enter || ![[YDSettingsManager sharedInstance] shouldDeleteAfterDuration];
     
-    if (!enter) {
-        // start the delete timer after the video is downloaded
-        if (!deleteTimer) {
-            deleteTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(checkDeleteDate) userInfo:nil repeats:YES];
-        }
-    }else{
-        if (deleteTimer) {
-            [deleteTimer invalidate];
-            deleteTimer = nil;
+    if (![[YDSettingsManager sharedInstance] shouldDeleteAfterDuration]) {
+        if (!enter) {
+            // start the delete timer after the video is downloaded
+            if (!deleteTimer) {
+                deleteTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(checkDeleteDate) userInfo:nil repeats:YES];
+            }
+        }else{
+            if (deleteTimer) {
+                [deleteTimer invalidate];
+                deleteTimer = nil;
+            }
         }
     }
 }
